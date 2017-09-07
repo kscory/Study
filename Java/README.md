@@ -9,26 +9,26 @@
 
 ## 2017.09.06
 
-### 개념설명
-> ### 1.  [String](https://github.com/Lee-KyungSeok/String)
-> ### 2.  [Math](https://github.com/Lee-KyungSeok/Math)
+>### 개념설명
+>> ### 1.  [String](https://github.com/Lee-KyungSeok/String)
+>> ### 2.  [Math](https://github.com/Lee-KyungSeok/Math)
 
 ### 문제
->#### 1. [숫자 합 계산 문제](https://github.com/Lee-KyungSeok/SumExample)
-> - ※ 전체합 / 홀수합 / 짝수합 문제
->#### 2. [Random함수를 활용한 Lotto 문제](https://github.com/Lee-KyungSeok/LottoExample)
-> - 일반배열 or 동적배열 이용
->#### 3. [정해진 범위 안에서 특정 숫자 갯수 카운팅 문제](https://github.com/Lee-KyungSeok/CountNumber)
-> - String 활용
->#### 4. [String을 활용한 Anagram 알고리즘 문제](https://github.com/Lee-KyungSeok/AnagramAlgorithm)
+>>#### 1. [숫자 합 계산 문제](https://github.com/Lee-KyungSeok/SumExample)
+>> - ※ 전체합 / 홀수합 / 짝수합 문제
+>>#### 2. [Random함수를 활용한 Lotto 문제](https://github.com/Lee-KyungSeok/LottoExample)
+>> - 일반배열 or 동적배열 이용
+>>#### 3. [정해진 범위 안에서 특정 숫자 갯수 카운팅 문제](https://github.com/Lee-KyungSeok/CountNumber)
+>> - String 활용
+>>#### 4. [String을 활용한 Anagram 알고리즘 문제](https://github.com/Lee-KyungSeok/AnagramAlgorithm)
 
 ## 2017.09.07
 
-### 개념설명
-> ### 1.  [Array / Collection](https://github.com/Lee-KyungSeok/Array-Collection)
-> ### 2.  [MVC 모델](https://github.com/Lee-KyungSeok/MVCModel)
+>### 개념설명
+>> ### 1.  [Array / Collection](https://github.com/Lee-KyungSeok/Array-Collection)
+>> ### 2.  [MVC 모델](https://github.com/Lee-KyungSeok/MVCModel)
 
-### 문제
->#### 1. [Memo 개발](https://github.com/Lee-KyungSeok/MemoExample)
-> - Collection 활용
-> - MVC 모델의 형태로 개발
+>### 문제
+>>#### 1. [Memo 개발](https://github.com/Lee-KyungSeok/MemoExample)
+>> - Collection 활용
+>> - MVC 모델의 형태로 개발
