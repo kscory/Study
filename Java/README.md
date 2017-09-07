@@ -21,3 +21,14 @@
 >#### 3. [정해진 범위 안에서 특정 숫자 갯수 카운팅 문제](https://github.com/Lee-KyungSeok/CountNumber)
 > - String 활용
 >#### 4. [String을 활용한 Anagram 알고리즘 문제](https://github.com/Lee-KyungSeok/AnagramAlgorithm)
+
+## 2017.09.07
+
+### 개념설명
+> ### 1.  [Array / Collection](https://github.com/Lee-KyungSeok/Array-Collection)
+> ### 2.  [MVC 모델](https://github.com/Lee-KyungSeok/MVCModel)
+
+### 문제
+>#### 1. [Memo 개발](https://github.com/Lee-KyungSeok/MemoExample)
+> - Collection 활용
+> - MVC 모델의 형태로 개발
