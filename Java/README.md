@@ -13,7 +13,7 @@
 >> ### 1.  [String](https://github.com/Lee-KyungSeok/String)
 >> ### 2.  [Math](https://github.com/Lee-KyungSeok/Math)
 
-### 문제
+>### 문제
 >>#### 1. [숫자 합 계산 문제](https://github.com/Lee-KyungSeok/SumExample)
 >> - ※ 전체합 / 홀수합 / 짝수합 문제
 >>#### 2. [Random함수를 활용한 Lotto 문제](https://github.com/Lee-KyungSeok/LottoExample)
