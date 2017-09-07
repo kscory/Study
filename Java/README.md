@@ -1,8 +1,8 @@
 # Java Study
 
 ## 개념 설명
-#### 1. [String](https://github.com/Lee-KyungSeok/String)
-#### 2. [Math](https://github.com/Lee-KyungSeok/Math)
+### 2017년 09월 06일
+> #### [String](https://github.com/Lee-KyungSeok/String) /  [Math](https://github.com/Lee-KyungSeok/Math)
 
 ## 문제
 #### 1. [반복문을 활용한 거스름돈 문제](https://github.com/Lee-KyungSeok/ChangeMoney)
@@ -19,4 +19,4 @@
 #### 5. [정해진 범위 안에서 특정 숫자 갯수 카운팅 문제](https://github.com/Lee-KyungSeok/CountNumber)
  - String 활용
 
-#### 6. String을 활용한 Anagram 알고리즘 문제
+#### 6. [String을 활용한 Anagram 알고리즘 문제](https://github.com/Lee-KyungSeok/AnagramAlgorithm)
