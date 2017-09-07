@@ -1,8 +1,8 @@
 # Java Study
 
 ## 개념 설명
-### 2017년 09월 06일
-> #### [String](https://github.com/Lee-KyungSeok/String) /  [Math](https://github.com/Lee-KyungSeok/Math)
+> ### [String](https://github.com/Lee-KyungSeok/String)
+> ### [Math](https://github.com/Lee-KyungSeok/Math)
 
 ## 문제
 #### 1. [반복문을 활용한 거스름돈 문제](https://github.com/Lee-KyungSeok/ChangeMoney)
