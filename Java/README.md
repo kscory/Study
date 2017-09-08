@@ -2,6 +2,9 @@
 
 ## 2017.09.05
 
+>### 개념설명
+>> ### 1. [S.O.L.I.D](https://github.com/Lee-KyungSeok/OOP_Solid)
+
 >### 문제
 >>#### 1. [반복문을 활용한 거스름돈 문제](https://github.com/Lee-KyungSeok/ChangeMoney)
 >>#### 2. [Control Flow 이해를 위한 별(\*) 트리 작성문제 모음](https://github.com/Lee-KyungSeok/ControlFlowExample)
@@ -32,3 +35,12 @@
 >>#### 1. [Memo 개발](https://github.com/Lee-KyungSeok/MemoExample)
 >> - Collection 활용
 >> - MVC 모델의 형태로 개발
+
+## 2017.09.08
+>### 개념설명
+>>### 1. [File IO]()
+>>### 2. [database 연동]()
+
+>### 문제
+>>#### 1. [File을 활용한 Memo]()
+>>#### 2. [Database를 활용한 Memo]()
