@@ -10,28 +10,36 @@ Stream / JDK 1.7 이상의 예외처리 에 대해
 
 ### 2. __JDK 1.7 이상의 예외처리 (try with)__
 * finally가 존재하지 않더라도 자동으로 close 처리를 한다.
-> * 예시
+> * 예시 - try-with
 
 ```java
 // finally를 하지 않더라도 try-with 절에서 자동으로 fis.close가 발생
 try(FileInputStream fis = new FileInputStream(database)) {
 	InputStreamReader isr = new InputStreamReader(fis, "MS949");
 	BufferedReader br = new BufferedReader(isr);
-	String row;
 	while( ...) {
         /* 생략 */
 	}
 } catch(Exception e) {
 	e.printStackTrace();
-}
+}	/*
+	 * 정석은 아래와 같이 역순으로 모두 닫아주어야 한다.
+	 * finally{
+	 * 		br.close();
+	 * 		isr.close();
+	 * 		fis.close();
+	 * }
+	 * */
+```
 
-// 이전에는 아래와 같이 finally 사용
+> * 이전 버전 예시 - try-catch-finally
+
+```java
 FileInputStream fis = null
 try {
   fis = new FileInputStream(database);
 	InputStreamReader isr = new InputStreamReader(fis, "MS949");
 	BufferedReader br = new BufferedReader(isr);
-	String row;
 	while( ...) {
         /* 생략 */
 	}
@@ -50,18 +58,56 @@ try {
 
 ## File IO
 사용 방법
-###  __입력 스트림__
-> 1. 읽력 스트림을 연다.
+
+### __file 생성__
+> 1. 디렉토리 경로 파악</br> 	mkdir : 자바 디렉토리가 없으면 에러</br>mkdirs : 경로 상에 디렉토리가 없으면 자동생성
+> 2. 파일 생성
+
 ```java
+//윈도우는 역방향 슬래시, 맥은 정방향 슬래시로 경로 구분
+private final String DB_DIR = "D:\\workspaces\\java\\database"; //경로 지정
+private final String DB_FILE = "memo.txt"; // 파일
+private File database = null;
+
+File dir = new File(DB_DIR);
+// 디렉토리 존재유무
+if(!dir.exists()) {
+
+	dir.mkdirs();
+}
+//separator는 구분자를 자동으로 생성
+File file = new File(DB_DIR + File.separator + DB_FILE);
+
+//파일의 존재유무 파악후 파일 생성
+if(!file.exists()) {
+	try {
+		file.createNewFile();
+	} catch(Exception e){
+		e.printStackTrace();
+	}
+}
+//생성된 파일 메모리에 저장
+database = file;
+
+```
+
+###  __입력 스트림__
+> 1. 읽는 스트림을 연다.
+
+```java
+File database = new File("경로" + File.separator +"파일명");
 FileInputStream fis = new FileInputStream(database)
+// "database" 는 file의 종류..
 ```
 
 > 2. 스트림을 중간처리 한다.(실제 파일 엔코딩을 바꿔주는 래퍼 클래스를 사용)
+
 ```java
-InputStreamReader isr = new InputStreamReader(fis, "MS949");
+InputStreamReader isr = new InputStreamReader(fis, "MS949"); //(입력스트림, "인코딩 형태")
 ```
 
 > 3. 버퍼처리를 한다.
+
 ```java
 BufferedReader br = new BufferedReader(isr);
 String row;
@@ -71,7 +117,8 @@ while((row = br.readLine()) != null) {
 }
 ```
 
-> 4. 스트림을 닫는다.
+> 4. 스트림을 닫는다. </br> 스트림이 생성되기 전에 오류가 발생했을 수도 있으므로 null 체크를 먼저 해야 한다.
+
 ```java
 if(fis != null) {
 	try {
@@ -82,11 +129,9 @@ if(fis != null) {
 }
 ```
 > 5. 예시 (Memo에서 List 내용 보기)
+
 ```java
 public ArrayList<Memo> showList(){
-
-	// 데이터가 중복해서 쌓이지 않도록 저장소를 지워주는 작업이 필요한 경우가 있다.
-	list.clear();
 
 	// 1. 읽력 스트림을 연다.
 	try(FileInputStream fis = new FileInputStream(database)){ //try-with 절에서 자동으로 fis.close가 발생
@@ -97,7 +142,8 @@ public ArrayList<Memo> showList(){
 		String row;
 		// 새로운 줄을 한줄씩 읽어서 row에 저장하고
 		// 더 이상 읽을 데이터가 없으면 null이 리턴되므로 로직이 종료
-		while( (row = br.readLine()) != null ) { //newLine표시를 만나면 읽을 수 있도록.... flush가 실행되는것이랑 비슷
+		// newLine표시를 만나면 읽을 수 있도록 한다-> flush가 실행되는것이랑 비슷
+		while( (row = br.readLine()) != null ) {
 			String tempRow[] = row.split(COLUM_SEP);
 			Memo memo = new Memo();
 			memo.no = Integer.parseInt(tempRow[0]);
@@ -110,27 +156,80 @@ public ArrayList<Memo> showList(){
 	} catch(Exception e) {
 		e.printStackTrace();
 	}
-	/*
-	 * 정석은 아래와 같이 역순으로 모두 닫아주어야 한다.
-	 * finally{
-	 * 		br.close();
-	 * 		isr.close();
-	 * 		fis.close();
-	 * }
-	 * */
-
 	return list;
 }
 ```
 
 ###  __출력 스트림__
 
-> 설명
+> 1. 출력 스트림을 연다.
 
 ```java
+File database = new File("경로" + File.separator +"파일명");
+FileOutputStream = fos = new FileOutputStream(database, true);
+// true이면 뒤에서 추가로 작성
+// false인 경우 새로 덮어 씌운다.
+```
 
+> 2. 스트림을 중간처리 한다.
+
+```java
+OutputStreamWriter osw = new OutputStreamWriter(fos);
+```
+
+> 3. 버퍼처리를 한다.<br> flush()를 반드시 사용하여 는 현재 버퍼에 저장되어 있는 내용을 클라이언트로 전송하고 버퍼를 비우는 작업을 실행해야 한다.
+
+```java
+BufferedWriter bw = new BufferedWriter(osw);
+bw.append(row); //버퍼에 추가
+bw.flush();
+```
+
+> 4. 스트림을 닫는다.
+
+```java
+if(fos != null) {
+	try {
+		fos.close();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+}
+```
+
+> 5. 예시 (Memo에서 file에 내용 추가)
+
+```java
+public void create(Memo memo) {
+
+	FileOutputStream fos =null;
+	try {
+		String row = "문자열"
+
+		// 1. 쓰는 스트림을 연다. (Output 스트림)
+		fos = new FileOutputStream(database, true);
+		// 2. 스트림을 중간처리...(텍스트의 엔코딩을 변경...)
+		OutputStreamWriter osw = new OutputStreamWriter(fos);
+		// 3. 버퍼처리...
+		BufferedWriter bw = new BufferedWriter(osw);
+		bw.append(row);
+		bw.flush();
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		// 4. 스트림을 닫는다.
+	} finally {
+		if(fos != null) {
+			try {
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
 ```
 
 ## 참고 문제
-Array / Collection을 활용한 문제
-1. [문제 이름](링크)
+File IO를 활용한 문제
+1. [File IO를 활용한 Memo 예제](링크)
