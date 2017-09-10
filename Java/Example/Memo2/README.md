@@ -55,236 +55,235 @@ public Model() {
 }
 ```
 
-#### 2. showIndex
+#### 2. rowSum
+* 메모 내용을 받아 COLUM_SEP(::)로 정보를 구분하여 row 형태로 반환한다.
+
+```java
+public String rowSum(Memo memo) {
+	String row;
+	row =  memo.no + COLUM_SEP
+			+ memo.name + COLUM_SEP
+			+ memo.content + COLUM_SEP
+			+ memo.datetime + "\n";
+	return row;
+}
+```
+
+#### 3. savingMemo
+* Memo의 내용을 받아 file에 저장한다.
+
+```java
+public boolean savingMemo(File file, boolean adding, String contents) {
+	boolean check = false;
+	// 출력스트림 활용
+	FileOutputStream fos = null;
+	try {
+		// 스트림을 연다 -> 스트림 중간 처리 -> 버퍼처리
+		fos = new FileOutputStream(file, adding);
+		OutputStreamWriter osw = new OutputStreamWriter(fos);
+		BufferedWriter bw = new BufferedWriter(osw);
+		bw.append(contents);
+		bw.flush();
+		check = true;
+
+	} catch(Exception e){
+		e.printStackTrace();
+	} finally {
+		if(fos != null) {
+			try {
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	return check;
+}
+```
+
+#### 4. loadingMemo
+* 파일에 저장된 내용을 row별로 저장된 List로 반환한다.
+
+```java
+public ArrayList<String> loadingMemo(File file) {
+	ArrayList<String> rowContent = new ArrayList<>();
+
+	// 스트림을 연다 -> 스트림 중간 처리 -> 버퍼처리
+	try(FileInputStream fis = new FileInputStream(file)){
+		InputStreamReader isr = new InputStreamReader(fis);
+		BufferedReader br = new BufferedReader(isr);
+		String row;
+
+		while((row = br.readLine()) != null) {
+			rowContent.add(row);
+		}
+
+	} catch(Exception e){
+		e.printStackTrace();
+	}
+
+	return rowContent;
+}
+```
+
+#### 5. showIndex
 * 저장해야 할 마지막 Index를 불러오는 메소드
 
 ```java
 public int showIndex() {
 	int index=0 ;
 
-	FileInputStream fis = null;
-	try {
-		fis = new FileInputStream(indexDatabase);
-		InputStreamReader isr = new InputStreamReader(fis,"MS949");
-		BufferedReader br = new BufferedReader(isr);
-		String row;
+	// 저장된 index들 load
+	ArrayList<String> indexList = loadingMemo(indexDatabase);
 
-		while((row = br.readLine()) != null) {
-			index = Integer.parseInt(row);
-		}			
-	} catch(Exception e) {
-		e.printStackTrace();
-	} finally {
-		if(fis != null) {
-			try {
-				fis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-				}
-		}
+	// 마지막에 저장된 index를 불러옴
+	for(String row : indexList) {
+		index = Integer.parseInt(row);
 	}
 	return index;
 }
 ```
 
-#### 3. create
-* file에 입력한 memo를 저장
-
-```java
-public void create(Memo memo) {
-  //글번호 저장
-  memo.no = showIndex()+1;
-
-  FileOutputStream fos =null;
-  try {
-    // 저장할 내용을 구분자로 분리하여 한줄의 문자열로 바꾼다.
-    String row = memo.no + COLUM_SEP
-        + memo.name + COLUM_SEP
-        + memo.content + COLUM_SEP
-        + memo.datetime + "\n";
-
-    // 출력 스트림 활용
-    fos = new FileOutputStream(database, true);
-    OutputStreamWriter osw = new OutputStreamWriter(fos);
-    BufferedWriter bw = new BufferedWriter(osw);
-    bw.append(row);
-    bw.flush();
-
-  } catch (Exception e) { /
-    e.printStackTrace();
-  } finally {
-    if(fos != null) {
-      try {
-        fos.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
-}
-```
-
-#### 4. showList
+#### 6. showList
 * file에 저장되어 있는 모든 memo를 보여준다.
 
 ```java
 public ArrayList<Memo> showList(){
 
-  // 데이터가 중복해서 쌓이지 않도록 저장소를 지워주는 작업이 필요한 경우가 있다.
-  list.clear();
+	// 데이터가 중복해서 쌓이지 않도록 저장소를 지워주는 작업이 필요한 경우가 있다.
+	list.clear();
 
-  // 입력 스트림 활용
-  try(FileInputStream fis = new FileInputStream(database)){
-    InputStreamReader isr = new InputStreamReader(fis, "MS949");
-    BufferedReader br = new BufferedReader(isr);
+	//row 별로 정리된 list를 불러온다
+	ArrayList<String> rowList = loadingMemo(database);
 
-    // 모든 목록을 line별로 불러온다.
-    String row;
-    while( (row = br.readLine()) != null ) {
-      String tempRow[] = row.split(COLUM_SEP);
-      Memo memo = new Memo();
-      memo.no = Integer.parseInt(tempRow[0]);
-      memo.name = tempRow[1];
-      memo.content = tempRow[2];
-      memo.datetime = Long.parseLong(tempRow[3]);
+	// list를 memo객체에 맞게 메모리에 저장한다.
+	for(String row : rowList) {
+		String tempRow[] = row.split(COLUM_SEP);
+		Memo memo = new Memo();
+		memo.no = Integer.parseInt(tempRow[0]);
+		memo.name = tempRow[1];
+		memo.content = tempRow[2];
+		memo.datetime = Long.parseLong(tempRow[3]);
 
-      list.add(memo);
-
-    }
-  } catch(Exception e) {
-    e.printStackTrace();
-  }
-  return list;
+		list.add(memo);
+	}
+	return list;
 }
 ```
 
-#### 5. read
+#### 7. create
+* file에 입력한 memo를 저장
+
+```java
+public void create(Memo memo) {
+
+	//글번호 불러오기
+	memo.no = showIndex()+1;
+
+	// 저장할 내용을 구분자로 분리하여 한줄의 문자열로 바꾼다.
+	String row = rowSum(memo);
+	// 전체 메모장에 메모 저장
+	savingMemo(database, true, row);
+
+	//저장할 인덱스를 구분
+	String indexString = Integer.toString(memo.no)+"\n";
+	// index 메모장에 인덱스 저장
+	savingMemo(indexDatabase, true, indexString);
+}
+```
+
+#### 8. read
 * no를 받아 알맞은 memo를 file에서 불러온다.
 
 ```java
 public Memo read(int no) {
 
-  //list를 초기화하고 목록을 불러와 no에 맞는 memo를 찾는다.
-  list.clear();
-  showList();
-  for(Memo memo : list) {
-    if(memo.no == no) {
-      return memo;
-    }
-  }
-  return null;
+	//메모리 리스트 초기화 및 메모장으로부터 불러옴
+	list.clear();
+	showList();
+
+	// no에 맞는 memo 찾기
+	for(Memo memo : list) {
+		if(memo.no == no) {
+			return memo;
+		}
+	}
+	// 찾는 memo가 없는 경우 null값 반환
+	return null;
 }
 ```
 
-#### 6. update
+#### 9. update
 * no를 받아 알맞은 memo를 file에서 불러와 그 부분을 수정한다.
 * 특정 부분을 수정한 뒤 전체 메모를 덮어 씌우는 방식 사용
 
 ```java
 public boolean update(int no, Memo memoTemp) {		
-  boolean check=false;
-  boolean checkTemp = false;
-  list.clear();
-  showList();
+	boolean check=false;
+	boolean checkTemp = false;
+	boolean checkInput = false;
 
-  String row="";
-  for(Memo memo : list) {
-    if(memo.no == no) {
-      //수정할 memo에 글 하나를 저장한 메모리를 덮어씌워 수정
-      memo.name = memoTemp.name;
-      memo.content = memoTemp.content;
-      checkTemp=true;
-    }
+	// 메모리 리스트 초기화 및 메모장으로부터 불러옴
+	list.clear();
+	showList();
 
-    // 저장할 메모내용을 하나의 String에 저장한다.
-    row = row
-      + memo.no + COLUM_SEP
-      + memo.name + COLUM_SEP
-      + memo.content + COLUM_SEP
-      + memo.datetime + "\n";
-  }		
+	// No에 맞는 메모를 찾고 수정
+	String row="";
+	for(Memo memo : list) {
+		if(memo.no == no) {
+			memo.name = memoTemp.name;
+			memo.content = memoTemp.content;
+			checkTemp=true;
+		}
+		//row에 글을 추가
+		row = row +rowSum(memo);
+	}
+	// 전체 메모장에 메모 저장
+	checkInput = savingMemo(database, false, row);
 
-  FileOutputStream fos =null;
-  try {
-    // 출력 스트림 활용 (메모를 전부 덮어 씌우므로 false 활용)
-    fos = new FileOutputStream(database, false);
-    OutputStreamWriter osw = new OutputStreamWriter(fos);
-    BufferedWriter bw = new BufferedWriter(osw);
-    bw.append(row);
-    bw.flush();
-    // 수정 완료시 true 값 반환
-    if(checkTemp ==true){
-      check = true;
-    }
-  } catch (Exception e) {
-    e.printStackTrace();
-  } finally {
-    if(fos != null) {
-      try {
-        fos.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
-  return check;
+	// 수정 완료사항 체크
+	if(checkTemp==true && checkInput==true) {
+		check = true;
+	}
+	return check;
 }
 ```
 
-#### 7. delete
+#### 10. delete
 * no를 받아 알맞은 memo를 file에서 불러와 그 메모를 삭제한다.
 * 삭제한 메모를 하나의 변수에 넣어 덮어 씌운다.
 
 ```java
 public boolean delete(int no) {
-  boolean check = false;
-  boolean checkTemp = false;
+	boolean check = false;
+	boolean checkTemp = false;
+	boolean checkInput = false;
 
-  list.clear();
-  showList();
+	// 메모리 리스트 초기화 및 메모장으로부터 불러옴
+	list.clear();
+	showList();
 
-  //글번호를 받아 특정 memo Search		
-  String row = "";
-  // list에서 삭제시 index오류가 발생할 수 있으므로 iterator 활용
-  Iterator<Memo> iter = list.iterator();
-  while(iter.hasNext()) {
-    Memo memo = iter.next();
+	// No에 맞는 메모를 찾고 삭제
+	String row = "";
+	Iterator<Memo> iter = list.iterator();
+	while(iter.hasNext()) {
+		Memo memo = iter.next();
 
-    if(memo.no == no) {
-      //발견한 특정 memo 삭제
-      checkTemp = true;
-    } else {
-      row = row
-          + memo.no + COLUM_SEP
-          + memo.name + COLUM_SEP
-          + memo.content + COLUM_SEP
-          + memo.datetime + "\n";
-    }			
-  }
+		// 삭제할 memo 내용 제외하고 row에 모든 memo를 추가
+		if(memo.no == no) {
+			checkTemp = true;
+		} else {
+			row = row +rowSum(memo);
+		}			
+	}
+	// 전체 메모장에 메모 저장
+	checkInput = savingMemo(database, false, row);
 
-  FileOutputStream fos =null;
-  try {
-    // 출력 스트림 활용
-    fos = new FileOutputStream(database, false);
-    OutputStreamWriter osw = new OutputStreamWriter(fos);
-    BufferedWriter bw = new BufferedWriter(osw);
-    bw.append(row);
-    bw.flush();
-    if(checkTemp ==true){
-      check = true;
-    }
-  } catch (Exception e) {
-    e.printStackTrace();
-  } finally {
-    if(fos != null) {
-      try {
-        fos.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
-  return check;
+	// 수정 완료사항 체크
+	if(checkTemp==true && checkInput) {
+		check = true;
+	}
+	return check;
 }
 ```
 
