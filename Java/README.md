@@ -42,5 +42,5 @@
 >>### 2. [database 연동]()
 
 >### 문제
->>#### 1. [File을 활용한 Memo]()
+>>#### 1. [File을 활용한 Memo](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Example/Memo2)
 >>#### 2. [Database를 활용한 Memo]()

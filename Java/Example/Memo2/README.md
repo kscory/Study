@@ -288,5 +288,5 @@ public boolean delete(int no) {
 }
 ```
 
-## __전체 소스 코드 링크__
-### [코드 보기](링크)
+## __Model 전체 소스 코드 링크__
+### [코드 보기](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Example/Memo2/src/Model.java)
