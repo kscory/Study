@@ -39,8 +39,8 @@
 ## 2017.09.08
 >### 개념설명
 >>### 1. [File IO (Stream, try-with 간단한 설명 포함)](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/File%20IO)
->>### 2. [database 연동]()
+>>### 2. [database 연동](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Database%20Connection)
 
 >### 문제
 >>#### 1. [File을 활용한 Memo](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Example/Memo2)
->>#### 2. [Database를 활용한 Memo]()
+>>#### 2. [Database를 활용한 Memo](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Example/MemoDatabase)
