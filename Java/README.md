@@ -7,7 +7,7 @@
 
 >### 문제
 >>#### 1. [반복문을 활용한 거스름돈 문제](https://github.com/Lee-KyungSeok/ChangeMoney)
->>#### 2. [Control Flow 이해를 위한 별(\*) 트리 작성문제 모음](https://github.com/Lee-KyungSeok/ControlFlowExample)
+>>#### 2. [Control Flow 이해를 위한 별(\*) 트리 작성문제 모음](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Example/ControlFlowExample)
 >> - ※ 난이도1~난이도7 (총 문제 11)
 
 ## 2017.09.06
