@@ -22,7 +22,14 @@ try(FileInputStream fis = new FileInputStream(database)) {
 	}
 } catch(Exception e) {
 	e.printStackTrace();
-}	/*
+	/* 아래와 같이 모든 에러를 따로 써주어야 한다. Exception e 는 최상위 에러체크
+	catch (FileNotFoundException e) {
+		e.printStackTrace();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}*/
+}
+	/*
 	 * 정석은 아래와 같이 역순으로 모두 닫아주어야 한다.
 	 * finally{
 	 * 		br.close();
@@ -72,12 +79,10 @@ private File database = null;
 File dir = new File(DB_DIR);
 // 디렉토리 존재유무
 if(!dir.exists()) {
-
 	dir.mkdirs();
 }
 //separator는 구분자를 자동으로 생성
 File file = new File(DB_DIR + File.separator + DB_FILE);
-
 //파일의 존재유무 파악후 파일 생성
 if(!file.exists()) {
 	try {
@@ -232,4 +237,4 @@ public void create(Memo memo) {
 
 ## 참고 문제
 File IO를 활용한 문제
-1. [File IO를 활용한 Memo 예제](링크)
+1. [File을 활용한 Memo](링크)
