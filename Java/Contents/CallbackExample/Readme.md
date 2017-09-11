@@ -28,5 +28,4 @@ public class A implements InterfaceC{
 c.process(this)를 하는 경우 "InterfaceC c = A"로 인식 (다형성 적용)</br>
 * 즉, "InterfaceC c = new 인터페이스 상속Class" 와 같이 인식하므로 c 메소드를 사용하되 내용은 A를 실행</br>
 * 이 상황에서 callback이 실행됨
-</br>
 ![](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/CallbackExample/picture/callback3.png)
