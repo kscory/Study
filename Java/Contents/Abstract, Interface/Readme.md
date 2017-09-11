@@ -101,8 +101,8 @@ public class Animal implements Building, Example {
 
 ### 3. __Abstract와 Interface 차이__
 * Abstract는 코드블럭을 넣을 수 있지만 Interface는 불가능
-* Abstract는 다중상속이 불가능, Interface는 다중상속 가능</br>- SOLID 원칙에서 코드를 바꿀 수 없기 때문에 다중상속처리르 많이 하여 Interface를 많이 사용
-*
+* Abstract는 다중상속이 불가능, Interface는 다중상속 가능</br>- SOLID 원칙에서 코드를 바꿀 수 없기 때문에 다중상속처리를 많이 하여 Interface를 많이 사용
+* Interface는 통신을 하기위해 보통 제공된다.
 
 ## Interface 사용 예시
 인터페이스 사용 예시
@@ -153,8 +153,8 @@ public class A {
 }
 ```
 ### #참고 그림
-![]()
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/Abstract%2C%20Interface/interface1.png)
 
 ## 심화
 Callback 개념
-1. [CallBack (Interface 심화)](링크)
+1. [CallBack (Interface 심화)](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/CallbackExample)
