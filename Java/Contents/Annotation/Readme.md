@@ -10,13 +10,13 @@
 다양한 도메인 객체를 단순한 map 저장소에 저장하기 위해서, 서로 다른 객체에서 정의되어 있는 key를 식별하는 방법에 대한 연구를 통한 공부
 
 #### 방법1. 객체마다 방법을 설정
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Annotation/annotation1.png)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/Annotation/annotation1.png)
 
 #### 방법2. 인터페이스 상속으로 객체의 형태를 통일
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Annotation/annotation2.png)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/Annotation/annotation2.png)
 
 #### 방법3. 어노테이션을 이용하여  key설정
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Annotation/annotation3.png)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/Annotation/annotation3.png)
 
 #### 비교
 * 방법1 : </br> - 도메인 객체가 늘어날 때마다 데이터 관리 방법을 추가 지정해줘야하는 번거로움 존재</br> - Data-Server에서 Service-Server의 도메인객체의 속성을 알고 있어야 하는 문제 존재
