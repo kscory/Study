@@ -65,6 +65,19 @@ public void remove(int position) {
 	list = tempList;
 }
 ````
+> 아래와 같이 반복문 한번만 사용해도 됨
+
+```java
+int realIndex=0;
+for(int i=0 ; i<list.length-1 ; i++) {
+	if(i==position) {
+		realIndex++;
+	}
+	tempList[i] = list[realIndex];
+	realIndex++;
+}
+list = tempList;
+```
 
 #### 4. get
 >1. 리스트에서 인덱스에 맞는 값을 불러온다.
