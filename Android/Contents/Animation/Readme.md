@@ -2,7 +2,6 @@
 - View Animation
 - Property Animation
 
-
 ## View 애니메이션
 위치나 크기, 회전을 지정한 시간내에 수행하는 애니메이션
 - View 애니메이션 사용 시 버튼클릭은 원래 위치에서 해야한다.
@@ -15,9 +14,9 @@
 
 #### ① Animation 설정
 RotateAnimation / ScaleAnimation / TranslateAnimation / AlphaAnimation 존재
-#### ① 조건 설정
+#### ② 조건 설정
 ex> setDuration, setFillAfter, setInterpolator, setRepeatCount 등
-#### ① 실제 위젯에 적용
+#### ③ 실제 위젯에 적용
 
 > 예시
 ```java
@@ -149,8 +148,126 @@ private void rotate(){
 }
 ```
 
+## Property 애니메이션
+위치나 크기, 회전을 지정한 시간내에 수행하는 애니메이션
+- ※ View 애니메이션 사용 시 버튼클릭은 바뀐 위치에서 실행 가능
+- 애니메이션 설정 방법
+   1. java 코드 내에서 이용 1
+   2. java 코드 내에서 이용 2
+   3. xml 이용
+
+### 1. __코드 내에서 바로 이용_1__
+ViewPropertyAnimator 사용</br>
+translationX / translationY / translationbyX / translationbyY / rotation / etc ...
+> 예시
+
+```java
+btnView.animate().translationX(100).withLayer();
+///btnView 는 View id를 뜻함
+```
+
+### 2. __코드 내에서 바로 이용_2__
+
+#### ① 대상을 정의한다.
+
+#### ② 애니메이터를 설정한다.
+  - 2.1. 움직일 대상을 넣는다.
+  - 2.2. 애니메이션 속성 (움직임)
+  - 2.3. 속성 값(위치일경우는 거리)
+
+#### ③ 애니메이터를 실행한다.
+
+```java
+// 2. 애니메이션 속성 정의
+ObjectAnimator ani = ObjectAnimator.ofFloat( //소수점 단위로 애니메이트 시킴
+        위젯,      // 가 . 움직일 대상을 넣는다.
+        "속성",    // 나. 애니메이션 속성 (움직임)
+        값        // 다. 속성 값(위치일경우는 거리)
+);
+
+// 3. 애니메이터를 실행한다.
+ani.start();
+```
+
+> 예시 (복합애니메이션 예시)
+
+```java
+ObjectAnimator aniY = ObjectAnimator.ofFloat(btnObject, "translationY", 300);
+ObjectAnimator aniX = ObjectAnimator.ofFloat(btnObject, "translationX", 300);
+ObjectAnimator anirot = ObjectAnimator.ofFloat(btnObject, "rotation", 0F,360F);
+
+// 애니메이션 셋에 담아서 동시에 실행 가능
+AnimatorSet aniSet = new AnimatorSet();
+aniSet.playTogether(aniY, aniX);
+aniSet.setDuration(3000);
+aniSet.setInterpolator(new LinearInterpolator());
+aniSet.start();
+```
+
+### 3. __xml을 이용한 애니메이션 설정__
+<순서> :</br>
+①. 애니메이션 xml 정의 () -> ②. AnimatorInflater로 정의된 애니메이션을 로드 -> ③. 로드된 애니메이션을 실제 위젯에 적용
+
+#### ① 애니메이션 xml 정의
+resource/animator 디렉토리에 xml 파일 생성
+-
+
+> Syntax
+```xml
+<set
+  android:ordering=["together" | "sequentially"]>
+    <objectAnimator
+        android:propertyName="string"
+        android:duration="int"
+        android:valueFrom="float | int | color"
+        android:valueTo="float | int | color"
+        android:startOffset="int"
+        android:repeatCount="int"
+        android:repeatMode=["repeat" | "reverse"]
+        android:valueType=["intType" | "floatType"]/>
+
+    <animator
+        android:duration="int"
+        android:valueFrom="float | int | color"
+        android:valueTo="float | int | color"
+        android:startOffset="int"
+        android:repeatCount="int"
+        android:repeatMode=["repeat" | "reverse"]
+        android:valueType=["intType" | "floatType"]/>
+    <set>
+        ...
+    </set>
+</set>
+```
+
+> 예시
+
+```java
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:propertyName="x"
+        android:duration="2000"
+        android:valueFrom="0"
+        android:valueTo="40"
+        android:startOffset="4"
+        android:valueType="floatType"/>
+</set>
+```
+
+#### ② AnimatorInflater로 정의된 애니메이션을 로드
+#### ③ 로드된 애니메이션을 실제 위젯에 적용
+```java
+// AnimatorInflater로 정의된 애니메이션을 로드
+Animator animation = AnimatorInflater.loadAnimator(this, R.animator.move);
+
+// 로드된 애니메이션을 실제 위젯에 적용
+animation.setTarget(object);
+animation.start();
+```
+
 ## 참고 사항
-1. interpolator 종류
+1. interpolator
+//움직임의 정도를 설정
 ```
 // 속도가 동일하게 이동 : linear_interpolator
 // 점점 빠르게 이동 : accerlerate_interpolator
@@ -165,3 +282,4 @@ private void rotate(){
 ## 참고 문제
 Animation을 활용한 문제
 1. [SpreadCubes](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/SpreadCubes)
+2. [JoyStick(코드만 제시)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation/app/src/main/java/com/example/kyung/animation/JoystickActivity.java)
