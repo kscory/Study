@@ -209,8 +209,8 @@ aniSet.start();
 ①. 애니메이션 xml 정의 () -> ②. AnimatorInflater로 정의된 애니메이션을 로드 -> ③. 로드된 애니메이션을 실제 위젯에 적용
 
 #### ① 애니메이션 xml 정의
+
 resource/animator 디렉토리에 xml 파일 생성
--
 
 > Syntax
 ```xml
