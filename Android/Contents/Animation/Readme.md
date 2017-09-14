@@ -7,13 +7,34 @@
 위치나 크기, 회전을 지정한 시간내에 수행하는 애니메이션
 - View 애니메이션 사용 시 버튼클릭은 원래 위치에서 해야한다.
 - 종류 : Move / Rotate / Scale / Alpha
-- 애니메이션 설정 방법 1 (xml 이용)
-  1. 애니메이션 xml 정의 ()
-  2. AnimationUtil로 정의된 애니메이션을 로드
-  3. 로드된 애니메이션을 실제 위젯에 적용
-- View 애니메이션 설정 방법 2 (java 코드 내에서 이용)
+- 애니메이션 설정 방법
+   1. java 코드 내에서 이용
+   2. xml 이용
 
-### 1. __xml을 이용한 애니메이션 설정__
+### 1. __코드 내에서 바로 이용__
+
+#### ① Animation 설정
+RotateAnimation / ScaleAnimation / TranslateAnimation / AlphaAnimation 존재
+#### ① 조건 설정
+ex> setDuration, setFillAfter, setInterpolator, setRepeatCount 등
+#### ① 실제 위젯에 적용
+
+> 예시
+```java
+// 1. 애니메이션 설정
+Animation aniView = new TranslateAnimation(0,100,0,0); //aniView 는 View 이름
+// 조건 설정
+aniView.setDuration(1000);
+aniView.setFillAfter(true);
+aniView.setInterpolator(new AccelerateInterpolator());
+// 3. 실제 위젯에 적용
+btnView.startAnimation(aniView);
+```
+
+### 2. __xml을 이용한 애니메이션 설정__
+<순서> :</br>
+①. 애니메이션 xml 정의 () -> ②. AnimationUtil로 정의된 애니메이션을 로드 -> ③. 로드된 애니메이션을 실제 위젯에 적용
+
 #### ① 애니메이션 xml 정의
 resource/anim 디렉토리에 xml 파일 생성
  - Move(Translate) : 움직임 조절
@@ -24,9 +45,9 @@ resource/anim 디렉토리에 xml 파일 생성
 
 > Syntax
 > - 몇가지 설명 </br>
-> filAfter =  true-애니메이션의 종료위치 고정 / false-원래위치로 복귀(default = false)</br>
-> 시간값(duration) = 1/1000 초 단위 설정</br>
-> pivot은 %로 기준점 위치
+> 》 filAfter =  true-애니메이션의 종료위치 고정 / false-원래위치로 복귀(default = false)</br>
+> 》 시간값(duration) = 1/1000 초 단위 설정</br>
+> 》 pivot은 %로 기준점 위치
 
 ```xml
 <!-- set을 translate으로 바꾼다-->
@@ -61,10 +82,17 @@ resource/anim 디렉토리에 xml 파일 생성
 ```
 
 > 예시
-
+> 위는 interpolator, 아래는 애니메이션
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<overshootInterpolator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:tension="7.0"
+    />
+```
 ```xml
 <translate
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
     android:fromXDelta="0"
     android:fromYDelta="0"
     android:toXDelta="100"
@@ -119,6 +147,19 @@ private void rotate(){
     // 3. 로드된 애니메이션을 실제 위젯에 적용
     object.startAnimation(animation);
 }
+```
+
+## 참고 사항
+1. interpolator 종류
+```
+// 속도가 동일하게 이동 : linear_interpolator
+// 점점 빠르게 이동 : accerlerate_interpolator
+// 점점 느리게 이동 : decelerate_interpolator
+// 위 둘을 동시에 : accerlerate_decelerate_interpolator
+// 시작위치에서 조금 뒤로 당겼다 이동 : anticipate__interpolator
+// 도착위치를 조금 지나쳤다가 도착위치로 이동 : overshoot_interpolator
+// 위 둘을 동시에 : anticipate_overshoot_interpolator
+// 도착위치에서 튕김 : bounce_interpolator
 ```
 
 ## 참고 문제
