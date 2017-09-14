@@ -3,7 +3,7 @@
 
 ## __문제__
 아래와 같이 작동하는 App 만들기
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/SpreadCubes/picture)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Example/SpreadCubes/picture/SpreadCubes.gif)
 
 ## __설명__
 ### ● 목차1
