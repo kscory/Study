@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- set을 scale으로 바꾼다-->
+<scale
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXScale="1.0"
+    android:fromYScale="1.0"
+    android:toXScale="0.5"
+    android:toYScale="5"
+
+    android:fillAfter="true"
+    android:duration="3000">
+    <!--
+    scale은 1.0부터 시작한다. (dp로 설정 가능)
+    여기도 pivot 설정 가능
+    filAfter =  true 일 경우 애니메이션의 종료위치에 고정
+                false 일 경우 원래위치로 복귀 (default = false)
+    시간값(duration) = 1/1000 초 단위
+    -->
+</scale>

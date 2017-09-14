@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- set을 rotate으로 바꾼다-->
+<rotate
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:toDegrees="270"
+    android:pivotX="50%"
+    android:pivotY="50%"
+
+    android:fillAfter="true"
+    android:duration="3000">
+    <!--  ,
+    filAfter =  true 일 경우 애니메이션의 종료위치에 고정
+                false 일 경우 원래위치로 복귀 (default = false)
+    시간값(duration) = 1/1000 초 단위
+    -->
+</rotate>
