@@ -3,17 +3,17 @@
 - [Animation 참고 자료](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation)
 
 (ex> 아래와 같이 버튼 클릭시 목표지점으로 이동 표현)</br>
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation2/picture/Button.gif)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Animation2/picture/Button.gif)
 
 
 ## Layout
 아래와 같은 레이아웃 설정</br>
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation2/picture/layout.png)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Animation2/picture/layout.png)
 
 ## Code
 - 모든 Layout은 addView를 이용해 위젯을 추가시킬 수 있다.
 - dummy 위젯을 생성하여 애니메이션을 이용
-- [전체코드 보기]()
+- [전체코드 보기](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Animation2/BasicLayoutReview/app/src/main/java/com/example/kyung/basiclayoutreview/MainActivity.java)
 
 ### 1. __dummy 생성__
 - LinearLayout 안에 버튼이 설정되어 있어 original 로 버튼을 이동시킬 경우 LinearLayout의 범위 안에서만 이동이 가능하므로 dummy button을 생성해서 이동
@@ -96,7 +96,7 @@ aniSet.start();
 
 ### LinearLayout 에서 버튼의 겹침 문제
  - 버튼을 새로 생성하여 적용하면 아래와 같이 좌표값이 변경된다.</br>
- ![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation2/picture/layout2.png)
+ ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Animation2/picture/layout2.png)
  - 또한 LinearLayout은 match-parent 가 마지막에 적용되므로 layoutParams을 통해 강제로 넓이와 높이를 정해줄 수 있다.
 
 ```java
