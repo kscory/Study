@@ -327,4 +327,4 @@ spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 - 일종의 MVC / MVP 패턴으로 인식 가능
 - adapter 이용 시 데이터를 가공하여 보여줄 수 있다.
 </br>
-![]](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicWidget/picture/spinner.png)
+![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicWidget/picture/spinner.png)
