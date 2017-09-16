@@ -29,6 +29,7 @@ aniView.setInterpolator(new AccelerateInterpolator());
 // 3. 실제 위젯에 적용
 btnView.startAnimation(aniView);
 ```
+---
 
 ### 2. __xml을 이용한 애니메이션 설정__
 <순서> :</br>
@@ -165,6 +166,7 @@ translationX / translationY / translationbyX / translationbyY / rotation / etc .
 btnView.animate().translationX(100).withLayer();
 ///btnView 는 View id를 뜻함
 ```
+---
 
 ### 2. __코드 내에서 바로 이용_2__
 
@@ -203,6 +205,7 @@ aniSet.setDuration(3000);
 aniSet.setInterpolator(new LinearInterpolator());
 aniSet.start();
 ```
+---
 
 ### 3. __xml을 이용한 애니메이션 설정__
 <순서> :</br>
