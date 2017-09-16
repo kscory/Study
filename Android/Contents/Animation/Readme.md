@@ -148,6 +148,8 @@ private void rotate(){
     object.startAnimation(animation);
 }
 ```
+---
+---
 
 ## Property 애니메이션
 위치나 크기, 회전을 지정한 시간내에 수행하는 애니메이션
