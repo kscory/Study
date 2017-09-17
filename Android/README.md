@@ -11,14 +11,12 @@
 > ### 4. [Animation](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation)
 >> - View / Property 애니메이션 사용법
 
-> ### 5. [Animation 활용 ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation2)
+> ### 5. [Animation2 ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation2)
 >> - dummy 생성 / 좌표값 받아오기 / 애니메이션
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
->> - Layout 적용 / 계산기 Logic / 정규식 / 버튼 디자인 /
+>> - Layout 적용 / 계산기 Logic / 정규식 / 버튼 디자인 / 애니메이션 / 버튼 클릭 효과 / 계산기 로직 예외처리
 
->#### 2. [계산기에 애니메이션 넣기]()
-
->#### 3. [SpreadCubes](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/SpreadCubes)
+>#### 2. [SpreadCubes](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/SpreadCubes)
 >> - Animation의 활용
