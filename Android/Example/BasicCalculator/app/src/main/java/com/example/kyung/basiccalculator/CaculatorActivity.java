@@ -1,16 +1,24 @@
 package com.example.kyung.basiccalculator;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 // View.OnClickListener를 상속 받는 것으로 이번에는 한다.
 public class CaculatorActivity extends AppCompatActivity
@@ -24,6 +32,8 @@ public class CaculatorActivity extends AppCompatActivity
     int rightParenthesesCount=0;
     boolean checkedDot=false;
 
+    ConstraintLayout stage;
+    LinearLayout linearLayout0, linearLayout1, linearLayout2, linearLayout3, linearLayout4;
     Button btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9;
     Button btnSum,btnSubtracttion,btnMultiplication,btnDivison, btnClear, btnRun, btnLeftParentheses, btnRightParentheses;
     Button btnDot;
@@ -46,57 +56,75 @@ public class CaculatorActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn0:
+                buttonEffect(btn0, "0");
                 inputPreView("0");
                 break;
             case R.id.btn1:
+                buttonEffect(btn1, "1");
                 inputPreView("1");
                 break;
             case R.id.btn2:
+                buttonEffect(btn2, "2");
                 inputPreView("2");
                 break;
             case R.id.btn3:
+                buttonEffect(btn3, "3");
                 inputPreView("3");
                 break;
             case R.id.btn4:
+                buttonEffect(btn4, "4");
                 inputPreView("4");
                 break;
             case R.id.btn5:
+                buttonEffect(btn5, "5");
                 inputPreView("5");
                 break;
             case R.id.btn6:
+                buttonEffect(btn6, "6");
                 inputPreView("6");
                 break;
             case R.id.btn7:
+                buttonEffect(btn7, "7");
                 inputPreView("7");
                 break;
             case R.id.btn8:
+                buttonEffect(btn8, "8");
                 inputPreView("8");
                 break;
             case R.id.btn9:
+                buttonEffect(btn9, "9");
                 inputPreView("9");
                 break;
             case R.id.btnDot:
+                buttonEffect(btnDot, ".");
                 inputPreView(".");
                 break;
             case R.id.btnSum:
+                buttonEffect(btnSum, "+");
                 inputPreView("+");
                 break;
             case R.id.btnSubtraction:
+                buttonEffect(btnSubtracttion, "-");
                 inputPreView("-");
                 break;
             case R.id.btnMultiplication:
+                buttonEffect(btnMultiplication, "*");
                 inputPreView("*");
                 break;
             case R.id.btnDivision:
+                buttonEffect(btnDivison, "/");
                 inputPreView("/");
                 break;
             case R.id.btnLeftParentheses:
+                buttonEffect(btnLeftParentheses, "(");
                 inputPreView("(");
                 break;
             case R.id.btnRightParentheses:
+                buttonEffect(btnRightParentheses, ")");
                 inputPreView(")");
                 break;
             case R.id.btnClear:
+                buttonEffect(btnClear, "c");
                 preViewText="입력창";
                 resultViewText="결과창";
                 preInput="=";
@@ -108,6 +136,7 @@ public class CaculatorActivity extends AppCompatActivity
                 textViewResultView.setText(resultViewText);
                 break;
             case R.id.btnRun:
+                buttonEffect(btnRun, "=");
                 inputResultView(preViewText);
                 break;
         }
@@ -129,8 +158,6 @@ public class CaculatorActivity extends AppCompatActivity
         if(tempCalculation.get(0).equals("")){
             tempCalculation.remove(0);
         }
-
-
 
         while(true){
 
@@ -389,6 +416,7 @@ public class CaculatorActivity extends AppCompatActivity
         // 오류가 없으면 계산 시작
         double result = calc(total);
 
+
         leftParenthesesCount=0;
         rightParenthesesCount=0;
         checkedDot=false;
@@ -398,16 +426,23 @@ public class CaculatorActivity extends AppCompatActivity
     }
 
     private void initView(){
-        btn0 = (Button) findViewById(R.id.btn1);
-        btn1 = (Button) findViewById(R.id.btn2);
-        btn2 = (Button) findViewById(R.id.btn3);
-        btn3 = (Button) findViewById(R.id.btn4);
-        btn4 = (Button) findViewById(R.id.btn5);
-        btn5 = (Button) findViewById(R.id.btn6);
-        btn6 = (Button) findViewById(R.id.btn7);
-        btn7 = (Button) findViewById(R.id.btn8);
-        btn8 = (Button) findViewById(R.id.btn9);
-        btn9 = (Button) findViewById(R.id.btn0);
+        stage = (ConstraintLayout) findViewById(R.id.stage);
+        linearLayout0 =(LinearLayout) findViewById(R.id.linearLayout0);
+        linearLayout1 =(LinearLayout) findViewById(R.id.linearLayout1);
+        linearLayout2 =(LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 =(LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout4 =(LinearLayout) findViewById(R.id.linearLayout4);
+
+        btn0 = (Button) findViewById(R.id.btn0);
+        btn1 = (Button) findViewById(R.id.btn1);
+        btn2 = (Button) findViewById(R.id.btn2);
+        btn3 = (Button) findViewById(R.id.btn3);
+        btn4 = (Button) findViewById(R.id.btn4);
+        btn5 = (Button) findViewById(R.id.btn5);
+        btn6 = (Button) findViewById(R.id.btn6);
+        btn7 = (Button) findViewById(R.id.btn7);
+        btn8 = (Button) findViewById(R.id.btn8);
+        btn9 = (Button) findViewById(R.id.btn9);
         btnSum = (Button) findViewById(R.id.btnSum);
         btnDot = (Button) findViewById(R.id.btnDot);
         btnSubtracttion = (Button) findViewById(R.id.btnSubtraction);
@@ -441,5 +476,83 @@ public class CaculatorActivity extends AppCompatActivity
         btnRun.setOnClickListener(this);
         btnLeftParentheses.setOnClickListener(this);
         btnRightParentheses.setOnClickListener(this);
+    }
+
+    // 애니메이션
+    public void buttonEffect(View view, String value){
+        // 넘겨받은 view 가 Button 인지 체크
+        if (view instanceof Button) {
+            // 오리지날 뷰를 생성
+            Button original = (Button) view;
+            // dummy를 상위 레이아웃에 생성
+            final TextView dummy = new TextView(this);
+
+            // original 위치 파악 후 dummy에 세팅
+            // Layout이 총 3개 이므로 두명의 부모 Layout으로 부터 초기 좌표를 받아서 해결
+            LinearLayout parent1 = (LinearLayout) original.getParent();
+            LinearLayout parent2 = (LinearLayout) parent1.getParent();
+            float basiclocationX = parent2.getX() + parent1.getX() + original.getX();
+            float basiclocationY = parent2.getY() + parent1.getY() + original.getY();
+            // 세팅
+            dummy.setX(basiclocationX);
+            dummy.setY(basiclocationY);
+
+            // original의 속성값 적용
+            dummy.setText(original.getText().toString());
+            dummy.setWidth(original.getWidth());
+            dummy.setHeight(original.getHeight());
+            dummy.setTextSize(original.getTextSize());
+            dummy.setGravity(original.getGravity());
+            dummy.setTextColor(Color.GRAY);
+
+            // LinearLayout 의 크기는 matchparent를 마지막에 받기 때문에 이를 줄여준다.
+            LinearLayout.LayoutParams size = new LinearLayout.LayoutParams(original.getWidth(),original.getHeight());
+            dummy.setLayoutParams(size);
+
+            // dummy를 상위 레이아웃에 담는다.
+            stage.addView(dummy);
+
+            // 목표지점을 선택한다.(X좌표 랜덤 선택)
+            Random random = new Random();
+            float goalX = random.nextInt(textViewPreView.getWidth());
+            float goalY = textViewPreView.getY();
+
+            // 애니메이션을 만든다.
+            ObjectAnimator aniX = ObjectAnimator.ofFloat(dummy, "x", goalX);
+            ObjectAnimator aniY = ObjectAnimator.ofFloat(dummy, "y", goalY);
+            ObjectAnimator aniR = ObjectAnimator.ofFloat(dummy, "rotation", 0F, 360F);
+
+            AnimatorSet aniSet = new AnimatorSet();
+            aniSet.playTogether(aniX,aniY,aniR);
+            aniSet.setDuration(1000);
+            aniSet.setInterpolator(new AccelerateInterpolator());
+
+            // 애니메이션 종료를 위한 리스너 사라지면 버튼 입력
+            aniSet.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    stage.removeView(dummy);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+
+            // 애니메이션 시작
+            aniSet.start();
+        }
+
     }
 }

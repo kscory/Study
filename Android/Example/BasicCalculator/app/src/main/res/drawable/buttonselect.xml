@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_pressed="false"
+        android:drawable="@drawable/buttonexample"
+        />
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/button_example_press"
+        />
+</selector>
+
+<!--
+android:state_enabled = 현재 사용 가능 상태일 경우 (유무)
+android:state_selected = 현재 선택된 경우 (유무)
+android:state_pressed = 현재 클릭이 된 경우 (유무)
+android:state_focused = 현재 포커스를 가진 경우 (유무)
+android:state_selected = 현재 선택된 경우 (유무)
+android:state_checked = 현재 체크된 경우 (유무)
+-->

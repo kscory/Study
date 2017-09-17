@@ -19,7 +19,8 @@
         <activity
             android:name=".CaculatorActivity"
             android:configChanges="orientation|screenSize"
-            android:label="계산기">
+            android:label="계산기"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
     </application>
 
