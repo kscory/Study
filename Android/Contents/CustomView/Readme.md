@@ -29,7 +29,9 @@ CustomView 만들기
 </br> - 3.2 ID에 맞게 실행
 
 ```java
-public class AniButton extends AppCompatButton {
+public class AniButton extends AppCompatButton implements View.OnTouchListener {
+    // animation이 true일 때만 실행
+    boolean animation = false;
     // attr에 정의한 모든 속성이 담겨진다.
     public AniButton(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,47 +47,55 @@ public class AniButton extends AppCompatButton {
             switch (current_attr){
                 case R.styleable.AniButton_animation:
                     String animation = typed.getString(current_attr);
-                    if("true".equals(animation)){ // 이렇게 해야 animation이 null 일때 exception이 발생하지 않는다.
-                        String currentText = getText().toString(); // 현재 입력된 값을 가져올 수 있다.
+                    if("true".equals(animation)){
+                        // 현재 입력된 값을 가져올 수 있다.
+                        String currentText = getText().toString();
                         setText("[animation]\n" + currentText );
-
-                        this.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                scaleAni(v);
-                            }
-                        });
+                        // animation을 true로 바꾼다.
+                        this.animation=true;
                     }
                     break;
                 case R.styleable.AniButton_delimeter:
                     break;
             }
         }
+        setOnTouchListener(this);
     }
 
-    // 애니메이션 정의(클릭시 버튼이 커졌다가 작아짐)
-    public void scaleAni(View view){
-        if (view instanceof AniButton){
-            ObjectAnimator startAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f);
-            ObjectAnimator startAniScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f);
+    // 애니메이션 정의
+    private void scaleAni(){
+        if(animation){
+            // ObjectAnimator startAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f, 1.0f); 사용 가능
 
-            ObjectAnimator endAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f);
-            ObjectAnimator endAniScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f);
+            ObjectAnimator startAniScaleX = ObjectAnimator.ofFloat(this, "scaleX", 1.5f);
+            ObjectAnimator startAniScaleY = ObjectAnimator.ofFloat(this, "scaleY", 1.5f);
+
+            ObjectAnimator endAniScaleX = ObjectAnimator.ofFloat(this, "scaleX", 1.0f);
+            ObjectAnimator endAniScaleY = ObjectAnimator.ofFloat(this, "scaleY", 1.0f);
 
             AnimatorSet aniSet = new AnimatorSet();
             AnimatorSet aniSet1 = new AnimatorSet();
             AnimatorSet aniSet2 = new AnimatorSet();
-
             aniSet1.playTogether(startAniScaleX,startAniScaleY);
             aniSet2.playTogether(endAniScaleX,endAniScaleY);
 
             aniSet.playSequentially(aniSet1,aniSet2);
             aniSet.setDuration(1000);
-
             aniSet.start();
         }
+
     }
-}
+
+    // onTouchListener 사용
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                scaleAni();
+                break;
+        }
+        return false;
+    }
 ```
 
 ---
@@ -131,3 +141,10 @@ public class AniButton extends AppCompatButton {
 ### 2. Button vs AppCompatButton
 - AppCompatButton은 하위레벨 버튼을 포함시켜서 API 레벨이 낮은 경우에도 버튼 실행을 가능하게 한다.
 - 사용 : public class AniButton extends AppCompatButton
+
+### 3. "true".equals(animation)
+- animation.equals(true) 와 같은 경우 animation에 null이 포함되게 되면 exception이 발생할 수 있으므로 이와같이 코딩한다.
+
+### 4. onTouchListener vs onClickListener
+- onTouchListener로 정의시 여러 event(down, press 등)에 맞게 종류별로 사용 가능하다.
+- onClickListener로 정의시 클릭후 떼었을때 event가 발생

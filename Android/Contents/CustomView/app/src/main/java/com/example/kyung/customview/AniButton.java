@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatButton;
 // 따라서 상황에 따라 다르게 해주어야 한다.
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,14 +21,10 @@ import android.widget.Button;
 
 //Alt+enter를 이용해 확인하여 메소드 변수?? 결정 + supper 등 설정
 @SuppressLint("AppCompatCustomView")
-public class AniButton extends AppCompatButton {
+public class AniButton extends AppCompatButton implements View.OnTouchListener {
+    // animation이 true일 때만 실행
+    boolean animation = false;
 
-// Button 과 AppCompatButton의 차이 -> AppCompatButton은 하위레벨 버튼을 포함시켜서 API 레벨이 낮은 경우에도 버튼을 실행시킬 수 있다.
-
-    /**
-     * animation 속성이 true일 경우
-     * scale 애니메이션을 사용해서 클릭시 살짝 커졌다 작아지는 버튼을 만들어 보세요
-     */
     public AniButton(Context context, AttributeSet attrs) { // attr에 정의한 모든 속성이 담겨진다.
         super(context, attrs);
         // 1. attrs.xml 에 정의된 속성을 가져온다.
@@ -45,28 +42,26 @@ public class AniButton extends AppCompatButton {
                     if("true".equals(animation)){ // 이렇게 해야 animation이 null 일때 exception이 발생하지 않는다.
                         String currentText = getText().toString(); // 현재 입력된 값을 가져올 수 있다.
                         setText("[animation]\n" + currentText );
-
-                        this.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                scaleAni(v);
-                            }
-                        });
+                        this.animation=true;
                     }
                     break;
                 case R.styleable.AniButton_delimeter:
                     break;
             }
         }
+        setOnTouchListener(this);
     }
 
-    public void scaleAni(View view){
-        if (view instanceof AniButton){
-            ObjectAnimator startAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f);
-            ObjectAnimator startAniScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f);
+    private void scaleAni(){
+        if(animation){
+            // ObjectAnimator startAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f, 1.0f);
+            // 위와같이 하면 커졌다 돌아올 수 있다.
 
-            ObjectAnimator endAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f);
-            ObjectAnimator endAniScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f);
+            ObjectAnimator startAniScaleX = ObjectAnimator.ofFloat(this, "scaleX", 1.5f);
+            ObjectAnimator startAniScaleY = ObjectAnimator.ofFloat(this, "scaleY", 1.5f);
+
+            ObjectAnimator endAniScaleX = ObjectAnimator.ofFloat(this, "scaleX", 1.0f);
+            ObjectAnimator endAniScaleY = ObjectAnimator.ofFloat(this, "scaleY", 1.0f);
 
             AnimatorSet aniSet = new AnimatorSet();
             AnimatorSet aniSet1 = new AnimatorSet();
@@ -81,5 +76,15 @@ public class AniButton extends AppCompatButton {
             aniSet.start();
         }
 
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                scaleAni();
+                break;
+        }
+        return false;
     }
 }
