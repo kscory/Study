@@ -121,3 +121,13 @@ public class AniButton extends AppCompatButton {
     android:layout_marginTop="8dp"
     custom:layout_constraintTop_toBottomOf="@+id/aniButton1" />
 ```
+
+---
+## 참고사항
+### 1. import android.support.v7.widget.AppCompatButton
+- v4 < v7 이라고 되어 있지만 v4에서 지원하는 것을 v7이 지원하지 않을 때도 있다.(ex> ViewPage)
+- 따라서 상황에 따라 v4, v7을 적절히 써야 한다.
+
+### 2. Button vs AppCompatButton
+- AppCompatButton은 하위레벨 버튼을 포함시켜서 API 레벨이 낮은 경우에도 버튼 실행을 가능하게 한다.
+- 사용 : public class AniButton extends AppCompatButton
