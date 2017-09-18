@@ -1,0 +1,123 @@
+# CustomView
+CustomView 만들기
+
+
+## CustomView
+1. 커스텀 속성을 attrs.xml 파일에 정의
+2. 커스텀할 객체(위젯)를 상속받은 후 재정의
+3. 커스텀한 위젯을 레이아웃.xml에서 태그로 사용
+---
+### 1. __커스텀 속성을 attrs.xml 파일에 정의__
+- resource/value 에 저장
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AniButton"> <!-- 재정의할 객체이름-->
+        <attr name="animation" format="string"></attr> <!-- string이랑 resource만 사용-->
+        <attr name="delimeter" format="string"></attr>
+    </declare-styleable>
+</resources>
+```
+
+---
+### 2. __커스텀할 객체(위젯)를 상속받은 후 재정의__
+1. attrs.xml 에 정의된 속성을 가져온다.
+2. 해당 이름으로 정의된 속성의 개수를 가져온다.
+3. 반복문을 돌면서 해당 속성에 대한 처리를 해준다.
+</br> - 3.1 현재 배열에 있는 속성 아이디 가져오기
+</br> - 3.2 ID에 맞게 실행
+
+```java
+public class AniButton extends AppCompatButton {
+    // attr에 정의한 모든 속성이 담겨진다.
+    public AniButton(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // 1. attrs.xml 에 정의된 속성을 가져온다.
+        TypedArray typed = context.obtainStyledAttributes(attrs, R.styleable.AniButton);
+        // 2. 해당 이름으로 정의된 속성의 개수를 가져온다.
+        int size = typed.getIndexCount();
+        Log.d("AniButton", "size="+size);
+        // 3. 반복문을 돌면서 해당 속성에 대한 처리를 해준다.
+        for(int i =0 ; i<size ; i++){
+            // 3.1 현재 배열에 있는 속성 아이디 가져오기
+            int current_attr = typed.getIndex(i);
+            switch (current_attr){
+                case R.styleable.AniButton_animation:
+                    String animation = typed.getString(current_attr);
+                    if("true".equals(animation)){ // 이렇게 해야 animation이 null 일때 exception이 발생하지 않는다.
+                        String currentText = getText().toString(); // 현재 입력된 값을 가져올 수 있다.
+                        setText("[animation]\n" + currentText );
+
+                        this.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                scaleAni(v);
+                            }
+                        });
+                    }
+                    break;
+                case R.styleable.AniButton_delimeter:
+                    break;
+            }
+        }
+    }
+
+    // 애니메이션 정의(클릭시 버튼이 커졌다가 작아짐)
+    public void scaleAni(View view){
+        if (view instanceof AniButton){
+            ObjectAnimator startAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f);
+            ObjectAnimator startAniScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f);
+
+            ObjectAnimator endAniScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f);
+            ObjectAnimator endAniScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f);
+
+            AnimatorSet aniSet = new AnimatorSet();
+            AnimatorSet aniSet1 = new AnimatorSet();
+            AnimatorSet aniSet2 = new AnimatorSet();
+
+            aniSet1.playTogether(startAniScaleX,startAniScaleY);
+            aniSet2.playTogether(endAniScaleX,endAniScaleY);
+
+            aniSet.playSequentially(aniSet1,aniSet2);
+            aniSet.setDuration(1000);
+
+            aniSet.start();
+        }
+    }
+}
+```
+
+---
+### 3. __커스텀한 위젯을 레이아웃.xml에서 태그로 사용__
+1. 아래를 사용
+</br> - 태그 : com.example.kyung.customview."재정의된 객체"
+</br> - xmlns:custom="http://schemas.android.com/apk/res-auto"
+</br> - custom:"속성"="true" // (or false)
+
+```xml
+<com.example.kyung.customview.AniButton xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/aniButton1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hello CustomWidget"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    custom:animation="true" />
+
+<com.example.kyung.customview.AniButton xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/aniButton2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hello CustomWidget"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    custom:animation="false"
+    custom:layout_constraintVertical_bias="0.665"
+    android:layout_marginTop="8dp"
+    custom:layout_constraintTop_toBottomOf="@+id/aniButton1" />
+```

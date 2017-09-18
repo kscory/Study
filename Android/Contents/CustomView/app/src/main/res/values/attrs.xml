@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AniButton"> <!-- 재정의할 객체이름-->
+        <attr name="animation" format="string"></attr> <!-- string이랑 rssource만 사용-->
+        <attr name="delimeter" format="string"></attr>
+    </declare-styleable>
+</resources>
