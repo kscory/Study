@@ -1,7 +1,7 @@
 # [CustomView]
 - 특정 위젯을 상속받는 CustomView</br>
 - View를 상속받아 코드로 직접 작성
-#### 참고 : [그림판](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/CustomView2)
+#### 참고 : [그림판](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/CustomView2)
 
 ## 특정 위젯을 상속받는 CustomView
 1. 커스텀 속성을 attrs.xml 파일에 정의
