@@ -2,9 +2,19 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kyung.customview.MainActivity">
+
+    <com.example.kyung.customview.CustomView
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <!-- custom 이라고 바꿔서 사용하면 네임태그? 사용 가능 / res-auto가 자동 지원-->
     <com.example.kyung.customview.AniButton xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -19,17 +29,17 @@
         custom:animation="true" />
 
     <com.example.kyung.customview.AniButton xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/aniButton2"
+        android:id="@+id/btnDraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello CustomWidget"
+        android:layout_marginTop="8dp"
+        android:text="Go to Draw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         custom:animation="false"
-        custom:layout_constraintVertical_bias="0.665"
-        android:layout_marginTop="8dp"
-        custom:layout_constraintTop_toBottomOf="@+id/aniButton1" />
+        custom:layout_constraintTop_toBottomOf="@+id/aniButton1"
+        custom:layout_constraintVertical_bias="0.665" />
 
 </android.support.constraint.ConstraintLayout>

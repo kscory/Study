@@ -1,5 +1,7 @@
 package com.example.kyung.customview;
 
+import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,15 +18,32 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    ConstraintLayout stage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 코드로 작성 가능
+        stage = (ConstraintLayout) findViewById(R.id.stage);
+        CustomView cv = new CustomView(this);
+        cv.setX(200);
+        cv.setY(200);
+        stage.addView(cv);
+
         findViewById(R.id.aniButton1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "클릭", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        findViewById(R.id.btnDraw).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DrawActivity.class);
+                startActivity(intent);
             }
         });
     }

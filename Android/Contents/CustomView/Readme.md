@@ -1,8 +1,8 @@
-# CustomView
-CustomView 만들기
+# CustomView1
+1. 특정 위젯을 상속받는 CustomWidget
+2. View 자체를 상속받는 CustomView
 
-
-## CustomView
+## 특정 위젯을 상속받는 CustomView
 1. 커스텀 속성을 attrs.xml 파일에 정의
 2. 커스텀할 객체(위젯)를 상속받은 후 재정의
 3. 커스텀한 위젯을 레이아웃.xml에서 태그로 사용
@@ -131,6 +131,20 @@ public class AniButton extends AppCompatButton implements View.OnTouchListener {
     android:layout_marginTop="8dp"
     custom:layout_constraintTop_toBottomOf="@+id/aniButton1" />
 ```
+
+---
+---
+
+## View 자체를 상속받는 CustomView
+1. 커스텀 속성을 attrs.xml 파일에 정의
+2. 커스텀할 객체(위젯)를 상속받은 후 재정의
+3. 커스텀한 위젯을 레이아웃.xml에서 태그로 사용
+
+
+---
+## 참고문제
+CustomView의 활용
+#### [그림판](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/CustomView2)
 
 ---
 ## 참고사항
