@@ -134,11 +134,11 @@ class Holder{
 ```
 
 > getView 메소드
-> - 1. 레이아웃 인플레이터로 xml 파일을 View 객체로 변환 -> </br> View itemView = LayoutInflater.from(컨텍스트).inflate(R.layout.만든 xml, null); </br> 커스텀뷰, 레이아웃을 만들때 사용 가능
+> 1. 레이아웃 인플레이터로 xml 파일을 View 객체로 변환 </br> - View itemView = LayoutInflater.from(컨텍스트).inflate(R.layout.만든 xml, null); </br> - 커스텀뷰, 레이아웃을 만들때 사용 가능
 >> LayoutInflater.from(context).inflate(R.layout.list_item, null); // context를 정의해주어야 함 (이전에 많이 사용)
 >> LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
-> - 2. View와 홀더를 생성하고 View에 Tag함
-> - 3. View가 존재할 경우 홀더를 불러옴
+> 2. View와 홀더를 생성하고 View에 Tag함
+> 3. View가 존재할 경우 홀더를 불러옴
 
 ```java
 @Override
@@ -156,7 +156,8 @@ public View getView(int position, View convertView, ViewGroup parent) {
         holder.textView =(TextView) convertView.findViewById(R.id.textView);
         holder.init();
         // (나) 홀더를 View에 붙여놓는다..
-        convertView.setTag(holder); // 원래 setTag는 네이밍(라벨링을 하기 위해서 사용했는데, 원래 목적과 다르게 사용되고 있다.
+        // 원래 setTag는 네이밍(라벨링을 하기 위해서 사용했는데, 원래 목적과 다르게 사용되고 있다.
+        convertView.setTag(holder);
     } else{
         // View에 붙어 있는 홀더를 가져온다.
         holder = (Holder) convertView.getTag();
@@ -275,6 +276,3 @@ public class DetailActivity extends AppCompatActivity {
     }
 }
 ```
-
-## 참고사항
-1.
