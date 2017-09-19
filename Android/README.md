@@ -14,9 +14,23 @@
 > ### 5. [Animation2 ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Animation2)
 >> - dummy 생성 / 좌표값 받아오기 / 애니메이션
 
+> ### 6.[CustomView](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/CustomView)
+>> - CustomWidget / CustomView / 사용법 / onTouchListener / onDraw 사용
+
+> ### 7.[BasicList](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicList)
+>> - ListView / Adapter / Holder / intent
+
+
+
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
 >> - Layout 적용 / 계산기 Logic / 정규식 / 버튼 디자인 / 애니메이션 / 버튼 클릭 효과 / 계산기 로직 예외처리
 
 >#### 2. [SpreadCubes](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/SpreadCubes)
 >> - Animation의 활용
+
+> #### 3. [그림판](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/CustomView2)
+>> - CustomView / onDraw / onTouchListener / Path 활용
+
+> #### 4. [메모장]()
+>>
