@@ -1,8 +1,9 @@
-# [CustomView 1]
-특정 위젯을 상속받는 CustomWidget</br>
-- 참고 : [View 자체를 상속받는 CustomView](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/CustomView2)
+# [CustomView]
+- 특정 위젯을 상속받는 CustomView</br>
+- View를 상속받아 코드로 직접 작성
+#### 참고 : [그림판](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/CustomView2)
 
-## 특정 위젯을 상속받는 CustomWidget
+## 특정 위젯을 상속받는 CustomView
 1. 커스텀 속성을 attrs.xml 파일에 정의
 2. 커스텀할 객체(위젯)를 상속받은 후 재정의
 3. 커스텀한 위젯을 레이아웃.xml에서 태그로 사용
@@ -130,6 +131,77 @@ public class AniButton extends AppCompatButton implements View.OnTouchListener {
     custom:layout_constraintVertical_bias="0.665"
     android:layout_marginTop="8dp"
     custom:layout_constraintTop_toBottomOf="@+id/aniButton1" />
+```
+---
+---
+
+## View를 상속받아 코드로 직접 작성
+1. View 를 상속받은 후 재정의
+2. CustomView 사용
+</br> - 2.1 Activity에 코드로 addView
+</br> - 2.2 커스텀한 View를 레이아웃.xml에서 태그로 사용
+---
+### 1. __커스텀할 객체(위젯)를 상속받은 후 재정의__
+1. View를 상속
+2. onDraw 메서드로 View에 그리기
+</br> - Paint : 물감
+</br> - setColor :
+</br> - drawRect : 사각형 / drawCircle : 원 / drawPath : 경로 그리기
+> CustomView.java
+
+```java
+public class CustomView extends View{
+    // 내가 소스코드에서 생성할 때
+    public CustomView(Context context){
+        super(context);
+    }
+    //xml 에서 태그로 사용할 때 시스템에서 호출해주는 생성자
+    public CustomView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+    // onDraw 메서드로 View에 그리기
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        Paint paint = new Paint(); // 물감 - 겉모양을 결정하는 도구
+        paint.setColor(Color.MAGENTA);
+        // 화면에 사각형 그리기
+        canvas.drawRect(100, 100, 200, 200, paint);
+    }
+}
+```
+---
+### 2. __CustomView 사용__
+#### 2.1 Activity에 코드로 addView
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+    ConstraintLayout stage;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        stage = (ConstraintLayout) findViewById(R.id.stage);
+        // 작성 부분
+        CustomView cv = new CustomView(this);
+        cv.setX(200); // CustomView의 x좌표 설정
+        cv.setY(200); // CustomView의 y좌표 설정
+        stage.addView(cv); // 화면에 추가
+    }
+}
+```
+#### 2.2 커스텀한 View를 레이아웃.xml에서 태그로 사용
+
+```xml
+<com.example.kyung.customview.CustomView
+    android:layout_width="300dp"
+    android:layout_height="150dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginTop="6dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 ```
 
 ---
