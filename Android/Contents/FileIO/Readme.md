@@ -12,7 +12,6 @@
 자바 API 이용 / 안드로이드 메소드 이용
 - 자바 API 이용
   - 다음과 같이 경로지정이 필수 `file = File(경로+파일)`
-  > 예시
   ```java
   // 경로 지정
   private static String DIR_INTERNAL = "/data/data/com.example.kyung.androidmemo/files";
@@ -23,9 +22,8 @@
   ```
 
 - 안드로이드 메소드 이용 (Context에서 사용 가능)
+  - Output(File 쓰기) : `openFileOutput(파일명, 모드 이름)`
   - Input(File 읽기) : `openFileInput(파일명)`
-  - Output(File 쓰기)`openFileOutput(파일명, 모드 이름)`
-  > 예시
   ```java
   FileInputStream fis = context.openFileInput(filename);
   FileOutputStream fos = context.openFileOutput(filename, MODE_PRIVATE);
@@ -33,13 +31,15 @@
 
 ### 3. __파일 입출력 방법__
 버퍼 이용 X / 버퍼 이용 O / 텍스트파일 입출력용 클래스
- - 버퍼를 이용한
-  - FileOutputStream
-  - FileInputStream
- - 버퍼를 이용한
-  - BufferedOutputStream
-  - BufferedInputStream 이용 (위를 포함)
- -
+- 기본적인 파일 입출력
+  - Output(File 쓰기) : `FileOutputStream`
+  - Input(File 읽기) : `FileInputStream`
+- 버퍼를 이용한
+  - Output(File 쓰기) :  `BufferedOutputStream`
+  - Input(File 읽기) : `BufferedInputStream`
+- 텍스트파일 입출력용 클래스
+  - Output(File 쓰기) :  `FileWriter`
+  - Input(File 읽기) : `FileReader`
 
 ---
 
