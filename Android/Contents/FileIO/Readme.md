@@ -3,7 +3,7 @@
 ---
 ## File I/O
 스트림을 열고 -> 중간처리(버퍼) -> 스트림을 닫는다.
-##### 참고사항 [file을 이용한 memo App](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemoFile)
+##### 참고사항 [file을 이용한 메모장 App](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemoFile)
 
 ### 1. __안드로이드에서의 파일 저장소__
 - 내부저장소(Internal) : 개별앱만 접근 가능, 파일탐색기에서 검색 불가능
