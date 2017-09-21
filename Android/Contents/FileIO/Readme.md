@@ -42,20 +42,20 @@
   - Output(File 쓰기) : `FileOutputStream`
   - Input(File 읽기) : `FileInputStream`
 
-  ![](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/File%20IO/picture/file1.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FileIO/picture/file1.png)
 
 
 - 버퍼를 사용한 파일 입출력 _ 보통 버퍼를 이용하여 사용
   - Output(File 쓰기) :  `BufferedOutputStream`
   - Input(File 읽기) : `BufferedInputStream`
 
-    ![](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/File%20IO/picture/file2.png)
+    ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FileIO/picture/file2.png)
 
 - 텍스트파일 입출력용 클래스
   - Output(File 쓰기) :  `FileWriter`
   - Input(File 읽기) : `FileReader`
 
-    ![](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/File%20IO/picture/file3.png)
+    ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FileIO/picture/file3.png)
 
 ### 4. __read 버퍼의 특이사항__
 - `read(buffer)` 의 경우 읽은 값을 `buffer`에 저장하고 읽은 count의 값(최대1024바이트) 을 넘겨준다.
