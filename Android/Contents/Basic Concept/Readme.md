@@ -25,8 +25,15 @@ App(어플) > Activity(화면한개 단위) > Fragment(화면조각) > Layout(�
   - Context는 new로 메모리에 로드(대표적으로 this) 되어야만 사용 가능 (클래스)
   - System.in 과 같이 사용 가능
 
+- View?
+  - View는 Activity랑 Service에 속해 있어 getContext 사용 가능
+  - View는 개별적으로 context를 가지고 있을 수 없다
 
-### 3. __View 란__
+---
+### 3. __Listener 란__
+- Listener는 크게 하나가 존재하며, 서버로 생각할 수 있다.
+- 우리는 Listener의 사용할 명령을 내리는 것.
+- App 증가 시 Listener에 set 되는 것이 많아진다.
 
 
 ---
@@ -53,6 +60,7 @@ App(어플) > Activity(화면한개 단위) > Fragment(화면조각) > Layout(�
   setContentView(R.layout.activity_main);
   ```
 
+---
 ### 5. __위젯 사용법__
   1. 레이아웃에 정의된 위젯의 아이디로 해당 객체를 변수에 선언</br>
   2. 선언된 변수에 실제 위젯을 할당
