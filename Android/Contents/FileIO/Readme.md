@@ -11,7 +11,7 @@
 ### 2. __파일에 접근하는 방법__
 자바 API 이용 / 안드로이드 메소드 이용
 - 자바 API 이용
-  - 다음과 같이 경로지정이 필수 `file = File(경로+파일)`
+  - 다음과 같이 경로지정이 필수 `file = File(경로+파일)`</br>
 
   ```java
   // 경로 지정
@@ -25,7 +25,7 @@
 
 - 안드로이드 메소드 이용 (Context에서 사용 가능)
   - Output(File 쓰기) : `openFileOutput(파일명, 모드 이름)`
-  - Input(File 읽기) : `openFileInput(파일명)`
+  - Input(File 읽기) : `openFileInput(파일명)`</br>
 
   ```java
   FileInputStream fis = context.openFileInput(filename);
@@ -38,11 +38,10 @@
   - Output(File 쓰기) : `FileOutputStream`
   - Input(File 읽기) : `FileInputStream`
 
-
+</br>
 - 버퍼를 사용한 파일 입출력
   - Output(File 쓰기) :  `BufferedOutputStream`
-  - Input(File 읽기) : `BufferedInputStream`
-
+  - Input(File 읽기) : `BufferedInputStream`</br>
 
 - 텍스트파일 입출력용 클래스
   - Output(File 쓰기) :  `FileWriter`
