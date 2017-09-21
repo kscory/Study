@@ -34,9 +34,11 @@
 - 기본적인 파일 입출력
   - Output(File 쓰기) : `FileOutputStream`
   - Input(File 읽기) : `FileInputStream`
+
 - 버퍼를 이용한
   - Output(File 쓰기) :  `BufferedOutputStream`
   - Input(File 읽기) : `BufferedInputStream`
+  
 - 텍스트파일 입출력용 클래스
   - Output(File 쓰기) :  `FileWriter`
   - Input(File 읽기) : `FileReader`
