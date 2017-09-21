@@ -10,10 +10,24 @@ App(어플) > Activity(화면한개 단위) > Fragment(화면조각) > Layout(�
 
 ---
 ### 2. __Context 란__
+- Context : 시스템 자원을 사용하기 위한 도구
+  - 개발자가 필요요할 함수를 미리 정의해둔 클래스
+  - 안드로이드의 메이저 컴포넌트를 위한 기반 클래스
 
----
+- 대표적으로 Activity가 Context를 상속
+
+- getContext vs  getapplicationContext
+  - getContext : 컴포넌트 단위
+  - getapplicationContext : 들어가있는 도구 등 차이
+  - 되도록이면 그냥 컨텍스트 or getBaseContext사용 (물론 아닌 경우도 존재)
+
+- 시스템과의 차이
+  - Context는 new로 메모리에 로드(대표적으로 this) 되어야만 사용 가능 (클래스)
+  - System.in 과 같이 사용 가능
+
 
 ### 3. __View 란__
+
 
 ---
 ### 4. __MainActivity, onCreate, setContentView__
@@ -39,11 +53,11 @@ App(어플) > Activity(화면한개 단위) > Fragment(화면조각) > Layout(�
   setContentView(R.layout.activity_main);
   ```
 
-### 5. __위젯 사용__
-> 1. 레이아웃에 정의된 위젯의 아이디로 해당 객체를 변수에 선언</br>
-> 2. 선언된 변수에 실제 위젯을 할당
-> 3. 위에서 저장한 변수를 사용( 이벤트(클릭, 터치) 캐치가 필요할 경우는 리스너를 달아준다,)
-> 4. 실행할 코드를 작성
+### 5. __위젯 사용법__
+  1. 레이아웃에 정의된 위젯의 아이디로 해당 객체를 변수에 선언</br>
+  2. 선언된 변수에 실제 위젯을 할당
+  3. 위에서 저장한 변수를 사용( 이벤트(클릭, 터치) 캐치가 필요할 경우는 리스너를 달아준다,)
+  4. 실행할 코드를 작성
 
 ```java
 public class MainActivity extends AppCompatActivity {
