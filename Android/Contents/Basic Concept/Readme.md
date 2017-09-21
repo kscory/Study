@@ -1,5 +1,5 @@
 # Android Intro
-구성
+알고 있어야 할 개념
 
 
 ## 기본 개념
@@ -8,29 +8,36 @@
 App(어플) > Activity(화면한개 단위) > Fragment(화면조각) > Layout(뷰그룹:컨테이너) > Widget(뷰)
 > ※ Fragment의 경우 생명주기 관리가 복잡하여 요즘에는 View를 Fragment처럼 하는 회사가 많다.
 
-### 2. __MainActivity__
-> 메인 Activity의 경우 Activity 기반클래스를 상속받아서 구성
+---
+### 2. __Context 란__
 
-```java
-public class MainActivity extends AppCompatActivity{
-}
-```
+---
 
-### 3. __onCreate__
-> onCreate는 화면을 최초에 생성할 때 호출되는 함수
+### 3. __View 란__
 
-```java
-@Override
-   protected void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-}
-```
+---
+### 4. __MainActivity, onCreate, setContentView__
+- 메인 Activity의 경우 Activity 기반클래스를 상속받아서 구성
 
-### 4. __setContentView__
-> 레이아웃 xml 파일을 메모리에 로드.
-```java
-setContentView(R.layout.activity_main);
-```
+  ```java
+  public class MainActivity extends AppCompatActivity{
+  }
+  ```
+
+- onCreate는 화면을 최초에 생성할 때 호출되는 함수
+
+  ```java
+  @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+  }
+  ```
+
+- setContentView : 레이아웃 xml 파일을 메모리에 로드.
+
+  ```java
+  setContentView(R.layout.activity_main);
+  ```
 
 ### 5. __위젯 사용__
 > 1. 레이아웃에 정의된 위젯의 아이디로 해당 객체를 변수에 선언</br>
