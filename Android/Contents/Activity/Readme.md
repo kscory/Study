@@ -7,7 +7,7 @@
 
 ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Activity/picture/lifecycle.jpg)
 
-### 1. __생명주기 메소드__
+### 1. 생명주기 메소드
 
   메소드 | 설명
   :----: | :----:
@@ -19,7 +19,7 @@
   onStop() | 액티비티가 더이상 사용자에게 보여지지 않을 때 호출된다
   onDestroy() | 액티비티가 소멸될 때 호출된다.<br> finish() 메소드가 호출되거나 시스템이 메모리 확보를 위해 액티비티를 제거할 때 호출된다
 
-### 2. __Activity 변화에 따른 호출 메소드__
+### 2. Activity 변화에 따른 호출 메소드
 
 ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Activity/picture/lifecycle2.jpg)
 
