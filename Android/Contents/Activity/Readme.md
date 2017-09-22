@@ -5,7 +5,7 @@
 
 ##  Activity 생명주기
 
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Activity/picture/lifecycle.jpg)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Activity/picture/lifecycle.jpg)
 
 ### 1. __생명주기 메소드__
 
@@ -21,7 +21,7 @@
 
 ### 2. __Activity 변화에 따른 호출 메소드__
 
-![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Activity/picture/lifecycle2.jpg)
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Activity/picture/lifecycle2.jpg)
 
 ---
 
