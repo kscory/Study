@@ -10,6 +10,8 @@ App(어플) > Activity(화면한개 단위) > Fragment(화면조각) > Layout(�
 
 ---
 ### 2. __Context 란__
+[참고자료_안드로이드 Context 이야기](http://blog.naver.com/PostView.nhn?blogId=huewu&logNo=110085457720)
+
 - Context : 시스템 자원을 사용하기 위한 도구
   - 개발자가 필요요할 함수를 미리 정의해둔 클래스
   - 안드로이드의 메이저 컴포넌트를 위한 기반 클래스
