@@ -4,8 +4,7 @@
 
 ---
 
-## Gradle
-[참고문헌](https://developer.android.com/studio/build/index.html?hl=ko)
+## Gradle (참고 : [빌드 구성](https://developer.android.com/studio/build/index.html?hl=ko))
 - 아래 그림과 같이 두가지의 build.Gradle이 존재
 
 ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Gradle%2CStyle/picture/gradle1.png)
@@ -123,8 +122,55 @@
 
 ---
 
-## Style 의 변경
+## Style (참고 : [스타일 및 테마](https://developer.android.com/guide/topics/ui/themes.html), [머티리얼 테마 사용](https://developer.android.com/training/material/theme.html) )
 
+### style.xml
+View 또는 창의 모양과 형식을 지정하는 속성 모음
+
+  - `<style>` 요소에 `parent` 특성을 사용하여 스타일이 속성을 상속해야 하는 상위 스타일을 지정가능
+  ```xml
+  <style name="GreenText" parent="@android:style/TextAppearance"></style>
+  ```
+
+  - `<item>` 요소로 정의되는 스타일 속성 정의(스타일 속성을 여러가지 존재)
+    - ex1> `<item name="windowNoTitle">true</item>` : title의 유무 (ture시 삭제)
+    - ex2> `<item name="windowActionBar">true</item>` : actionBar의 유무
+    - ex3> `<item name="android:windowIsTranslucent">true</item>` : 투명도 설정
+    ```xml
+    <style name="Theme.AppCompat.Translucent">
+    <!-- 타이틀을 날리는 것으 반드시 Style에서 한다. -->
+    <item name="windowActionBar">true</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowBackground">@color/transparent</item> // color 설정 적용
+    </style>
+    ```
+
+  - 상태표시줄
+    ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Gradle%2CStyle/picture/style1.png)
+
+
+### color.xml
+색상을 지정
+  - 아래와 같이 사용
+  ```xml
+  <color name="transparent">#33000000</color>
+  ```
+
+### Sytle 적용
+
+  - 액티비티 또는 애플리케이션 적용 (AndroidMaifest 파일에서 적용)
+  ```xml
+  <activity android:name=".WriteActivity"
+    android:theme="@style/Theme.AppCompat.Translucent"></activity>
+  ```
+
+  - View에 적용
+  ```xml
+  <TextView
+    style="@style/CodeFont" // 적용
+    android:text="@string/hello" />
+  ```
 
 
 ## 참고
