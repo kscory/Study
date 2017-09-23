@@ -134,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
   ```
 
 - getView 메소드
-  1. 레이아웃 인플레이터로 xml 파일을 View 객체로 변환
+  - a. 레이아웃 인플레이터로 xml 파일을 View 객체로 변환
     - View itemView = LayoutInflater.from(컨텍스트).inflate(R.layout.만든 xml, null);
     - 커스텀뷰, 레이아웃을 만들때 사용 가능
-  2. View와 홀더를 생성하고 View에 Tag함
-  3. View가 존재할 경우 홀더를 불러옴
+  - b. View와 홀더를 생성하고 View에 Tag함
+  - c. View가 존재할 경우 홀더를 불러옴
 
   ```java
   @Override
