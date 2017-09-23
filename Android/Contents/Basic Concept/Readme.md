@@ -4,6 +4,12 @@
 
 ## 기본 개념
 들어가기 전 기본 개념
+
+### 0. __안드로이드 Framework__
+- 아래 그림에서 자바API Framework 까지 관리하며 아래는 C / C++로 보통 되어 있다.
+- 따라서 bitmap과 같은 경우 강제로 refresh 시켜주지 않을 경우 계속 값을 가지게 된다.
+![](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Basic%20Concept/picture/android-stack_2x.png)
+
 ### 1. __안드로이드 화면 구조__
 App(어플) > Activity(화면한개 단위) > Fragment(화면조각) > Layout(뷰그룹:컨테이너) > Widget(뷰)
 > ※ Fragment의 경우 생명주기 관리가 복잡하여 요즘에는 View를 Fragment처럼 하는 회사가 많다.
