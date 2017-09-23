@@ -71,208 +71,218 @@ public class MainActivity extends AppCompatActivity {
 
 ### 2. __아답터의 생성__
 
-> 기본 아답터 클래스를 상속, 생성자
+- 기본 아답터 클래스를 상속, 생성자
 
-```java
-public class CustomAdapter extends BaseAdapter {
-    // 데이터 저장소를 아답터 내부에 두는것이 컨트롤하기 편하다.
-    List<String> data;
-    Context context;
-    // 생성자
-    public  CustomAdapter(Context context, List<String> data){
-        this.context = context;
-        this.data = data;
-    }
-}
-```
+  ```java
+  public class CustomAdapter extends BaseAdapter {
+      // 데이터 저장소를 아답터 내부에 두는것이 컨트롤하기 편하다.
+      List<String> data;
+      Context context;
+      // 생성자
+      public  CustomAdapter(Context context, List<String> data){
+          this.context = context;
+          this.data = data;
+      }
+  }
+  ```
 
-> 상속받은 메소드 오버라이딩
+- 상속받은 메소드 오버라이딩
 
-```java
-@Override
-    public int getCount() {
-        return data.size();
-    }
-    // 현재 뿌려질 데이터를 리턴
-    @Override
-    public Object getItem(int position) { // <-호출되는 목록아이템의 위치가 position
-        return data.get(position);
-    }
-    // 뷰의 아이디를 리턴
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-    // 목록에 나타나는 아이템 하나하나를 그려준다.
-    // 화면에 1 픽셀이라도 나타나면 getView가 호출
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        /* 뒤에 설명 */
-        return convertView;
-    }
-```
+  ```java
+  @Override
+  public int getCount() {
+      return data.size();
+  }
+  // 현재 뿌려질 데이터를 리턴
+  @Override
+  public Object getItem(int position) { // <-호출되는 목록아이템의 위치가 position
+      return data.get(position);
+  }
+  // 뷰의 아이디를 리턴
+  @Override
+  public long getItemId(int position) {
+      return position;
+  }
+  // 목록에 나타나는 아이템 하나하나를 그려준다.
+  // 화면에 1 픽셀이라도 나타나면 getView가 호출
+  @Override
+  public View getView(int position, View convertView, ViewGroup parent) {
+      /* 뒤에 설명 */
+      return convertView;
+  }
+  ```
 
-> Holder 클래스
-> - intent를 이용하여 textView의 text를 key를 달아 다음 레이아웃으로 넘겨준다.(putExtra)
+- Holder 클래스
+  - intent를 이용하여 textView의 text를 key를 달아 다음 레이아웃으로 넘겨준다.(`putExtra`)
 
-```java
-class Holder{
-    TextView textView;
+  ```java
+  class Holder{
+      TextView textView;
 
-    public void init(){
-        textView.setOnClickListener(new View.OnClickListener() {
-            // 화면에 보여지는 View는 기본적으로 자신이 속한 Component의 컨텍스트를 그대로 가지고 있다.
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DetailActivity.class);
-                intent.putExtra("valueKey", textView.getText());
-                view.getContext().startActivity(intent);
-            }
-        });
-    }
-}
-```
+      public void init(){
+          textView.setOnClickListener(new View.OnClickListener() {
+              // 화면에 보여지는 View는 기본적으로 자신이 속한 Component의 컨텍스트를 그대로 가지고 있다.
+              @Override
+              public void onClick(View view) {
+                  Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                  intent.putExtra("valueKey", textView.getText());
+                  view.getContext().startActivity(intent);
+              }
+          });
+      }
+  }
+  ```
 
-> getView 메소드
-> 1. 레이아웃 인플레이터로 xml 파일을 View 객체로 변환 </br> - View itemView = LayoutInflater.from(컨텍스트).inflate(R.layout.만든 xml, null); </br> - 커스텀뷰, 레이아웃을 만들때 사용 가능
->> LayoutInflater.from(context).inflate(R.layout.list_item, null); // context를 정의해주어야 함 (이전에 많이 사용)
->> LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
-> 2. View와 홀더를 생성하고 View에 Tag함
-> 3. View가 존재할 경우 홀더를 불러옴
+- getView 메소드
+  1. 레이아웃 인플레이터로 xml 파일을 View 객체로 변환
+    - View itemView = LayoutInflater.from(컨텍스트).inflate(R.layout.만든 xml, null);
+    - 커스텀뷰, 레이아웃을 만들때 사용 가능
+  2. View와 홀더를 생성하고 View에 Tag함
+  3. View가 존재할 경우 홀더를 불러옴
 
-```java
-@Override
-public View getView(int position, View convertView, ViewGroup parent) {
-    Holder holder = null;
-    // 아이템 view를 재사용하기 위해서 null 체크
-    if(convertView ==null){
-        // 레이아웃 인플레이터로 xml 파일을 View 객체로 변환
-        convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
+  ```java
+  @Override
+  public View getView(int position, View convertView, ViewGroup parent) {
+      Holder holder = null;
+      // 아이템 view를 재사용하기 위해서 null 체크
+      if(convertView ==null){
+          // 레이아웃 인플레이터로 xml 파일을 View 객체로 변환
+          convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
+          // 혹은 아래와 같이 사용 가능
+          // LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
 
-        // 뷰안에 있는 텍스트뷰 위젯에 값을 입력
+          // 뷰안에 있는 텍스트뷰 위젯에 값을 입력
+          // (가) 아이템이 최초 호출될 경우는 Holder에 위젯들을 담고,
+          holder = new Holder();
+          holder.textView =(TextView) convertView.findViewById(R.id.textView);
+          holder.init();
+          // (나) 홀더를 View에 붙여놓는다..
+          // 원래 setTag는 네이밍(라벨링을 하기 위해서 사용했는데, 원래 목적과 다르게 사용되고 있다.
+          convertView.setTag(holder);
+      } else{
+          // View에 붙어 있는 홀더를 가져온다.
+          holder = (Holder) convertView.getTag();
+      }
+      // 데이터를 입력
+      holder.textView.setText(data.get(position));
 
-        // (가) 아이템이 최초 호출될 경우는 Holder에 위젯들을 담고,
-        holder = new Holder();
-        holder.textView =(TextView) convertView.findViewById(R.id.textView);
-        holder.init();
-        // (나) 홀더를 View에 붙여놓는다..
-        // 원래 setTag는 네이밍(라벨링을 하기 위해서 사용했는데, 원래 목적과 다르게 사용되고 있다.
-        convertView.setTag(holder);
-    } else{
-        // View에 붙어 있는 홀더를 가져온다.
-        holder = (Holder) convertView.getTag();
-    }
-    // 데이터를 입력
-    holder.textView.setText(data.get(position));
-
-    return convertView;
-}
+      return convertView;
+  }
 ```
 
 - 전체 코드
-```java
-public class CustomAdapter extends BaseAdapter {
-    List<String> data;
-    Context context;
+  ```java
+  public class CustomAdapter extends BaseAdapter {
+      List<String> data;
+      Context context;
 
-    public  CustomAdapter(Context context, List<String> data){
-        this.context = context;
-        this.data = data;
-    }
-    @Override
-    public int getCount() {
-        return data.size();
-    }
-    @Override
-    public Object getItem(int position) {
-        return data.get(position);
-    }
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Holder holder = null;
-        if(convertView ==null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
+      public  CustomAdapter(Context context, List<String> data){
+          this.context = context;
+          this.data = data;
+      }
+      @Override
+      public int getCount() {
+          return data.size();
+      }
+      @Override
+      public Object getItem(int position) {
+          return data.get(position);
+      }
+      @Override
+      public long getItemId(int position) {
+          return position;
+      }
+      @Override
+      public View getView(int position, View convertView, ViewGroup parent) {
+          Holder holder = null;
+          if(convertView ==null){
+              convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 
-            holder = new Holder();
-            holder.textView =(TextView) convertView.findViewById(R.id.textView);
-            holder.init();
-            convertView.setTag(holder);
+              holder = new Holder();
+              holder.textView =(TextView) convertView.findViewById(R.id.textView);
+              holder.init();
+              convertView.setTag(holder);
 
-        } else{
-            holder = (Holder) convertView.getTag();
-        }
+          } else{
+              holder = (Holder) convertView.getTag();
+          }
 
-        holder.textView.setText(data.get(position));
+          holder.textView.setText(data.get(position));
 
-        return convertView;
-    }
+          return convertView;
+      }
 
-    class Holder{
-        TextView textView;
-        public void init(){
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
-                    intent.putExtra("valueKey", textView.getText());
-                    view.getContext().startActivity(intent);
-                }
-            });
-        }
-    }
-}
-```
+      class Holder{
+          TextView textView;
+          public void init(){
+              textView.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                      intent.putExtra("valueKey", textView.getText());
+                      view.getContext().startActivity(intent);
+                  }
+              });
+          }
+      }
+  }
+  ```
 
 ### 3. __넘겨받은 인텐트를 받음__
-- #1 번들을 통해 받기
-- #2 인텐트에서 바로 꺼내기
-- DetailActivity.java
+\#1 번들을 통해 받기 / \#2 인텐트에서 바로 꺼내기
 
-> \# 1. 번들을 통해 받기
+> DetailActivity.java
 
-```java
-public class DetailActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        // 인텐트를 통해 넘어온 값 꺼내기
-        // startActivity를 통해 넘어온 intent를 꺼낸다.
-        Intent intent = getIntent();
+- \# 1. 번들을 통해 받기
 
-        // 인텐트에서 값의 묶음인 번들을 꺼내고
-        Bundle bundle = intent.getExtras();
-        // 번들에서 최종 값을 꺼낸다.
-        String result = bundle.getString("valueKey");
+  ```java
+  public class DetailActivity extends AppCompatActivity {
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.activity_detail);
+          // 인텐트를 통해 넘어온 값 꺼내기
+          // startActivity를 통해 넘어온 intent를 꺼낸다.
+          Intent intent = getIntent();
 
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(result);
-    }
-}
-```
-> \# 2. 인텐트에서 바로 값을 꺼내기
+          // 인텐트에서 값의 묶음인 번들을 꺼내고
+          Bundle bundle = intent.getExtras();
+          // 번들에서 최종 값을 꺼낸다.
+          String result = bundle.getString("valueKey");
 
-```java
-public class DetailActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        // 인텐트를 통해 넘어온 값 꺼내기
-        // startActivity를 통해 넘어온 intent를 꺼낸다.
-        Intent intent = getIntent();
+          TextView textView = (TextView) findViewById(R.id.textView);
+          textView.setText(result);
+      }
+  }
+  ```
+- \# 2. 인텐트에서 바로 값을 꺼내기
 
-        // # 2. 인텐트에서 바로 값을 꺼내기
-        String result = intent.getStringExtra("valueKey");
+  ```java
+  public class DetailActivity extends AppCompatActivity {
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.activity_detail);
+          // 인텐트를 통해 넘어온 값 꺼내기
+          // startActivity를 통해 넘어온 intent를 꺼낸다.
+          Intent intent = getIntent();
 
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(result);
+          // # 2. 인텐트에서 바로 값을 꺼내기
+          String result = intent.getStringExtra("valueKey");
+
+          TextView textView = (TextView) findViewById(R.id.textView);
+          textView.setText(result);
 
 
-    }
-}
-```
+      }
+  }
+  ```
+
+  ---
+
+## 참고자료 (LayoutInflater)
+- LayoutInflater.from(context).inflate(R.layout.item_list,null)
+  - 최외곽의 레이아웃의 속성이 레이아웃에 영향을 미치지 못한다.(ex> matchparent인 경우 화면을 다 차치해야하는데 그렇지 않고 내용물만이 영향을 미친다.)
+
+- LayoutInflater.from(context).inflate(R.layout.item_list,parent, false)
+  - 최외곽의 레이아웃 속성이 영향을 미치는데 true, false에 따라 목록에 영향을 미치게 된다.
