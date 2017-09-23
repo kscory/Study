@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
 ```
 
 - 전체 코드
+
   ```java
   public class CustomAdapter extends BaseAdapter {
       List<String> data;
@@ -255,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
       }
   }
   ```
+
 - \# 2. 인텐트에서 바로 값을 꺼내기
 
   ```java
@@ -272,8 +274,6 @@ public class MainActivity extends AppCompatActivity {
 
           TextView textView = (TextView) findViewById(R.id.textView);
           textView.setText(result);
-
-
       }
   }
   ```
