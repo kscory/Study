@@ -147,6 +147,7 @@ View 또는 창의 모양과 형식을 지정하는 속성 모음
     ```
 
   - 상태표시줄
+  
     ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Gradle%2CStyle/picture/style1.png)
 
 
@@ -171,8 +172,13 @@ View 또는 창의 모양과 형식을 지정하는 속성 모음
     style="@style/CodeFont" // 적용
     android:text="@string/hello" />
   ```
-
+---
 
 ## 참고
 1. 메이븐 중앙 저장소(Maven Central repository)
+
+  - 메이븐은 프로젝트 객체 모델(Project Object Model)이라는 개념을 바탕으로 프로젝트 의존성 관리, 라이브러리 관리, 프로젝트 생명 주기 관리 기능 등을 제공하는 프로젝트 관리 도구이다. 또한 플러그인을 기반으로 소스 코드로부터 배포 가능한 산출물을 만들어 내는 빌드 기능 뿐만 아니라 레포팅 및 documentation 작성 기능 등을 제공
+
 2. jcenter
+
+  - jcenter는 bintray.com이 운영하는 Maven Repository
