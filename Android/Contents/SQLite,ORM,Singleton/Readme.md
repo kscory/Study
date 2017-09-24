@@ -330,7 +330,3 @@
   -  매번 새로운 접속을 통해서 쿼리를 통해 DB에서 정보를 가지고 오는 것은 해당 서버의 cpu점유율을 높여 무리를 주는 직접적인 원인이 될수있다. 따라서 DB를 제어하기전에 사용자 지정 갯수만큼 커넥션을 만들어놓고 pool에 넣어놓았다가 필요할때마다 갔다가 쓰고 사용을 다하면 다시 pool에 넣어놓고 사용하는 식으로 시스템을 효율적으로 운영한다. 이 pool을 Connection pool 이라 한다.
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/SQLite,ORM,Singleton/picture/db3.png)
-
-2. Cursor란
-
-  - jcenter는 bintray.com이 운영하는 Maven Repository
