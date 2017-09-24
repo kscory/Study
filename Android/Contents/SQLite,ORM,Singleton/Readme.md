@@ -12,6 +12,8 @@
   - 로컬에서 만든 파일을 assets에 담은 후 복사 붙여넣기 (우편번호처럼 기반 데이터가 필요한 db일 경우)
 - DB 연결 순서 : `1. 데이터베이스에 연결` -> `2. 조작` -> 3. `연결을 해제`
 
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/SQLite,ORM,Singleton/picture/db1.png)
+
 ### db파일을 직접 코드로 생성하여 SQLite 이용
 - DAO(Data Access Object) / DBHelper 를 이용하여 데이터베이스 이용
 
@@ -146,13 +148,15 @@
 
 ---
 
-## ORM (참고 : [스타일 및 테마](https://developer.android.com/guide/topics/ui/themes.html), [머티리얼 테마 사용](https://developer.android.com/training/material/theme.html) )
+## ORM (참고 : [ORM](http://www.incodom.kr/ORM) )
 - ORM(Object-relational mapping)을 단순하게 표현하면 객체와 관계와의 설정
 - 객체와 테이블간의 관계를 설정하여 자동으로 처리
 
 ### ORM 설정
 - gradle 에서 dependencies에 `compile 'com.android.support:cardview-v7:25.3.1'`추가하여 라이브러리 다운
 - syne now 클릭 (or Build -> makeproject 클릭)
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/SQLite,ORM,Singleton/picture/db2.png)
 
 ### ORM 사용 순서
 - SQLite 만을 이용할 때와 사용 방법은 비슷
@@ -271,6 +275,52 @@
      }
   ```
 
+---
+
+## Singleton 패턴 (참고 : [ORM](http://www.incodom.kr/ORM) )
+- 인스턴스가 사용될 때에 똑같은 인스턴스를 만들어 내는 것이 아니라, 동일 인스턴스를 사용하게끔 하는 것이 기본 전략
+- new가 한번만 진행되도록 설정하도록 한다.
+- ※ 그러나 안드로이드에서 메모리풀이 꽉찬 경우 DBconnection을 끊기 때문에 사용하지 않는 것이 좋다.
+
+### 사용방법
+
+  ```java
+  class Singleton{
+      // 인스턴스를 한개 저장하는 저장소
+      private static Singleton instance = null;
+
+      // 접근 가능한 통로를 한개만 열어준다.
+      public static Singleton getInstance(){
+          if(instance==null){
+              instance = new Singleton();
+          }
+          return instance;
+      }
+      // 얘는 앱 전체에 하나만 new가 되어야 한다. (private 사용)
+      private Singleton(){
+
+      }
+  }
+  ```
+
+### DBHelper에 사용한다면?
+- 사용하지 않는것이 좋다.
+
+  ```java
+  // DBHelper를 싱글톤으로?
+  // DBHelper 인스턴스
+  private static DBHelper instance = null;
+
+  // DBHelper 를 메모리에 하나만 띄워서 사용한다.
+  public static DBHelper getInstance(Context context){
+      if(instance==null){
+          new DBHelper(context);
+      }
+      return instance;
+  }
+  private DBHelper(Context context){}
+  ```
+
 
 ---
 
@@ -279,6 +329,8 @@
 
   -  매번 새로운 접속을 통해서 쿼리를 통해 DB에서 정보를 가지고 오는 것은 해당 서버의 cpu점유율을 높여 무리를 주는 직접적인 원인이 될수있다. 따라서 DB를 제어하기전에 사용자 지정 갯수만큼 커넥션을 만들어놓고 pool에 넣어놓았다가 필요할때마다 갔다가 쓰고 사용을 다하면 다시 pool에 넣어놓고 사용하는 식으로 시스템을 효율적으로 운영한다. 이 pool을 Connection pool 이라 한다.
 
-2. jcenter
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/SQLite,ORM,Singleton/picture/db3.png)
+
+2. Cursor란
 
   - jcenter는 bintray.com이 운영하는 Maven Repository
