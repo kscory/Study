@@ -11,9 +11,9 @@
   - db파일을 직접 코드로 생성
   - 로컬에서 만든 파일을 assets에 담은 후 복사 붙여넣기 (우편번호처럼 기반 데이터가 필요한 db일 경우)
 - DB 연결 순서 : `1. 데이터베이스에 연결` -> `2. 조작` -> 3. `연결을 해제`
-- DAO(Data Access Object) / DBHelper 등 존재
 
 ### db파일을 직접 코드로 생성하여 SQLite 이용
+- DAO(Data Access Object) / DBHelper 를 이용하여 데이터베이스 이용
 
   #### 0. 데이터 베이스에 연결을 도와주는 클래스 정의(DBHelper)
   - 보통 DB와 연결을 `DBHelper` 라는 클래스를 새로 생성하여 여기서 처리한다.
