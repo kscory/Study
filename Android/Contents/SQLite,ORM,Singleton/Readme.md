@@ -17,6 +17,7 @@
 
   #### 0. 데이터 베이스에 연결을 도와주는 클래스 정의(DBHelper)
   - 보통 DB와 연결을 `DBHelper` 라는 클래스를 새로 생성하여 여기서 처리한다.
+  - SQLiteOpenHelper 상속
   - 생성자
     - super(context, 데이터베이스 이름, 펙토리, 버전)
   - onCreate
@@ -64,7 +65,7 @@
         //    String alterQuery = "Alter TABLE 'memo' (\n Add Column count text)";
         // }
     }
-  ```
+    ```
 
   #### 1. 데이터 베이스 연결 (DAO)
   - DBHelper를 통해 DB와 연결
@@ -132,6 +133,7 @@
       con.close();
   }
   ```
+
   #### 3. 데이터 베이스 연결 해제 (DAO)
   - DBHelper를 해제
   - 반드시 닫아주어야 한다.
@@ -145,28 +147,131 @@
 ---
 
 ## ORM (참고 : [스타일 및 테마](https://developer.android.com/guide/topics/ui/themes.html), [머티리얼 테마 사용](https://developer.android.com/training/material/theme.html) )
+- ORM(Object-relational mapping)을 단순하게 표현하면 객체와 관계와의 설정
+- 객체와 테이블간의 관계를 설정하여 자동으로 처리
 
-### style.xml
-View 또는 창의 모양과 형식을 지정하는 속성 모음
+### ORM 설정
+- gradle 에서 dependencies에 `compile 'com.android.support:cardview-v7:25.3.1'`추가하여 라이브러리 다운
+- syne now 클릭 (or Build -> makeproject 클릭)
 
-  - `<style>` 요소에 `parent` 특성을 사용하여 스타일이 속성을 상속해야 하는 상위 스타일을 지정가능
-  ```xml
-  <style name="GreenText" parent="@android:style/TextAppearance"></style>
+### ORM 사용 순서
+- SQLite 만을 이용할 때와 사용 방법은 비슷
+- DAO(Data Access Object) / DBHelper 를 이용하여 데이터베이스 이용
+
+  #### 0. 데이터 베이스에 연결을 도와주는 클래스 정의(DBHelper)
+  - OrmLiteSqliteOpenHelper를 상속
+  ```java
+  public class DBHelper extends OrmLiteSqliteOpenHelper {
+    private static final String DB_NAME = "ormlite.db";
+    private static final int DB_VERSION =1;
+
+    public DBHelper(Context context){
+        super(context, DB_NAME, null, DB_VERSION);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
+        try {
+            // PicNote.class를 참조해서 테이블을 생성해준다.
+            TableUtils.createTable(connectionSource, PicNote.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
+
+    }
+  }
   ```
 
-  - `<item>` 요소로 정의되는 스타일 속성 정의(스타일 속성을 여러가지 존재)
-    - ex1> `<item name="windowNoTitle">true</item>` : title의 유무 (ture시 삭제)
-    - ex2> `<item name="windowActionBar">true</item>` : actionBar의 유무
-    - ex3> `<item name="android:windowIsTranslucent">true</item>` : 투명도 설정
-    ```xml
-    <style name="Theme.AppCompat.Translucent">
-    <!-- 타이틀을 날리는 것으 반드시 Style에서 한다. -->
-    <item name="windowActionBar">true</item>
-    <item name="windowNoTitle">true</item>
-    <item name="android:windowIsTranslucent">true</item>
-    <item name="android:windowBackground">@color/transparent</item> // color 설정 적용
-    </style>
-    ```
+  #### 1. 데이터 베이스 연결 (DAO)
+  - DBHelper를 통해 DB와 연결
+
+  ```java
+  DBHelper helper;
+  Dao<PicNote, Long> dao=null;
+  public PicNoteDAO(Context context){
+      helper = new DBHelper(context);
+      // 어떤 테이블의 DAO를 쓸꺼니?? (우리는 picnote)
+      try {
+          dao = helper.getDao(PicNote.class);
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+  }
+  ```
+
+  #### 2. 데이터 베이스 조작 (DAO)
+  - Query를 생성하고 실행
+  - C R U D 를 항상 만들고 시작하는 것이 좋다.
+  - read를 만들 때는 주의한다. (나머지는 아래와 같은 형식으로 사용)
+
+  ```java
+  // 생성
+     public void create(PicNote picNote){
+         try {
+             dao.create(picNote);
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+     }
+
+     public List<PicNote> readAll(/*쿼리를 할 수 있는 조건*/){
+         List<PicNote> result = null;
+         try {
+             // 전체 데이터를 가져올 경우 queryForAll();
+             result = dao.queryForAll();
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+
+         return result;
+     }
+
+     public PicNote readOneById(long id){
+         PicNote result = null;
+         try {
+             result = dao.queryForId(id);
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         return result;
+     }
+
+     // 형식은 그냥 쓸 것.
+     public List<PicNote> search(String word){ //ex> word=그림
+         // 요즘에는 format을 많이 사용 (알아보기 편하다)
+         String query = String.format("select * from picnote where title like '%% %s %%'",word);
+         List<PicNote> result= null;
+         try {
+             GenericRawResults<PicNote> temp = dao.queryRaw(query, dao.getRawRowMapper());
+             result = temp.getResults();
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+
+         return result;
+     }
+
+     public void update(PicNote picNote){
+         try {
+             dao.update(picNote);
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+     }
+
+     public void delete(PicNote picNote){
+         try {
+             dao.delete(picNote);
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         // deleteById를 하면 id만 넘겨주어도 삭제 가능
+     }
+  ```
+
+
 ---
 
 ## 참고
