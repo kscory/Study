@@ -2,7 +2,7 @@
 
 ## 개념설명
 > ### 1. [Android Intro(기본개념)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Basic%20Concept)
->> -  안드로이드 화면 구조 / Context / View / MainActivity / onCreate / setContentView / 위젯 사용법
+>> - 안드로이드 Framework 구조 / 안드로이드 화면 구조 / Context / Listner / MainActivity / onCreate / setContentView / 위젯 사용법
 
 > ### 2. [BasicLayout](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicLayout)
 >> - Constraint / Linear / Frame / Grid / Relative Layout
@@ -25,8 +25,17 @@
 > ### 8. [File I/O](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/FileIO)
 >> - File I/O
 
-> ### 9. [Activity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/FileIO)
->> - Activity 생명주기, startActivityForResult(Intent 포함)
+> ### 9. [Activity ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Activity)
+>> - Activity 생명주기, startActivityForResult, (Intent 사용법)
+
+> ### 10. [Style /  Gradle](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Gradle,Style)
+>> - Gradle 설명 / Style 변경방법
+
+> ### 11. [SQLite / ORM / Singleton ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Activity)
+>> - SQLite / ORM / Singleton 설명
+
+> ### 12. [Permission /  BaseActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Permission)
+>> - Permission 설명 / BaseActivity 사용법
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
