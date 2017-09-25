@@ -17,7 +17,7 @@
 ### db파일을 직접 코드로 생성하여 SQLite 이용
 - DAO(Data Access Object) / DBHelper 를 이용하여 데이터베이스 이용
 
-  #### 0. 데이터 베이스에 연결을 도와주는 클래스 정의(DBHelper)
+  #### 1. 데이터 베이스에 연결을 도와주는 클래스 정의(DBHelper)
   - 보통 DB와 연결을 `DBHelper` 라는 클래스를 새로 생성하여 여기서 처리한다.
   - SQLiteOpenHelper 상속
   - 생성자
@@ -69,7 +69,7 @@
     }
     ```
 
-  #### 1. 데이터 베이스 연결 (DAO)
+  #### 2. 데이터 베이스 연결 (DAO)
   - DBHelper를 통해 DB와 연결
 
   ```java
@@ -80,7 +80,7 @@
   }
   ```
 
-  #### 2. 데이터 베이스 조작 (DAO)
+  #### 3. 데이터 베이스 조작 (DAO)
   - Query를 생성하고 실행
   - C R U D 를 항상 만들고 시작하는 것이 좋다.
 
@@ -136,7 +136,7 @@
   }
   ```
 
-  #### 3. 데이터 베이스 연결 해제 (DAO)
+  #### 4. 데이터 베이스 연결 해제 (DAO)
   - DBHelper를 해제
   - 반드시 닫아주어야 한다.
 
@@ -162,7 +162,31 @@
 - SQLite 만을 이용할 때와 사용 방법은 비슷
 - DAO(Data Access Object) / DBHelper 를 이용하여 데이터베이스 이용
 
-  #### 0. 데이터 베이스에 연결을 도와주는 클래스 정의(DBHelper)
+
+
+  #### 0. Model 설정시 어노테이션 추가
+  - 변수는 모두 소문자지만, 클래스는 대문자가 들어가므로 `tableName`을 지정해주는 경우가 많다.(변수의 경우 `fildName`)
+  - `@DatabaseField` 를 field에 지정해주며 자동으로 생성해주는 값의 경우 `generatedId = true` 를 추가해준다.
+  ```java
+  // 예시
+  @DatabaseTable(tableName = "picnote")
+  public class PicNote {
+      // 식별자
+      @DatabaseField(generatedId = true)
+      private long id;
+      // 제목
+      @DatabaseField
+      private String title;
+      // 그림
+      @DatabaseField
+      private String bitmap_path;
+      // 날짜
+      @DatabaseField
+      private long datetime;
+  }  
+  ```
+
+  #### 1. 데이터 베이스에 연결을 도와주는 클래스 정의(DBHelper)
   - OrmLiteSqliteOpenHelper를 상속
   ```java
   public class DBHelper extends OrmLiteSqliteOpenHelper {
@@ -188,7 +212,7 @@
   }
   ```
 
-  #### 1. 데이터 베이스 연결 (DAO)
+  #### 2. 데이터 베이스 연결 (DAO)
   - DBHelper를 통해 DB와 연결
 
   ```java
@@ -205,7 +229,7 @@
   }
   ```
 
-  #### 2. 데이터 베이스 조작 (DAO)
+  #### 3. 데이터 베이스 조작 (DAO)
   - Query를 생성하고 실행
   - C R U D 를 항상 만들고 시작하는 것이 좋다.
   - read를 만들 때는 주의한다. (나머지는 아래와 같은 형식으로 사용)
