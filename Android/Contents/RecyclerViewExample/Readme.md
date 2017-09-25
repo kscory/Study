@@ -1,11 +1,11 @@
 # Recycler View
-- 사용법
-  - 0. 화면 만들기
-  - 1. 데이터를 정의
-  - 2. 아답터를 재정의
-  - 3. 재정의한 아답터를 생성하면서 데이터를 담는다.
-  - 4. 아답터와 RecyclerView 컨테이너를 연결
-  - 5. RecyclerView에 레이아웃매니저를 설정
+- 사용법 (순서)
+  - 화면 만들기
+  - 데이터를 정의
+  - 아답터를 재정의
+  - 재정의한 아답터를 생성하면서 데이터를 담는다.
+  - 아답터와 RecyclerView 컨테이너를 연결
+  - RecyclerView에 레이아웃매니저를 설정
 - 참고 : [ListView](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicList)
 
 ---
