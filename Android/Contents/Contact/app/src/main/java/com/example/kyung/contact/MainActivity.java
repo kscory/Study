@@ -37,7 +37,7 @@ import java.util.List;
  *    startActivity(intent);
  *
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PermissionUtil.CallBack {
 
     private static final int REQ_CODE = 999;
     private static final String permissions[]={
@@ -56,19 +56,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         pUtil = new PermissionUtil(REQ_CODE, permissions);
-        if(pUtil.checkPermission(this)){
-            init();
-        }
+        pUtil.checkPermission(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(pUtil.afterPermissionResult(requestCode,grantResults)){
-            init();
-        } else{
-            Toast.makeText(this, "승인필요",Toast.LENGTH_LONG).show();
-        }
+        pUtil.afterPermissionResult(requestCode,grantResults,this);
     }
 
     private void init(){
@@ -97,7 +91,13 @@ public class MainActivity extends AppCompatActivity {
         };
         // 4. 쿼리 결과 -> Cursor (쿼리뒤에 순서대로)
         // 선택할 조건절을 처리할 컬럼명이 selection /
-        Cursor cursor = resolver.query(uri, projection, null, null, null);
+        Cursor cursor = resolver.query(
+                uri,        // 데이터의 주소 (URI)
+                projection, // 가져올 데이터 컬럼명 배열 (projection)
+                null,       // 조건절에 들어가는 컬럼명들 지정
+                null,       // 지정된 컬럼명과 매핑되는 실제 조건 값
+                null        // 정렬
+        );
         // 5. cursor 반복처리
         if(cursor != null){
             while(cursor.moveToNext()){
@@ -117,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return contacts;
+    }
+
+    @Override
+    public void callinit() {
+        init();
     }
 }
 
