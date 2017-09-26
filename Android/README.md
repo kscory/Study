@@ -37,13 +37,10 @@
 > ### 12. [Permission /  BaseActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Permission)
 >> - Permission 설명 / BaseActivity 사용법
 
-> ### 13. [Contact](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Contact)
->> - Contact를 활용한 주소록 / Permission Callback 이용
-
-> ### 14. [Contact / Intent](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Contact)
+> ### 13. [Contact / Intent](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Contact)
 >> - Contact를 활용한 주소록 / Permission Callback 이용 / Intent에 대해
 
-> ### 15. [Camera & Gallery](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Camera)
+> ### 14. [Camera & Gallery](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Camera)
 >> - Camera 와 Gallery의 사용
 
 
