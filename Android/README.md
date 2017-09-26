@@ -31,11 +31,21 @@
 > ### 10. [Style /  Gradle](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Gradle,Style)
 >> - Gradle 설명 / Style 변경방법
 
-> ### 11. [SQLite / ORM / Singleton ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Activity)
+> ### 11. [SQLite / ORM / Singleton ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/SQLite%2CORM%2CSingleton)
 >> - SQLite / ORM / Singleton 설명
 
 > ### 12. [Permission /  BaseActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Permission)
 >> - Permission 설명 / BaseActivity 사용법
+
+> ### 13. [Contact](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Contact)
+>> - Contact를 활용한 주소록 / Permission Callback 이용
+
+> ### 14. [Contact / Intent](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Contact)
+>> - Contact를 활용한 주소록 / Permission Callback 이용 / Intent에 대해
+
+> ### 15. [Camera & Gallery](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Camera)
+>> - Camera 와 Gallery의 사용
+
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
