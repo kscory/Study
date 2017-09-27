@@ -100,11 +100,11 @@
 
   > 결과
 
-  ![]((https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FragmentBasic2/picture/fragments_ex.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FragmentBasic2/picture/fragments_ex.png)
 
 ---
 
-##
+## Fragment 사용 방법
 
 ### 1.
 > 예시
@@ -116,5 +116,6 @@
 
 ---
 
-## 참고
+## 참고 링크
 #### 1.[프래그먼트](https://developer.android.com/guide/components/fragments.html)
+#### 2.[프레그먼트 블로그](http://blog.saltfactory.net/implement-layout-using-with-fragment/)
