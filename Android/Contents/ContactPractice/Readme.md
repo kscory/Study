@@ -13,7 +13,9 @@
 ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/ContactPractice/picture/contentResolver.png)
 
 </br>
+
 - 사용 방법 (전화번호부 예시)
+
   ### 1. Content Resolver 를 불러오기
 
   ```java
@@ -58,7 +60,7 @@
 
   ### 5. Cursor에 담긴 데이터를 반복문을 돌면서 처리한다.
     - `set~~` 에 바로 담을 수 없으므로 index를 사용한다.
-    
+
   ```java
   if(cursor != null){
       while(cursor.moveToNext()){
