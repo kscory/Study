@@ -6,7 +6,10 @@
 ---
 
 ## Content Resolver
-- `Content Provider` 는 어플리케이션 사이에서 Data 를 공유하는 통로 역할을 하며 `Content Resolver` 결과를 반환하는 브릿지 역할을 한다.
+- `Content Provider` 는 어플리케이션 사이에서 Data 를 공유하는 통로 역할을 하며
+- `Content Resolver` 결과를 반환하는 브릿지 역할을 한다.
+</br>
+
 ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/ContactPractice/picture/contentResolver.png)
 
   ### 1.
