@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- name (논리 구조) : uri 주소체계의 prefix (ex>content://Camera.xxxx) -->
+    <!-- path (물리 디스크경로) : /외부저장소의루트/CameraN 디렉토리를 사용 -->
+    <external-path name = "Camera" path = "CameraN"></external-path>
+</paths>
