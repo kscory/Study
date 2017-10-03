@@ -1,0 +1,74 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:clickable="true"
+    tools:context="com.example.kyung.basicfragment.DetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textNo"
+            android:layout_alignStart="@+id/textNo"
+            android:layout_centerVertical="true"
+            android:text="Number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textNumber"
+            android:layout_marginBottom="18dp"
+            android:layout_marginLeft="37dp"
+            android:layout_marginStart="37dp"
+            android:layout_toEndOf="@+id/textNo"
+            android:layout_toRightOf="@+id/textNo"
+            android:text="Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/textNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textName"
+            android:layout_alignBottom="@+id/textName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="73dp"
+            android:layout_marginStart="73dp"
+            android:text="No"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <ImageButton
+            android:id="@+id/imageCall"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignTop="@+id/textName"
+            android:layout_marginLeft="54dp"
+            android:layout_marginStart="54dp"
+            android:layout_toEndOf="@+id/textName"
+            android:layout_toRightOf="@+id/textName"
+            android:onClick="onCall"
+            app:srcCompat="@drawable/ic_call" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_above="@+id/textName"
+            android:layout_marginBottom="59dp"
+            android:layout_toEndOf="@+id/textNumber"
+            android:layout_toRightOf="@+id/textNumber"
+            app:srcCompat="@drawable/ic_account_box_black_24dp" />
+    </RelativeLayout>
+</FrameLayout>
