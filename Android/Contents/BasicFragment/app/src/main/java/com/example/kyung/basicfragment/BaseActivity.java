@@ -4,6 +4,8 @@ import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import com.example.kyung.basicfragment.util.PermissionUtil;
 
@@ -23,13 +25,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Permissi
 
     // 추상 메소드 정의 (init을 강제로 호출)
     public abstract void init();
+    public abstract void changeInit();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // 가로 모드시 리셋되게 하지 않음
-        if(savedInstanceState !=null) return;
+        if(savedInstanceState != null) {
+            changeInit();
+            return;
+        }
 
         pUtil = new PermissionUtil(this,PER_CODE,permission);
         pUtil.checkVersion();

@@ -14,10 +14,17 @@ public class MainActivity extends BaseActivity implements ListFragment.CallbackD
     @Override
     public void init() {
         setContentView(R.layout.activity_main);
+
         if(getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT){ // 현재 레이아웃 세로체크
             initFragment();
         }
+    }
+
+    @Override
+    public void changeInit() {
+        setContentView(R.layout.activity_main);
+
     }
 
     // 프래그 먼트를 더함
