@@ -255,14 +255,274 @@
   ```
 
   ### 4. ListAdapter
+  - textView 클릭시 callback 메소드를 이용하여 주소록 상세내역으로 이동시키며 `id` 값을 가지고 호출한다.
+  - `notifyDataSetChanged` 를 이용하여 listview(RecyclerView)를 업데이트
+
+  > ListAdapter.java
+
+  ```java
+  public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
+      List<Contact> data = new ArrayList<>();
+      ListFragment.CallbackDetail callbackDetail;
+      Context context;
+
+      public ListAdapter(Context context, final ListFragment.CallbackDetail callbackDetail){
+          this.context = context;
+          this.callbackDetail = callbackDetail;
+      }
+
+      public void setData(List<Contact> data){
+          this.data = data;
+          notifyDataSetChanged();
+      }
+
+      @Override
+      public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+          View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.number_list,parent,false);
+          return new Holder(view,callbackDetail);
+      }
+
+      @Override
+      public void onBindViewHolder(Holder holder, int position) {
+          Contact contact = data.get(position);
+          holder.setTextNameList(contact.getName());
+          holder.setId(contact.getId());
+      }
+
+      @Override
+      public int getItemCount() { return data.size(); }
+
+      class Holder extends RecyclerView.ViewHolder{
+          TextView textNameList;
+          int id;
+          public Holder(View itemView, final ListFragment.CallbackDetail callback) {
+              super(itemView);
+              textNameList = (TextView) itemView.findViewById(R.id.textNameList);
+              // onClick하면 Detail Fragment 호출 (callback 함수 이용)
+              textNameList.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      callback.showDetail(id);
+                  }
+              });
+          }
+          public void setTextNameList(String name){ textNameList.setText(name); }
+          public void setId(int id){ this.id = id; }
+      }
+  }
+  ```
 
   ### 5. MainActivity
+  - BaseActivity를 상속
+  - 가로 및 세로체크를 한 후 레이아웃 결정
+  - 만약 회전을 시킬 경우 init이 아닌 changeInit을 호출하며 View만 세팅
+  - ListFragment의 callback 메소드를 상속받아 DetailFragment로 이동시키는 메소드 구현
+  - 만약 세로일 경우 바로 세팅, 가로일 경우 새로운 Fragment를 만들어서 이동시킴
+  - Fragment의 경우 `Bundle` 을 이용해 데이터를 전달, `Argument`를 이용
+
+  > MainActivity.java
+
+  ```java
+  public class MainActivity extends BaseActivity implements ListFragment.CallbackDetail {
+
+      @Override
+      public void init() {
+          setContentView(R.layout.activity_main);
+
+          if(getResources().getConfiguration().orientation
+                  == Configuration.ORIENTATION_PORTRAIT){ // 현재 레이아웃 세로체크
+              initFragment();
+          }
+      }
+
+      @Override
+      public void changeInit() {
+          setContentView(R.layout.activity_main);
+      }
+
+      // 프래그 먼트를 더함
+      private void initFragment(){
+          getSupportFragmentManager()
+                  .beginTransaction()
+                  .add(R.id.container,new ListFragment()) //addtoBack..Stack은 쓰지 않음
+                  .commit();
+      }
+
+      @Override
+      public void showDetail(int id) {
+          // 레이아웃이 세로이면 디테일 프레그먼트를 화면에 보이면서 값을 전달
+          if(getResources().getConfiguration().orientation
+                  == Configuration.ORIENTATION_PORTRAIT){
+              DetailFragment detailFragment = new DetailFragment();
+              Bundle bundle = new Bundle();
+              bundle.putInt("id",id);
+              // 프레그먼트로 값 전달하기
+              detailFragment.setArguments(bundle);
+
+              getSupportFragmentManager()
+                      .beginTransaction()
+                      .add(R.id.container, detailFragment)
+                      .addToBackStack(null)
+                      .commit();
+          }
+          // 레이아웃이 가로이면 삽입되어 있는 프레그먼트를 가져온다,
+          else {
+              DetailFragment detailFragment
+                      = (DetailFragment) getSupportFragmentManager()
+                          .findFragmentById(R.id.fragmentDetail);
+              // 만들어놓은 함수를 호출해서 값을 세팅
+              if(detailFragment != null){
+                  Contact contact;
+                  contact = detailFragment.loaddata(id);
+                  detailFragment.setTextNo(contact.getId());
+                  detailFragment.setTextName(contact.getName());
+                  detailFragment.setTextNumber(contact.getNumber());
+              }
+          }
+      }
+  }
+  ```
 
   ### 6. ListFragment
+  - Fragment는 생성자에는 표시하지 않는다.
+  - Context를 Fragment가 Attach(`onAttach`) 할 때 받아놓으며 이는 Activity가 넘어온 것
+  - loader를 이용해 데이터를 받아오며 아답터를 연결하여 RecyclerView 구현
+  - Callback 인터페이스를 설계
+
+  > ListFragment.java
+
+  ```java
+  public class ListFragment extends Fragment {
+      Context context;
+      RecyclerView recyclerView;
+      ListAdapter adapter;
+      List<Contact> contacts = new ArrayList<>();
+      CallbackDetail callback;
+
+      public ListFragment() {
+          // Required empty public constructor
+      }
+
+      @Override
+      public void onAttach(Context context) {
+          super.onAttach(context);
+          this.context = context;
+          if(context instanceof CallbackDetail){
+              callback = (CallbackDetail) context;
+          }
+      }
+
+      @Override
+      public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+          View view = inflater.inflate(R.layout.fragment_list,container,false);
+          init(view);
+          return view;
+      }
+
+      private void init(View view){
+          recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+          Loader loader = new Loader(context);
+          contacts = loader.contactLoad();
+
+          adapter = new ListAdapter(context,callback);
+          adapter.setData(contacts);
+
+          recyclerView.setAdapter(adapter);
+          recyclerView.setLayoutManager(new LinearLayoutManager(context));
+      }
+
+      public interface CallbackDetail{
+          public void showDetail(int id);
+      }
+  }
+  ```
 
   ### 7. DetailFragment
+  - 전화 걸기 기능 추가
+  - `MainActivity` 에서 넘긴 `Argument` 를 받아 `Bundle` 에 있는 `id` 를 가지고 `loader` 를 이용하여 상세 데이터를 가져옴
+
+  > DetailFragment.java
+
+  ```java
+  public class DetailFragment extends Fragment {
+      TextView textNo, textName, textNumber;
+      ImageButton imageCall;
+      String number = null;
+      Contact contact;
+      Context context;
+
+      public DetailFragment() {
+          // Required empty public constructor
+      }
+
+      @Override
+      public void onAttach(Context context) {
+          super.onAttach(context);
+          this.context = context;
+      }
+
+      @Override
+      public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                               Bundle savedInstanceState) {
+          // Inflate the layout for this fragment
+          View view = inflater.inflate(R.layout.fragment_detail, container, false);
+          init(view);
+          imageCall.setOnClickListener(onClickListener);
+          return view;
+      }
+
+      private void init(View view){
+          textNo = (TextView) view.findViewById(R.id.textNo);
+          textName = (TextView) view.findViewById(R.id.textName);
+          textNumber = (TextView) view.findViewById(R.id.textNumber);
+          imageCall = (ImageButton) view.findViewById(R.id.imageCall);
+
+          // Argument 로 전달된 값 꺼내기
+          Bundle bundle = getArguments();
+          if(bundle != null) {
+              int no = bundle.getInt("id",-1);
+              contact = loaddata(no);
+              setTextNo(contact.getId());
+              setTextName(contact.getName());
+              setTextNumber(contact.getNumber());
+              number = contact.getNumber();
+          }
+      }
+      public void setTextNo(int no) { textNo.setText(no+""); }
+
+      public void setTextName(String name) { textName.setText(name); }
+
+      public void setTextNumber(String number){ textNumber.setText(number); }
+
+      public Contact loaddata(int id){
+          Contact data = null;
+          Loader loader = new Loader(context);
+          data = loader.detailLoad(id);
+          return data;
+      }
+
+      View.OnClickListener onClickListener = new View.OnClickListener() {
+          @SuppressWarnings("MissingPermission")
+          @Override
+          public void onClick(View v) {
+              switch (v.getId()){
+                  case R.id.imageCall:
+                      if(number != null){
+                          String num = "tel:" +number;
+                          Uri uri = Uri.parse(num);
+                          Intent intent = new Intent(Intent.ACTION_CALL,uri);
+                          v.getContext().startActivity(intent);
+                      }
+                      break;
+              }
+          }
+      };  
+  }
+  ```
+
 ---
 
 ## 참고 링크
 #### 1.[프래그먼트](https://developer.android.com/guide/components/fragments.html)
 #### 2.[프레그먼트 블로그](http://blog.saltfactory.net/implement-layout-using-with-fragment/)
+#### 3.[ContentResolver](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ContactPractice)

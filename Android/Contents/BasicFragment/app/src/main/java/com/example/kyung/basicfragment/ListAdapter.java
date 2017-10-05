@@ -28,6 +28,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
 
     public void setData(List<Contact> data){
         this.data = data;
+        notifyDataSetChanged();
     }
 
     @Override
