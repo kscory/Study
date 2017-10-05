@@ -115,8 +115,152 @@
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFragment/picture/fragments_Layout.png)
 
-  ### 2.
+  ### 2. domain / util
+  - util은 생략 _ [참고 링크](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Permission)
+  - domain은 Contact 모델과 데이터 Loader로 구성
+  - Loader의 경우 Content Resolver 이용했으며 모든 데이터를 불러오는 메소드와 id를 받아 한개의 데이터만 불러오는 메소드로 구성
 
+  > Contact.java
+
+  ```java
+  public class Contact {
+      private int id;
+      private String name;
+      private String number;
+
+      public int getId() { return id; }
+      public void setId(int id) { this.id = id; }
+      public String getName() { return name; }
+      public void setName(String name) { this.name = name; }
+      public String getNumber() { return number; }
+      public void setNumber(String number) { this.number = number; }
+  }
+  ```
+
+  > Loader.java
+
+  ```java
+  public class Loader {
+      Context context;
+      public Loader(Context context){
+          this.context = context;
+      }
+
+      // 모든 Contact 데이터 로드
+      public List<Contact> contactLoad(){
+          List<Contact> data = new ArrayList<>();
+          // Content Resolver 정의
+          ContentResolver resolver = context.getContentResolver();
+          // Uri 정의
+          Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+          // 가져올 컬럼(projection) 정의
+          String[] projection = {
+                  ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+                  ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                  ContactsContract.CommonDataKinds.Phone.NUMBER
+          };
+          // 커서 정의
+          Cursor cursor = resolver.query(uri,projection,null,null,
+                  ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY +" asc");
+          // 반복문을 돌면서 데이터 저장
+          if(cursor !=null){
+              while(cursor.moveToNext()){
+                  Contact contact = new Contact();
+                  int index =  cursor.getColumnIndex(projection[0]);
+                  contact.setId(cursor.getInt(index));
+                  index =  cursor.getColumnIndex(projection[1]);
+                  contact.setName(cursor.getString(index));
+                  index =  cursor.getColumnIndex(projection[2]);
+                  contact.setNumber(cursor.getString(index));
+                  data.add(contact);
+              }
+          }
+          return data;
+      }
+
+      // 특정 Contact 데이터 로드
+      public Contact detailLoad(int id) {
+          Contact contact = new Contact();
+          ContentResolver resolver = context.getContentResolver();
+          Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+          String[] projection = {
+                  ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+                  ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                  ContactsContract.CommonDataKinds.Phone.NUMBER
+          };
+          Cursor cursor = resolver.query(uri,projection,
+                  ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
+                  null,null);
+          if(cursor !=null){
+              while(cursor.moveToNext()){
+                  int index = cursor.getColumnIndex(projection[0]);
+                  contact.setId(cursor.getInt(index));
+                  index = cursor.getColumnIndex(projection[1]);
+                  contact.setName(cursor.getString(index));
+                  index = cursor.getColumnIndex(projection[2]);
+                  contact.setNumber(cursor.getString(index));
+              }
+          }
+          return contact;
+      }
+  }
+  ```
+
+  ### 3. BaseActivity
+  - 가로모드와 세로모드를 일정하게 유지하기 위해 `init` 메소드와 `changeInit` 메소드 두가지로 나누어 다르게 진행 강제
+  - 퍼미션을 확인(3가지), 퍼미션 솩인 후 init 실행을 위한 `Callback` 인터페이스 구현
+
+  > BaseActivity.java
+
+  ```java
+  public abstract class BaseActivity extends AppCompatActivity implements PermissionUtil.Callback {
+      // 상수 정의
+      private static final int PER_CODE = 999;
+      private static final String[] permission = {
+              Manifest.permission.CALL_PHONE,
+              Manifest.permission.READ_EXTERNAL_STORAGE,
+              Manifest.permission.READ_CONTACTS
+      };
+      PermissionUtil pUtil;
+
+      // 추상 메소드 정의 (init을 강제로 호출)
+      public abstract void init();
+      public abstract void changeInit();
+
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+
+          // 가로 모드시 리셋되게 하지 않음
+          if(savedInstanceState != null) {
+              changeInit();
+              return;
+          }
+
+          pUtil = new PermissionUtil(this,PER_CODE,permission);
+          pUtil.checkVersion();
+      }
+
+      // 퍼미션 체크
+      @Override
+      public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+          super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+          pUtil.onResult(requestCode,grantResults);
+      }
+      // 인터페이스 구현 및 callback 호출
+      public void callinit(){
+          init();
+      }
+  }
+  ```
+
+  ### 4. ListAdapter
+
+  ### 5. MainActivity
+
+  ### 6. ListFragment
+
+  ### 7. DetailFragment
 ---
 
 ## 참고 링크
