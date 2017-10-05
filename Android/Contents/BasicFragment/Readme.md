@@ -1,14 +1,14 @@
 # Fragment
   - Fragment에 대해
 
-  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FragmentBasic2/picture/fragments.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFragment/picture/fragments.png)
 
 ---
 
 ## Fragment의 생명주기
   ### Fragment의 생명주기 (그림)
 
-  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FragmentBasic2/picture/fragment_lifecycle.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFragment/picture/fragment_lifecycle.png)
 
   ### 코드 예시
   - 로그로 생명주기 확인
@@ -100,19 +100,22 @@
 
   > 결과
 
-  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/FragmentBasic2/picture/fragments_ex.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFragment/picture/fragments_ex.png)
 
 ---
 
 ## Fragment를 이용한 주소록 예시
 
-### 1.
-> 예시
+  ### 1. Layout 구성
+  - res/layout-land에 세로방향 layout xml 설정
+    - layout-land에 저장하게 되면 세로방향으로 인식을 하게 된다.
+  - 주소록 목록을 보여주는 ListFragment 생성
+  - 상세 내역을 보여주는 DetailFragment를 구성
+  - Layout 구성 그림
 
-```xml
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFragment/picture/fragments_Layout.png)
 
-```
-### 2.
+  ### 2.
 
 ---
 
