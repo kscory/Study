@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tap Layout</string>
+
+    <string name="title_one">One</string>
+    <string name="title_two">Two</string>
+    <string name="title_three">Three</string>
+    <string name="title_four">Four</string>
+
+</resources>
