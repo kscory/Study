@@ -33,19 +33,23 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 
+    // 뷰페이지 연결
     private void setViewPager(){
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        // 실제로는 data를 이렇게 넘기지 않는다.
+        CustomAdapter adapter = new CustomAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        // data를 넘겨서 사용하는 방법
 //        List<Fragment> data = new ArrayList<>();
 //        data.add(new OneFragment());
 //        data.add(new TwoFragment());
 //        data.add(new ThreeFragment());
 //        data.add(new FourFragment());
 //        CustomAdapter adapter = new CustomAdapter(getSupportFragmentManager(),data);
-//
 //        viewPager.setAdapter(adapter);
     }
 
+    // 탭을 순서대로 추가
     private  void setTabLayout(){
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab( tabLayout.newTab().setText("One") );

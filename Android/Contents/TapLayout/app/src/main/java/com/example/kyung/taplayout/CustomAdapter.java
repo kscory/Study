@@ -62,21 +62,21 @@ public class CustomAdapter extends FragmentStatePagerAdapter {
 //        }
 //        return fragment;
 //    }
-
-
-    // # 2. 만약 멀리까지 호출해야 하면 이렇게 한번에 많이 호출하는 것이 좋다.
+//
+//
+//     # 2. 만약 멀리까지 호출해야 하면 이렇게 한번에 많이 호출하는 것이 좋다.
 //        List<Fragment> data;
-
+//
 //    public CustomAdapter(FragmentManager fm, List<Fragment> data) {
 //        super(fm);
 //        this.data = data;
 //    }
-
+//
 //    @Override
 //    public Fragment getItem(int position) {
 //        return data.get(position);
 //    }
-
+//
 //    @Override
 //    public int getCount() {
 //        return data.size();
