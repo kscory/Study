@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tap Layout</string>
+
+    <string name="title_one">하나</string>
+    <string name="title_two">둘</string>
+    <string name="title_three">셋</string>
+    <string name="title_four">넷</string>
+
+</resources>
