@@ -37,11 +37,20 @@
 > ### 12. [Permission /  BaseActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Permission)
 >> - Permission 설명 / BaseActivity 사용법
 
-> ### 13. [Contact / Intent](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Contact)
->> - Contact를 활용한 주소록 / Permission Callback 이용 / Intent에 대해
+> ### 13. [Content Resolver / Intent(pdf)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ContactPractice)
+>> - Content를 활용한 주소록 / Permission Callback 이용 / Intent에 대해
 
 > ### 14. [Camera & Gallery](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Camera)
->> - Camera 와 Gallery의 사용
+>> - Camera / Custom Gallery의 사용 / 외부파일 저장소 이용
+
+> ### 15. [Fragment](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFragment)
+>> - Fragment 활용 / Content Resolver를 활용한 주소록 예시
+
+> ### 16. [TabLayout(Fragment)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/TapLayout)
+>> - Fragment 어답터를 활용한 TabLayout / Preview에 한글 표시 방법
+
+> ### 17. [ViewPager](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/TabLayoutView)
+>> - Pager 어답터를 활용한 TabLayout / View를 직접 상속(Customview)
 
 
 ## 문제
