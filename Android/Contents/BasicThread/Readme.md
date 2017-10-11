@@ -20,8 +20,8 @@
 
   </br>
 
-  ![]((https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicThread/picture/thread.png)
-  
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicThread/picture/thread.png)
+
   </br>
 
 
