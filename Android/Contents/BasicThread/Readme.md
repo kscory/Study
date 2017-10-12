@@ -340,6 +340,29 @@
       }
   }
   ```
+---
+## 추가사항
+  ### 1. runOnUiThread
+  - runOnUiThread vs Handler
+    - ` Handler` : post 방식을 통해 매번 이벤트를 발생
+    - `runOnUiThread` : 현재 시점이 UI 스레드이면 바로 실행(=> mainThread에서 실행....조금 더 효율적)
+  - 사용 예시 - [Mp3Player예제_작성중](ㅇ)
+  - 사용 방법
+
+  ```java
+  new Thread(new Runnable() {
+      @Override
+      public void run() {
+          for(i = 0; i<=100; i++) { // 현재 UI 스레드가 아니기 때문에 메시지 큐에 Runnable을 등록 함
+              runOnUiThread(new Runnable() {
+                  public void run() { // 메시지 큐에 저장될 메시지의 내용
+                      textView.setText("runOnUiThread 을 통해 텍스트 설정");
+                  }
+              });
+          }
+      }
+  }).start();
+  ```
 
 ---
 
