@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.kyung.basicthread.secondexample.ThreadTwoView;
+
 public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
@@ -23,6 +25,27 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         CustomPagerAdapter adapter = new CustomPagerAdapter(this);
         adapter.setView(viewPager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position !=1){
+                    if(ThreadTwoView.runFlag){
+                        ThreadTwoView.stopRain();
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void setTabLayout(){

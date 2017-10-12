@@ -6,7 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kyung.basicthread.firstExample.ThreadOneView;
+import com.example.kyung.basicthread.firstexample.ThreadOneView;
+import com.example.kyung.basicthread.secondexample.ThreadTwoView;
 
 import java.util.ArrayList;
 import java.util.List;

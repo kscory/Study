@@ -1,12 +1,10 @@
-package com.example.kyung.basicthread.firstExample;
+package com.example.kyung.basicthread.firstexample;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
@@ -23,7 +21,6 @@ public class ThreadOneView extends FrameLayout {
     Button rotObject;
     ToggleButton toggleRot;
     Rotator rotator;
-    boolean isCheckFirst = false;
 
     public static final int ACTION_SET = 999;
 

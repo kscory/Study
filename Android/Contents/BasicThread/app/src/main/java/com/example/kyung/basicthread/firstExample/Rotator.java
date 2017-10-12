@@ -1,9 +1,7 @@
-package com.example.kyung.basicthread.firstExample;
+package com.example.kyung.basicthread.firstexample;
 
 import android.os.Handler;
 import android.os.Message;
-
-import com.example.kyung.basicthread.MainActivity;
 
 /**
  * Created by Kyung on 2017-10-10.
