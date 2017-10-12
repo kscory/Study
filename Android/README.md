@@ -52,6 +52,11 @@
 > ### 17. [ViewPager](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/TabLayoutView)
 >> - Pager 어답터를 활용한 TabLayout / View를 직접 상속(Customview)
 
+> ### 18. [BasicThread](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicThread)
+>> - Thread 사용법 / 사용예제
+
+> ### 18. [BasicService](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicService)
+>> - Service 생명주기 / Service 개념
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
@@ -63,5 +68,17 @@
 > #### 3. [그림판](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/CustomView2)
 >> - CustomView / onDraw / onTouchListener / Path 활용
 
-> #### 4. [file을 이용한 메모장](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemoFile)
+> #### 4. [file을 이용한 메모장_정리중](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemoFile)
 >> - File I/O / ListView 사용 / 생명주기 / Intent 활용
+
+> #### 5. [SQLite를 이용한 메모장_정리중](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemo2)
+>> -
+
+> #### 6. [ORM을 이용한 메모장_정리중](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemoORM)
+>> -
+
+> #### 7. [Tetris_정리중](ㅇㅇ)
+>> -
+
+> #### 7. [MusicPlayer]()
+>> -
