@@ -16,7 +16,7 @@
 ---
 
 ## Service 사용 예시
-  ### 1. f
+  ### 1. MainActivity
   - dd
 
   > MainActivity.java
@@ -25,6 +25,14 @@
 
   ```
 
+  ### 2. MyService
+  - dd
+
+  > MyService.java
+
+  ```java
+
+  ```
 ---
 
 ## 참고 자료
