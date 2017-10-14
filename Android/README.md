@@ -55,7 +55,7 @@
 > ### 18. [BasicThread](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicThread)
 >> - Thread 사용법 / 사용예제
 
-> ### 18. [BasicService](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicService)
+> ### 19. [BasicService](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ServiceBasic)
 >> - Service 생명주기 / Service 개념
 
 ## 문제
@@ -71,14 +71,14 @@
 > #### 4. [file을 이용한 메모장_정리중](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemoFile)
 >> - File I/O / ListView 사용 / 생명주기 / Intent 활용
 
-> #### 5. [SQLite를 이용한 메모장_정리중](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemo2)
+> #### 5. [SQLite를 이용한 메모장_정리중]()
 >> -
 
-> #### 6. [ORM을 이용한 메모장_정리중](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/AndroidMemoORM)
+> #### 6. [ORM을 이용한 메모장_정리중]()
 >> -
 
-> #### 7. [Tetris_정리중](ㅇㅇ)
+> #### 7. [Tetris_정리중]()
 >> -
 
-> #### 7. [MusicPlayer]()
+> #### 7. [MusicPlayer_정리중]()
 >> -
