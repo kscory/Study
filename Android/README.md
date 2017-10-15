@@ -80,5 +80,5 @@
 > #### 7. [Tetris_정리중]()
 >> -
 
-> #### 7. [MusicPlayer_정리중]()
->> -
+> #### 8. [MusicPlayer_정리중](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/MusicPlayer)
+>> - Service / Thread / Fragment / ViewPager / Content Resolver / 디자인패턴 등 이용
