@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">음악</string>
+    <string name="tab_album">앨범별</string>
+    <string name="tab_artist">가수별</string>
+    <string name="tab_genre">장르별</string>
+    <string name="tab_title">제목별</string>
+</resources>
