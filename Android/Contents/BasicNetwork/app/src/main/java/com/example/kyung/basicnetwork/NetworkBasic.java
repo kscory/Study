@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -24,8 +26,9 @@ import java.net.URL;
         > Retrofit (내부에 Thread 포함)
         > Rx (내부에 Thread 포함, Thread 관리기능 포함, 예외처리 특화)
  */
-public class NetworkBasic extends View {
+public class NetworkBasic extends FrameLayout {
 
+    FrameLayout stage;
     TextView textView;
     Context context;
     Activity activity;
@@ -36,9 +39,16 @@ public class NetworkBasic extends View {
         if(context instanceof Activity){
             activity = (Activity) context;
         }
+        initView();
 
-        textView = (TextView) findViewById(R.id.textView);
         new NetworkThread().start();
+    }
+
+    private void initView(){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.network,null);
+        stage = (FrameLayout) view.findViewById(R.id.stage);
+        textView = (TextView) view.findViewById(R.id.textView);
+        addView(view);
     }
 
     /*
@@ -51,9 +61,9 @@ public class NetworkBasic extends View {
      */
     class NetworkThread extends Thread{
         public void run(){
-            StringBuilder result = new StringBuilder();
+            final StringBuilder result = new StringBuilder();
             try {
-                URL url = new URL("fastcampus.co.kr");
+                URL url = new URL("http://fastcampus.co.kr");
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("GET");
                 // 통신이 성공인지 체크
@@ -78,7 +88,7 @@ public class NetworkBasic extends View {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
+                    textView.setText(result.toString());
                 }
             });
         }
