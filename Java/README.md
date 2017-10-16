@@ -35,8 +35,8 @@
 > ### 11. [Annotation](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Annotation)
 >> Annotation에 대해 / Annotation 사용 방법 / Annotation생성 방법
 
-> ### 12.[Observer 패턴]()
->> 
+> ### 12. [디자인패턴](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/DesignPattern)
+>> Singleton / Observer
 
 ## 문제
 > #### 1. [반복문을 활용한 거스름돈 문제](https://github.com/Lee-KyungSeok/ChangeMoney)
