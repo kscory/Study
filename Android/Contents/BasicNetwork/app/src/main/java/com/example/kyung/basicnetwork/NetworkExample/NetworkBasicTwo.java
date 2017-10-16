@@ -92,10 +92,13 @@ class NetworkThreadTwo extends Thread{
         } catch (Exception e){
             Log.e("Error",e.toString());
         }
+        String resultString =result.toString();
+        resultString = resultString.substring(resultString.indexOf("<title>")+"<title>".length()
+                ,resultString.indexOf("</title>"));
 
         Message msg = new Message();
         msg.what = NetworkBasicTwo.SERVER_CODE_TWO;
-        msg.obj = result;
+        msg.obj = resultString;
         handler.sendMessage(msg);
     }
 }
