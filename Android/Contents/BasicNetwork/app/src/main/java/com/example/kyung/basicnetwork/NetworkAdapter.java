@@ -2,9 +2,13 @@ package com.example.kyung.basicnetwork;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.kyung.basicnetwork.AsyncTaskExample.AsyncTask;
+import com.example.kyung.basicnetwork.NetworkExample.NetworkBasic;
+import com.example.kyung.basicnetwork.NetworkExample.NetworkBasicOne;
+import com.example.kyung.basicnetwork.NetworkExample.NetworkBasicTwo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +19,7 @@ import java.util.List;
 
 public class NetworkAdapter extends PagerAdapter {
 
-    private static final int COUNT = 2;
+    private static final int COUNT = 4;
 
     List<View> viewList;
     Context context;
@@ -24,6 +28,8 @@ public class NetworkAdapter extends PagerAdapter {
         this.context = context;
         viewList = new ArrayList<>();
         viewList.add(new NetworkBasic(context));
+        viewList.add(new NetworkBasicOne(context));
+        viewList.add(new NetworkBasicTwo(context));
         viewList.add(new AsyncTask(context));
     }
 

@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTabLayout(){
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_network));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_network_one));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_network_two));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_network_three));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_asynctask));
     }
 

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">BasicNetwork</string>
 
-    <string name="tab_network">NetworkExample</string>
-    <string name="tab_asynctask">AsyncTaskExample</string>
+
+    <string name="tab_network_two">Network2</string>
+    <string name="tab_network_three">Network3</string>
+    <string name="tab_network_one">Network1</string>
+    <string name="tab_asynctask">AsyncTask</string>
 </resources>
