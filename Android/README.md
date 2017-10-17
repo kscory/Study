@@ -58,6 +58,15 @@
 > ### 19. [BasicService](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ServiceBasic)
 >> - Service 생명주기 / Service 개념
 
+> ### 20. [BasicNetwork & Thread, Asynctask](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicNetwork)
+>> - Network 사용방법 / Asynctask 사용방법 / Thread의 다양한 사용 방법
+
+> ### 21. [JsonData Basic](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/JsonDataPractice)
+>> - Json에 대해 / Json 포멧 파싱 / Glide 라이브러리 / GSON 라이브러리 / 외부 Api 이용(githubusers, 서울 열린데이터)
+
+> ### 22. [GoogleMap]()
+>> 외부Api 이용 / Json 포멧 / googleMap 이용
+
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
 >> - Layout 적용 / 계산기 Logic / 정규식 / 버튼 디자인 / 애니메이션 / 버튼 클릭 효과 / 계산기 로직 예외처리
