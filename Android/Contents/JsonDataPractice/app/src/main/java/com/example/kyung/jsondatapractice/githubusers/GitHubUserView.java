@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.kyung.jsondatapractice.R;
 import com.example.kyung.jsondatapractice.Remote;
@@ -55,10 +56,14 @@ public class GitHubUserView extends FrameLayout {
 
             @Override
             protected void onPostExecute(String jsonString) {
-                // jsonString을 parsing
-                users = parse(jsonString);
-                // data = 결과 (쓰레드로 작동하기 때문에 작업이 끝난후 이어지게 하려면 이곳에 넣는다.)
-                initListView();
+                if("AccessError".equals(jsonString)){
+                    Toast.makeText(getContext(), "githubuser Api 통신 오류", Toast.LENGTH_SHORT).show();
+                } else {
+                    // jsonString을 parsing
+                    users = parse(jsonString);
+                    // data = 결과 (쓰레드로 작동하기 때문에 작업이 끝난후 이어지게 하려면 이곳에 넣는다.)
+                    initListView();
+                }
             }
         }.execute();
     }
