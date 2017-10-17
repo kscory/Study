@@ -490,11 +490,11 @@
   ### 2. Restful 방식
   - 이전에는 액션에 따라 모든 파일(php)를 만들었는데 현재는 위에서 쓴 `GET` 과 같이 Method로 알려주게 된다.
 
-  https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/picture/restful.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/picture/restful.png)
 
   ### 3. Restful 주소전달체계
   - GET의 경우는 주소에 모두 호출한다. 그 외 여러가지 존재
   - 나머지는 Body안에 데이터가 딸려서 들어간다.
   - [참고자료](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/pdf/restful.pdf)
 
-  https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/picture/restful2.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/picture/restful2.png)
