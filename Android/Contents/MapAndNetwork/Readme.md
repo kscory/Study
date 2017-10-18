@@ -1,12 +1,12 @@
-# Map & BasicNetwork2
+# GoogleMap
   - GoogleMap 사용법 (Activity & Fragement)
-  - (추가)
-
+  - 오픈 api 이용
 ---
 
 ## GoogleMap 예제 결과
   - 서울 열린데이터에서 일반병원 위치 api를 이용
   - 결과 사진
+  
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/MapAndNetwork/picture/map.png)
 
 ---
