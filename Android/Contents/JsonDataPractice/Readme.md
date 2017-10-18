@@ -495,6 +495,6 @@
   ### 3. Restful 주소전달체계
   - GET의 경우는 주소에 모두 호출한다. 그 외 여러가지 존재
   - 나머지는 Body안에 데이터가 딸려서 들어간다.
-  - [참고자료](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/pdf/restful.pdf)
+  - [참고자료](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/pdf/RESTful.pdf)
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/JsonDataPractice/picture/restful2.png)
