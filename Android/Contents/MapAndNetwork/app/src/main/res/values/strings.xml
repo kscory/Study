@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">MapAndNetwork</string>
     <string name="title_activity_maps">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">TempActivity</string>
+
+    <string name="title_maphos">HosGoogleMap</string>
+    <string name="title_temp">TempFrag</string>
 </resources>
