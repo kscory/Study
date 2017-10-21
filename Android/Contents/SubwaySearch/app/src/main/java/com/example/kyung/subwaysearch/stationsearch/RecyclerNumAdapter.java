@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class RecyclerNumAdapter extends RecyclerView.Adapter<RecyclerNumAdapter.
     String stationName;
     List<Row> rowList;
     SearchInfo searchInfo;
+    int clickPosition=-1;
 
     public RecyclerNumAdapter(FrameLayout frameLayout, String stationName , List<Row> rowList){
         this.frameLayout = frameLayout;
@@ -65,7 +67,12 @@ public class RecyclerNumAdapter extends RecyclerView.Adapter<RecyclerNumAdapter.
         String text = stationName +"( " + line + " )";
         holder.setTextStation(text);
         holder.setF_CODE(row.getFR_CODE());
-        holder.setImageView(row.getLINE_NUM());
+        holder.setPosition(position);
+        if(row.getClicked()){
+            holder.setImageView(R.drawable.linebutton19_select);
+        } else{
+            holder.setImageView(R.drawable.linebutton19_normal);
+        }
     }
 
     @Override
@@ -73,30 +80,51 @@ public class RecyclerNumAdapter extends RecyclerView.Adapter<RecyclerNumAdapter.
         return rowList.size();
     }
 
+    public void resetClickHolder(){
+        for(Row row : rowList){
+            row.unClick();
+        }
+    }
+    public void refreshHolder(){
+
+    }
+
     class Holder extends RecyclerView.ViewHolder{
+        private int position;
         private String F_CODE;
-        private ImageView imageView;
+        private Button btnLine;
         private TextView textStation;
         public Holder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            btnLine = (Button) itemView.findViewById(R.id.btnLine);
             textStation = (TextView) itemView.findViewById(R.id.textStation);
 
-            imageView.setOnClickListener(new View.OnClickListener() {
+            btnLine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     searchInfo.SearchSubwayInfoUpByFR_CODE(F_CODE);
+                    resetClickHolder();
+                    rowList.get(position).click();
+                    if(clickPosition>=0){
+                        notifyItemChanged(clickPosition);
+                    }
+                    clickPosition = position;
+                    notifyItemChanged(position);
+//                    notifyDataSetChanged();
                 }
             });
         }
-        public void setImageView(String LineNumber){
-
+        public void setImageView(int id){
+            btnLine.setBackgroundResource(id);
         }
         public void setTextStation(String stationName){
             textStation.setText(stationName);
         }
         public void setF_CODE(String code){
             F_CODE=code;
+        }
+        public void setPosition(int position){
+            this.position = position;
         }
     }
 

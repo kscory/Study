@@ -5,6 +5,9 @@ package com.example.kyung.subwaysearch.model.SubwayNameService;
  */
 
 public class Row {
+
+    private boolean clicked = false;
+
     private String STATION_NM; // 전철역 명
     private String STATION_CD; // 전철역 코드
     private String LINE_NUM; // 호선번호
@@ -40,6 +43,16 @@ public class Row {
 
     public void setFR_CODE(String FR_CODE) {
         this.FR_CODE = FR_CODE;
+    }
+
+    public void click(){
+        clicked = true;
+    }
+    public void unClick(){
+        clicked = false;
+    }
+    public boolean getClicked(){
+        return clicked;
     }
 
     @Override

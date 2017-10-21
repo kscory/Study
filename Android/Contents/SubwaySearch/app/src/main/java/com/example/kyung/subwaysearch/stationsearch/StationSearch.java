@@ -172,6 +172,7 @@ public class StationSearch extends FrameLayout implements RecyclerNumAdapter.Sea
         recyclerViewDown.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+    // 상,하행선 호출
     @Override
     public void SearchSubwayInfoUpByFR_CODE(String FR_CODE) {
         jsonSubwyInfoUp = null;
@@ -201,7 +202,7 @@ public class StationSearch extends FrameLayout implements RecyclerNumAdapter.Sea
                     }
                 }
                 if("ServerConError".equals(s)){
-                    Toast.makeText(getContext(), "서버연결이 원할하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "서버연결이 원할하지 않아 하행을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     jsonSubwyInfoDown = gson.fromJson(s[1], JsonSubwayInfo.class);
                     if (jsonSubwyInfoDown.getSearchSTNTimeTableByFRCodeService() == null) {
@@ -214,29 +215,5 @@ public class StationSearch extends FrameLayout implements RecyclerNumAdapter.Sea
 
             }
         }.execute(FR_CODE);
-
-//        // 하행 호출
-//        new AsyncTask<String, Void, String>(){
-//            @Override
-//            protected String doInBackground(String... params) {
-//                subwayInfoURL = MakeURL.getInstance().makeSubwayInfoURL(params[0],"1","1");
-//                return Remote.getData(subwayInfoURL);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String s) {
-//                if("ServerConError".equals(s)){
-//                    Toast.makeText(getContext(), "서버연결이 원할하지 않습니다.", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    jsonSubwyInfoDown = gson.fromJson(s, JsonSubwayInfo.class);
-//                    if (jsonSubwyInfoDown.getSearchSTNTimeTableByFRCodeService() == null) {
-//                        Toast.makeText(getContext(), "데이터 로드 오류", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        rowInfo = SearchSubway.getInstance().changeRowSubwayInfo(jsonSubwyInfoDown);
-//                        setRecyclerViewDownListener();
-//                    }
-//                }
-//            }
-//        }.execute(FR_CODE);
     }
 }

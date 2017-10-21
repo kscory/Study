@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.kyung.subwaysearch.linesearch.LineSearch;
 import com.example.kyung.subwaysearch.stationsearch.StationSearch;
+import com.example.kyung.subwaysearch.subwayschedule.ScheduleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class TabPageAdapter extends PagerAdapter {
         this.context = context;
         viewList = new ArrayList<>();
         viewList.add(new StationSearch(context));
-        viewList.add(new LineSearch(context));
+        viewList.add(new ScheduleView(context));
     }
 
     @Override

@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTabLayout(){
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.app_station)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.app_line)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_station)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_schedule)));
     }
 
     private void initViewPager(){
