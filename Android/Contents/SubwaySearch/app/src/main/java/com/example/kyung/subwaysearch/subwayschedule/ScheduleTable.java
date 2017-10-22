@@ -13,6 +13,7 @@ import com.example.kyung.subwaysearch.R;
 import com.example.kyung.subwaysearch.model.SubwayInfo.JsonSubwayInfo;
 import com.example.kyung.subwaysearch.model.SubwayInfo.Row;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +22,6 @@ import java.util.List;
 
 public class ScheduleTable extends FrameLayout {
 
-    List<Row> rowUp;
-    List<Row> rowDown;
     RecyclerView recyclerViewTime;
     TimeTableRecyclerAdapter adapter;
     View view;
@@ -30,24 +29,23 @@ public class ScheduleTable extends FrameLayout {
     public ScheduleTable(Context context) {
         super(context);
         initView();
+        setRecyclerAdapter();
     }
 
     private void initView(){
         view = LayoutInflater.from(getContext()).inflate(R.layout.subwayschedule_schduletable,null);
+        addView(view);
     }
 
     private void setRecyclerAdapter(){
-        adapter = null;
-        adapter = new TimeTableRecyclerAdapter(this,rowUp,rowDown);
-        recyclerViewTime = null;
+        adapter = new TimeTableRecyclerAdapter(this);
         recyclerViewTime = (RecyclerView) view.findViewById(R.id.recyclerViewTime);
         recyclerViewTime.setAdapter(adapter);
         recyclerViewTime.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    public void setDataAndSetAdapter(List<Row> rowUp, List<Row> rowDown){
-        this.rowUp = rowUp;
-        this.rowDown = rowDown;
-        setRecyclerAdapter();
+    public void setDataByAdapter(List<Row> rowUp, List<Row> rowDown){
+        adapter.setData(rowUp,rowDown);
+        adapter.notifyDataSetChanged();
     }
 }

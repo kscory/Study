@@ -1,6 +1,7 @@
 package com.example.kyung.subwaysearch.CustomButton;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.support.v7.widget.AppCompatButton;
 
 /**
@@ -8,7 +9,9 @@ import android.support.v7.widget.AppCompatButton;
  */
 
 public class LineButton extends AppCompatButton {
+
     public LineButton(Context context) {
         super(context);
     }
+
 }

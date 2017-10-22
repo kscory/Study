@@ -47,16 +47,16 @@ public class ScheduleView extends FrameLayout {
     ScheduleTable scheduleTableDay;
     ScheduleTable scheduleTableSat;
     ScheduleTable scheduleTableSun;
-    List<View> scheduleTableList;
+    List<View> scheduleTableList = new ArrayList<>();
 
     JsonSubwayInfo jsonSubwayInfo;
     JsonSubwayService jsonSubwayService;
     String jsonSubwayInfoURL;
     String jsonSubwayServiceURL;
 
-    List<Row> rowsInfoUp;
-    List<Row> rowsInfoDown;
-    List<com.example.kyung.subwaysearch.model.SubwayNameService.Row> rowsService;
+    List<Row> rowsInfoUp = new ArrayList<>();
+    List<Row> rowsInfoDown = new ArrayList<>();
+    List<com.example.kyung.subwaysearch.model.SubwayNameService.Row> rowsService = new ArrayList<>();
 
     String stationName;
     String station_FR_CODE;
@@ -81,10 +81,10 @@ public class ScheduleView extends FrameLayout {
         jsonSubwayService = null;
         jsonSubwayServiceURL = null;
         jsonSubwayInfoURL = null;
-        rowsInfoDown = new ArrayList<>();
-        rowsInfoUp = new ArrayList<>();
-        rowsService = new ArrayList<>();
-        scheduleTableList = new ArrayList<>();
+        rowsInfoDown.clear();
+        rowsInfoUp.clear();
+        rowsService.clear();
+        scheduleTableList.clear();
 
         stationName = null;
         station_FR_CODE = null;
@@ -209,11 +209,11 @@ public class ScheduleView extends FrameLayout {
             @Override
             protected void onPostExecute(String[] jsonInfoString) {
                 LoadTimeData(jsonInfoString[0],jsonInfoString[1]);
-                scheduleTableDay.setDataAndSetAdapter(rowsInfoUp,rowsInfoDown);
+                scheduleTableDay.setDataByAdapter(rowsInfoUp,rowsInfoDown);
                 LoadTimeData(jsonInfoString[2],jsonInfoString[3]);
-                scheduleTableSat.setDataAndSetAdapter(rowsInfoUp,rowsInfoDown);
+                scheduleTableSat.setDataByAdapter(rowsInfoUp,rowsInfoDown);
                 LoadTimeData(jsonInfoString[4],jsonInfoString[5]);
-                scheduleTableSun.setDataAndSetAdapter(rowsInfoUp,rowsInfoDown);
+                scheduleTableSun.setDataByAdapter(rowsInfoUp,rowsInfoDown);
                 dayPagerAdapter.notifyDataSetChanged();
             }
         }.execute(station_FR_CODE);

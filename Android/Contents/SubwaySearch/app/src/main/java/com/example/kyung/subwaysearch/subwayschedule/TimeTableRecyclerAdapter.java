@@ -1,6 +1,7 @@
 package com.example.kyung.subwaysearch.subwayschedule;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.kyung.subwaysearch.model.SubwayInfo.Row;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,13 +23,19 @@ import java.util.List;
 public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecyclerAdapter.Holder> {
 
     FrameLayout frameLayout;
-    List<Row> rowUpList;
-    List<Row> rowDownList;
+    List<Row> rowUpList = new ArrayList<>();
+    List<Row> rowDownList = new ArrayList<>();
 
-    public TimeTableRecyclerAdapter(FrameLayout frameLayout, List<Row> rowUpList, List<Row> rowDownList){
+    public TimeTableRecyclerAdapter(FrameLayout frameLayout){
+        Log.e("확인","=============어댑터 연결");
         this.frameLayout = frameLayout;
+    }
+
+    public void setData(List<Row> rowUpList, List<Row> rowDownList){
         this.rowUpList = rowUpList;
         this.rowDownList = rowDownList;
+        Log.e("확인","=================setData 호출"+"checkcount개수"+checkCount());
+        //notifyDataSetChanged();
     }
 
     private int checkCount(){
@@ -40,6 +48,7 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.e("확인","=================홀더생성호출");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subwayschedule_timeunit,parent,false);
         return new Holder(view);
     }
@@ -69,6 +78,7 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
 
     @Override
     public int getItemCount() {
+        Log.e("확인","=================아이템카운트호출"+checkCount());
         return checkCount();
     }
 
