@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SubwaySearch</string>
 
-    <!-- tab 이름 -->
+    <!-- maintab 이름 -->
     <string name="tab_station">StationSearch</string>
     <string name="tab_line">lineSearch</string>
     <string name="tab_schedule">Schedule</string>

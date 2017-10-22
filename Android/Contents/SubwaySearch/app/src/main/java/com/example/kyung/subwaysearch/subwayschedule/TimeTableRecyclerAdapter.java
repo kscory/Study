@@ -28,7 +28,6 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
         this.frameLayout = frameLayout;
         this.rowUpList = rowUpList;
         this.rowDownList = rowDownList;
-        notifyDataSetChanged();
     }
 
     private int checkCount(){

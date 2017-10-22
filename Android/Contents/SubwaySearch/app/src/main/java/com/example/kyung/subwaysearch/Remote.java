@@ -15,13 +15,13 @@ import java.net.URL;
 
 public class Remote {
 
-    public static String getData(String string){
+    public static String getData(String stringURL){
         boolean runFlag = true;
         int ServerConCount = 0;
         String result="";
         while(runFlag) {
             try {
-                URL url = new URL(string);
+                URL url = new URL(stringURL);
                 HttpURLConnection connection = null;
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");

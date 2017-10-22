@@ -10,12 +10,12 @@ import java.util.List;
  * 넘긴 뷰를 연결만 한다.
  */
 
-public class DayPagerAdpater extends PagerAdapter {
+public class DayPagerAdapter extends PagerAdapter {
 
     List<View> viewList;
     private int COUNT = 3;
 
-    public DayPagerAdpater(List<View> viewList){
+    public DayPagerAdapter(List<View> viewList){
         this.viewList = viewList;
     }
 
@@ -39,5 +39,10 @@ public class DayPagerAdpater extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View)object);
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 }
