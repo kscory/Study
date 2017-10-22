@@ -1,21 +1,15 @@
 package com.example.kyung.subwaysearch.stationsearch;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kyung.subwaysearch.R;
 import com.example.kyung.subwaysearch.model.SubwayNameService.Row;
-import com.example.kyung.subwaysearch.util.SearchSubway;
 
 import java.util.List;
 
@@ -69,9 +63,9 @@ public class RecyclerNumAdapter extends RecyclerView.Adapter<RecyclerNumAdapter.
         holder.setF_CODE(row.getFR_CODE());
         holder.setPosition(position);
         if(row.getClicked()){
-            holder.setImageView(R.drawable.linebutton19_select);
+            holder.setImageView(R.drawable.linebutton1_select);
         } else{
-            holder.setImageView(R.drawable.linebutton19_normal);
+            holder.setImageView(R.drawable.linebutton1_normal);
         }
     }
 

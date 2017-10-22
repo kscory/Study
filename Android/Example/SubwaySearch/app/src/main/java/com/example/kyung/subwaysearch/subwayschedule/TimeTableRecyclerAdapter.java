@@ -33,7 +33,6 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
     public void setData(List<Row> rowUpList, List<Row> rowDownList){
         this.rowUpList = rowUpList;
         this.rowDownList = rowDownList;
-        //notifyDataSetChanged();
     }
 
     private int checkCount(){
@@ -52,11 +51,19 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
+
+        Log.e("체크Down","============="+rowDownList.get(position).getLEFTTIME());
         // 상행 체크
         if(rowUpList.size()>position){
             Row rowUp = rowUpList.get(position);
-            holder.setTextUpTime(rowUp.getARRIVETIME());
-            holder.settextUpDes(rowUp.getSUBWAYENAME() +" 행");
+            if("99:99:99".equals(rowUp.getLEFTTIME())){
+                holder.setTextUpTime("00:00:00");
+                holder.settextUpDes("종착역");
+            } else {
+                Log.e("체크Up","============="+rowUpList.get(position).getLEFTTIME());
+                holder.setTextUpTime(rowUp.getLEFTTIME());
+                holder.settextUpDes(rowUp.getSUBWAYENAME() +" 행");
+            }
         } else{
             holder.setTextUpTime("");
             holder.settextUpDes("");
@@ -64,8 +71,13 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
         // 하행 체크
         if(rowDownList.size()>position){
             Row rowDown = rowDownList.get(position);
-            holder.settextDownTime(rowDown.getARRIVETIME());
-            holder.settextDownDes(rowDown.getSUBWAYENAME() +" 행");
+            if("99:99:99".equals(rowDown.getLEFTTIME())){
+                holder.setTextUpTime("00:00:00");
+                holder.settextUpDes("종착역");
+            } else {
+                holder.settextDownTime(rowDown.getLEFTTIME());
+                holder.settextDownDes(rowDown.getSUBWAYENAME() + " 행");
+            }
         } else{
             holder.settextDownTime("");
             holder.settextDownDes("");

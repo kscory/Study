@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ import java.util.List;
 public class ScheduleView extends FrameLayout {
 
     ConstraintLayout constraintSearch;
-    RelativeLayout linearLineBtnContainer;
+    RelativeLayout relativeLineBtnContainer;
     EditText stationMain;
     TextView stationRight;
     TextView stationLeft;
@@ -81,6 +82,7 @@ public class ScheduleView extends FrameLayout {
             activity = (Activity)context;
         }
         initView();
+        initLineBtnListener();
         init();
     }
 
@@ -101,7 +103,7 @@ public class ScheduleView extends FrameLayout {
     private void initView(){
         View view = LayoutInflater.from(getContext()).inflate(R.layout.subwayschedule,null);
         constraintSearch = (ConstraintLayout) view.findViewById(R.id.constraintSearch);
-        linearLineBtnContainer = (RelativeLayout) view.findViewById(R.id.linearLineBtnContainer);
+        relativeLineBtnContainer = (RelativeLayout) view.findViewById(R.id.relativeLineBtnContainer);
         stationMain = (EditText) view.findViewById(R.id.stationMain);
         stationRight = (TextView) view.findViewById(R.id.stationRight);
         stationLeft = (TextView) view.findViewById(R.id.stationLeft);
@@ -116,58 +118,71 @@ public class ScheduleView extends FrameLayout {
     }
 
     private void btnInit(){
-        btnSize = (int)(linearLineBtnContainer.getHeight() * 0.9);
-        LineButton button1 = new LineButton(linearLineBtnContainer.getContext(),"1"); buttonCollection.put("1",button1);
-        LineButton button2 = new LineButton(linearLineBtnContainer.getContext(),"2"); buttonCollection.put("2",button2);
-        LineButton button3 = new LineButton(linearLineBtnContainer.getContext(),"3"); buttonCollection.put("3",button3);
-        LineButton button4 = new LineButton(linearLineBtnContainer.getContext(),"4"); buttonCollection.put("4",button4);
-        LineButton button5 = new LineButton(linearLineBtnContainer.getContext(),"5"); buttonCollection.put("5",button5);
-        LineButton button6 = new LineButton(linearLineBtnContainer.getContext(),"6"); buttonCollection.put("6",button6);
-        LineButton button7 = new LineButton(linearLineBtnContainer.getContext(),"7"); buttonCollection.put("7",button7);
-        LineButton button8 = new LineButton(linearLineBtnContainer.getContext(),"8"); buttonCollection.put("8",button8);
-        LineButton button9 = new LineButton(linearLineBtnContainer.getContext(),"9"); buttonCollection.put("9",button9);
-        LineButton buttonI = new LineButton(linearLineBtnContainer.getContext(),"I"); buttonCollection.put("I",buttonI);
-        LineButton buttonI2 = new LineButton(linearLineBtnContainer.getContext(),"I2"); buttonCollection.put("I2",buttonI2);
-        LineButton buttonK = new LineButton(linearLineBtnContainer.getContext(),"K"); buttonCollection.put("K",buttonK);
-        LineButton buttonKK = new LineButton(linearLineBtnContainer.getContext(),"KK"); buttonCollection.put("KK",buttonKK);
-        LineButton buttonB = new LineButton(linearLineBtnContainer.getContext(),"B"); buttonCollection.put("B",buttonB);
-        LineButton buttonA = new LineButton(linearLineBtnContainer.getContext(),"A"); buttonCollection.put("A",buttonA);
-        LineButton buttonG = new LineButton(linearLineBtnContainer.getContext(),"G"); buttonCollection.put("G",buttonG);
-        LineButton buttonS = new LineButton(linearLineBtnContainer.getContext(),"S"); buttonCollection.put("S",buttonS);
-        LineButton buttonSS = new LineButton(linearLineBtnContainer.getContext(),"SS"); buttonCollection.put("SS",buttonSS);
+        btnSize = (int)(relativeLineBtnContainer.getHeight() * 0.9);
+        LineButton button1 = new LineButton(relativeLineBtnContainer.getContext(),"1"); buttonCollection.put("1",button1);
+        LineButton button2 = new LineButton(relativeLineBtnContainer.getContext(),"2"); buttonCollection.put("2",button2);
+        LineButton button3 = new LineButton(relativeLineBtnContainer.getContext(),"3"); buttonCollection.put("3",button3);
+        LineButton button4 = new LineButton(relativeLineBtnContainer.getContext(),"4"); buttonCollection.put("4",button4);
+        LineButton button5 = new LineButton(relativeLineBtnContainer.getContext(),"5"); buttonCollection.put("5",button5);
+        LineButton button6 = new LineButton(relativeLineBtnContainer.getContext(),"6"); buttonCollection.put("6",button6);
+        LineButton button7 = new LineButton(relativeLineBtnContainer.getContext(),"7"); buttonCollection.put("7",button7);
+        LineButton button8 = new LineButton(relativeLineBtnContainer.getContext(),"8"); buttonCollection.put("8",button8);
+        LineButton button9 = new LineButton(relativeLineBtnContainer.getContext(),"9"); buttonCollection.put("9",button9);
+        LineButton buttonI = new LineButton(relativeLineBtnContainer.getContext(),"I"); buttonCollection.put("I",buttonI);
+        LineButton buttonI2 = new LineButton(relativeLineBtnContainer.getContext(),"I2"); buttonCollection.put("I2",buttonI2);
+        LineButton buttonK = new LineButton(relativeLineBtnContainer.getContext(),"K"); buttonCollection.put("K",buttonK);
+        LineButton buttonKK = new LineButton(relativeLineBtnContainer.getContext(),"KK"); buttonCollection.put("KK",buttonKK);
+        LineButton buttonB = new LineButton(relativeLineBtnContainer.getContext(),"B"); buttonCollection.put("B",buttonB);
+        LineButton buttonA = new LineButton(relativeLineBtnContainer.getContext(),"A"); buttonCollection.put("A",buttonA);
+        LineButton buttonG = new LineButton(relativeLineBtnContainer.getContext(),"G"); buttonCollection.put("G",buttonG);
+        LineButton buttonS = new LineButton(relativeLineBtnContainer.getContext(),"S"); buttonCollection.put("S",buttonS);
+        LineButton buttonSS = new LineButton(relativeLineBtnContainer.getContext(),"SS"); buttonCollection.put("SS",buttonSS);
+    }
+    private void initLineBtnListener(){
+        for(String lineName : buttonCollection.keySet()){
+            buttonCollection.get(lineName).setOnClickListener(setLineBtnListener);
+        }
     }
     // 호선 선택뷰 세팅
     private void setLineSelect(){
         // 가장 위 호선 세팅
-        linearLineBtnContainer.removeAllViews();
+        relativeLineBtnContainer.removeAllViews();
         int x=20;
         for(int i=0 ; i<rowsService.size() ; i++){
             String line = rowsService.get(i).getLINE_NUM();
             buttonCollection.get(line).setX(x);
-            Log.e("좌표","===================================="+buttonCollection.get(line).getX());
-            linearLineBtnContainer.addView(buttonCollection.get(line),buttonCollection.get(line).getSize(),buttonCollection.get(line).getSize());
+            relativeLineBtnContainer.addView(buttonCollection.get(line),buttonCollection.get(line).getSize(),buttonCollection.get(line).getSize());
             buttonCollection.get(line).setPosition(i);
-            Log.e("사이즈","======================="+buttonCollection.get(line).getWidth());
             x+=buttonCollection.get(line).getSize()+15;
         }
-
+        if(lineNum!=null){
+            buttonCollection.get(lineNum).unClickButton();
+        }
+        station_FR_CODE = rowsService.get(0).getFR_CODE();
+        lineNum = rowsService.get(0).getLINE_NUM();
+        buttonCollection.get(lineNum).clickButton();
+        constraintSearch.setBackgroundColor(buttonCollection.get(lineNum).getColor());
         // 스케쥴 및 나머지 업데이트
         startUpdate();
     }
 
-    OnClickListener setLinebtnListener = new OnClickListener() {
+    OnClickListener setLineBtnListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            LineButton btn = (LineButton)v;
+            // FR_CODE 변경
+            station_FR_CODE = rowsService.get(btn.getPosition()).getFR_CODE();
+            // 이전 호선 이미지 원본으로
+            buttonCollection.get(lineNum).unClickButton();
+            // lineNum 변경
+            lineNum = rowsService.get(btn.getPosition()).getLINE_NUM();
             // 호선 이미지 업데이트
-            setLineImage();
+            buttonCollection.get(lineNum).clickButton();
+            constraintSearch.setBackgroundColor(btn.getColor());
             // 스케쥴 및 나머지 업데이트
             startUpdate();
         }
     };
-    // 호선 이미지 업데이트
-    private void setLineImage(){
-        /* 코드 작성 */
-    }
 
     // 전역, 다음역 세팅, (리스너)
     private void setTextRight(String right){
@@ -303,8 +318,6 @@ public class ScheduleView extends FrameLayout {
                                             Toast.makeText(getContext(), "역명이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
                                         } else {
                                             rowsService = SearchSubway.getInstance().changeRowSubwayService(jsonSubwayService);
-                                            station_FR_CODE = rowsService.get(0).getFR_CODE();
-                                            lineNum = rowsService.get(0).getLINE_NUM();
                                             setLineSelect();
                                         }
                                     }

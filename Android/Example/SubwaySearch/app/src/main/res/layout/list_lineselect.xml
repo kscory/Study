@@ -10,7 +10,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:gravity="center"
-        android:background="@drawable/linebutton19"
+        android:background="@drawable/linebutton1"
         android:text="0"
         android:textColor="#FF0000"
         app:srcCompat="@android:drawable/radiobutton_off_background" />
