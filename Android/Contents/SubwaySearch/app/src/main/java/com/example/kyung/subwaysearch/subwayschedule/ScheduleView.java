@@ -2,6 +2,7 @@ package com.example.kyung.subwaysearch.subwayschedule;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
@@ -12,12 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kyung.subwaysearch.CustomButton.LineButton;
 import com.example.kyung.subwaysearch.R;
 import com.example.kyung.subwaysearch.Remote;
 import com.example.kyung.subwaysearch.model.SubwayInfo.JsonSubwayInfo;
@@ -28,6 +32,7 @@ import com.example.kyung.subwaysearch.util.SearchSubway;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,7 +42,7 @@ import java.util.List;
 public class ScheduleView extends FrameLayout {
 
     ConstraintLayout constraintSearch;
-    RelativeLayout relativeLine;
+    RelativeLayout linearLineBtnContainer;
     EditText stationMain;
     TextView stationRight;
     TextView stationLeft;
@@ -49,18 +54,21 @@ public class ScheduleView extends FrameLayout {
     ScheduleTable scheduleTableSun;
     List<View> scheduleTableList = new ArrayList<>();
 
-    JsonSubwayInfo jsonSubwayInfo;
-    JsonSubwayService jsonSubwayService;
-    String jsonSubwayInfoURL;
-    String jsonSubwayServiceURL;
+    HashMap<String, LineButton> buttonCollection = new HashMap<>();
+
+    JsonSubwayInfo jsonSubwayInfo = null;
+    JsonSubwayService jsonSubwayService = null;
+    String jsonSubwayInfoURL = null;
+    String jsonSubwayServiceURL = null;
 
     List<Row> rowsInfoUp = new ArrayList<>();
     List<Row> rowsInfoDown = new ArrayList<>();
     List<com.example.kyung.subwaysearch.model.SubwayNameService.Row> rowsService = new ArrayList<>();
 
-    String stationName;
-    String station_FR_CODE;
-    String LineNum;
+    String stationName = null;
+    String station_FR_CODE = null;
+    String lineNum = null;
+    int btnSize = 0;
 
     Gson gson;
     Activity activity;
@@ -77,18 +85,10 @@ public class ScheduleView extends FrameLayout {
     }
 
     private void init(){
-        jsonSubwayInfo = null;
-        jsonSubwayService = null;
-        jsonSubwayServiceURL = null;
-        jsonSubwayInfoURL = null;
         rowsInfoDown.clear();
         rowsInfoUp.clear();
         rowsService.clear();
         scheduleTableList.clear();
-
-        stationName = null;
-        station_FR_CODE = null;
-        LineNum = null;
 
         gson = new Gson();
 
@@ -101,22 +101,55 @@ public class ScheduleView extends FrameLayout {
     private void initView(){
         View view = LayoutInflater.from(getContext()).inflate(R.layout.subwayschedule,null);
         constraintSearch = (ConstraintLayout) view.findViewById(R.id.constraintSearch);
-        relativeLine = (RelativeLayout) view.findViewById(R.id.relativeLine);
+        linearLineBtnContainer = (RelativeLayout) view.findViewById(R.id.linearLineBtnContainer);
         stationMain = (EditText) view.findViewById(R.id.stationMain);
         stationRight = (TextView) view.findViewById(R.id.stationRight);
         stationLeft = (TextView) view.findViewById(R.id.stationLeft);
         tabLayoutDay = (TabLayout) view.findViewById(R.id.tabLayoutDay);
         viewPagerSchedule = (ViewPager) view.findViewById(R.id.viewPagerSchedule);
+        btnInit();
 
         scheduleTableDay = new ScheduleTable(getContext());
         scheduleTableSat = new ScheduleTable(getContext());
         scheduleTableSun = new ScheduleTable(getContext());
         addView(view);
     }
+
+    private void btnInit(){
+        btnSize = (int)(linearLineBtnContainer.getHeight() * 0.9);
+        LineButton button1 = new LineButton(linearLineBtnContainer.getContext(),"1"); buttonCollection.put("1",button1);
+        LineButton button2 = new LineButton(linearLineBtnContainer.getContext(),"2"); buttonCollection.put("2",button2);
+        LineButton button3 = new LineButton(linearLineBtnContainer.getContext(),"3"); buttonCollection.put("3",button3);
+        LineButton button4 = new LineButton(linearLineBtnContainer.getContext(),"4"); buttonCollection.put("4",button4);
+        LineButton button5 = new LineButton(linearLineBtnContainer.getContext(),"5"); buttonCollection.put("5",button5);
+        LineButton button6 = new LineButton(linearLineBtnContainer.getContext(),"6"); buttonCollection.put("6",button6);
+        LineButton button7 = new LineButton(linearLineBtnContainer.getContext(),"7"); buttonCollection.put("7",button7);
+        LineButton button8 = new LineButton(linearLineBtnContainer.getContext(),"8"); buttonCollection.put("8",button8);
+        LineButton button9 = new LineButton(linearLineBtnContainer.getContext(),"9"); buttonCollection.put("9",button9);
+        LineButton buttonI = new LineButton(linearLineBtnContainer.getContext(),"I"); buttonCollection.put("I",buttonI);
+        LineButton buttonI2 = new LineButton(linearLineBtnContainer.getContext(),"I2"); buttonCollection.put("I2",buttonI2);
+        LineButton buttonK = new LineButton(linearLineBtnContainer.getContext(),"K"); buttonCollection.put("K",buttonK);
+        LineButton buttonKK = new LineButton(linearLineBtnContainer.getContext(),"KK"); buttonCollection.put("KK",buttonKK);
+        LineButton buttonB = new LineButton(linearLineBtnContainer.getContext(),"B"); buttonCollection.put("B",buttonB);
+        LineButton buttonA = new LineButton(linearLineBtnContainer.getContext(),"A"); buttonCollection.put("A",buttonA);
+        LineButton buttonG = new LineButton(linearLineBtnContainer.getContext(),"G"); buttonCollection.put("G",buttonG);
+        LineButton buttonS = new LineButton(linearLineBtnContainer.getContext(),"S"); buttonCollection.put("S",buttonS);
+        LineButton buttonSS = new LineButton(linearLineBtnContainer.getContext(),"SS"); buttonCollection.put("SS",buttonSS);
+    }
     // 호선 선택뷰 세팅
     private void setLineSelect(){
-        // 가장 위 라인선택부분 세팅
-        ////// 코드 작성///////
+        // 가장 위 호선 세팅
+        linearLineBtnContainer.removeAllViews();
+        int x=20;
+        for(int i=0 ; i<rowsService.size() ; i++){
+            String line = rowsService.get(i).getLINE_NUM();
+            buttonCollection.get(line).setX(x);
+            Log.e("좌표","===================================="+buttonCollection.get(line).getX());
+            linearLineBtnContainer.addView(buttonCollection.get(line),buttonCollection.get(line).getSize(),buttonCollection.get(line).getSize());
+            buttonCollection.get(line).setPosition(i);
+            Log.e("사이즈","======================="+buttonCollection.get(line).getWidth());
+            x+=buttonCollection.get(line).getSize()+15;
+        }
 
         // 스케쥴 및 나머지 업데이트
         startUpdate();
@@ -252,28 +285,32 @@ public class ScheduleView extends FrameLayout {
                     case EditorInfo.IME_ACTION_SEARCH:
                         stationName = v.getText().toString();
                         jsonSubwayService = null;
-                        jsonSubwayServiceURL = MakeURL.getInstance().makeSubwayNameServiceURL(stationName);
-                        new AsyncTask<Void, Void, String>() {
-                            @Override
-                            protected String doInBackground(Void... params) {
-                                return Remote.getData(jsonSubwayServiceURL);
-                            }
-                            @Override
-                            protected void onPostExecute(String subwayServiceString) {
-                                if("ServerConError".equals(subwayServiceString)){
-                                    Toast.makeText(getContext(), "서버연결이 원할하지 않습니다.", Toast.LENGTH_SHORT).show();
-                                } else{
-                                    jsonSubwayService = gson.fromJson(subwayServiceString,JsonSubwayService.class);
-                                    if(jsonSubwayService.getSearchInfoBySubwayNameService()==null){
-                                        Toast.makeText(getContext(), "역명이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
-                                    } else{
-                                        rowsService = SearchSubway.getInstance().changeRowSubwayService(jsonSubwayService);
-                                        station_FR_CODE = rowsService.get(0).getFR_CODE();
-                                        setLineSelect();
+                        if(!"".equals(stationName)) {
+                            jsonSubwayServiceURL = MakeURL.getInstance().makeSubwayNameServiceURL(stationName);
+                            new AsyncTask<Void, Void, String>() {
+                                @Override
+                                protected String doInBackground(Void... params) {
+                                    return Remote.getData(jsonSubwayServiceURL);
+                                }
+
+                                @Override
+                                protected void onPostExecute(String subwayServiceString) {
+                                    if ("ServerConError".equals(subwayServiceString)) {
+                                        Toast.makeText(getContext(), "서버연결이 원할하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        jsonSubwayService = gson.fromJson(subwayServiceString, JsonSubwayService.class);
+                                        if (jsonSubwayService.getSearchInfoBySubwayNameService() == null) {
+                                            Toast.makeText(getContext(), "역명이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            rowsService = SearchSubway.getInstance().changeRowSubwayService(jsonSubwayService);
+                                            station_FR_CODE = rowsService.get(0).getFR_CODE();
+                                            lineNum = rowsService.get(0).getLINE_NUM();
+                                            setLineSelect();
+                                        }
                                     }
                                 }
-                            }
-                        }.execute();
+                            }.execute();
+                        }
                         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(stationMain.getWindowToken(),0);
                         break;

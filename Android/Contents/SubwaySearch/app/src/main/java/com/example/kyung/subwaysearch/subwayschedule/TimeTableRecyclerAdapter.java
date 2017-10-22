@@ -27,14 +27,12 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
     List<Row> rowDownList = new ArrayList<>();
 
     public TimeTableRecyclerAdapter(FrameLayout frameLayout){
-        Log.e("확인","=============어댑터 연결");
         this.frameLayout = frameLayout;
     }
 
     public void setData(List<Row> rowUpList, List<Row> rowDownList){
         this.rowUpList = rowUpList;
         this.rowDownList = rowDownList;
-        Log.e("확인","=================setData 호출"+"checkcount개수"+checkCount());
         //notifyDataSetChanged();
     }
 
@@ -48,7 +46,6 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.e("확인","=================홀더생성호출");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subwayschedule_timeunit,parent,false);
         return new Holder(view);
     }
@@ -78,7 +75,6 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
 
     @Override
     public int getItemCount() {
-        Log.e("확인","=================아이템카운트호출"+checkCount());
         return checkCount();
     }
 

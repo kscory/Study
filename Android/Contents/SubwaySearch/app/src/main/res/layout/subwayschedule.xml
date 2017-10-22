@@ -8,21 +8,35 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/relativeLine"
+        android:id="@+id/linearLineBtnContainer"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="3dp">
 
         <Button
             android:id="@+id/btnLine"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp"
             android:background="@drawable/linebutton19_normal"
-            android:text=" " />
+            android:text=" "
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/btnLine2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/linebutton19_normal"
+            android:text=" "
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_toRightOf="@+id/btnLine"
+            android:layout_toEndOf="@+id/btnLine"
+            android:layout_alignBottom="@+id/btnLine" />
 
     </RelativeLayout>
 
