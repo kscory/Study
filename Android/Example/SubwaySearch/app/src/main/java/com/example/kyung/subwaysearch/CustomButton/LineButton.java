@@ -15,7 +15,6 @@ import com.example.kyung.subwaysearch.R;
 public class LineButton extends AppCompatButton {
 
     int position = 0;
-    private int backgroundId = 0;
     private int size=150;
     private String lineNum =null;
     int color = 0;

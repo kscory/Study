@@ -10,17 +10,20 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kyung.subwaysearch.CustomButton.CustomTab;
 import com.example.kyung.subwaysearch.CustomButton.LineButton;
 import com.example.kyung.subwaysearch.R;
 import com.example.kyung.subwaysearch.Remote;
@@ -49,6 +52,9 @@ public class ScheduleView extends FrameLayout {
     TextView stationLeft;
     TabLayout tabLayoutDay;
     ViewPager viewPagerSchedule;
+    CustomTab tab1;
+    CustomTab tab2;
+    CustomTab tab3;
 
     ScheduleTable scheduleTableDay;
     ScheduleTable scheduleTableSat;
@@ -70,6 +76,7 @@ public class ScheduleView extends FrameLayout {
     String station_FR_CODE = null;
     String lineNum = null;
     int btnSize = 0;
+    int tabPosition=0;
 
     Gson gson;
     Activity activity;
@@ -137,6 +144,7 @@ public class ScheduleView extends FrameLayout {
         LineButton buttonG = new LineButton(relativeLineBtnContainer.getContext(),"G"); buttonCollection.put("G",buttonG);
         LineButton buttonS = new LineButton(relativeLineBtnContainer.getContext(),"S"); buttonCollection.put("S",buttonS);
         LineButton buttonSS = new LineButton(relativeLineBtnContainer.getContext(),"SS"); buttonCollection.put("SS",buttonSS);
+        relativeLineBtnContainer.addView(button1,button1.getSize(),button1.getSize()); // 테스트용
     }
     private void initLineBtnListener(){
         for(String lineName : buttonCollection.keySet()){
@@ -169,18 +177,20 @@ public class ScheduleView extends FrameLayout {
     OnClickListener setLineBtnListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            LineButton btn = (LineButton)v;
-            // FR_CODE 변경
-            station_FR_CODE = rowsService.get(btn.getPosition()).getFR_CODE();
-            // 이전 호선 이미지 원본으로
-            buttonCollection.get(lineNum).unClickButton();
-            // lineNum 변경
-            lineNum = rowsService.get(btn.getPosition()).getLINE_NUM();
-            // 호선 이미지 업데이트
-            buttonCollection.get(lineNum).clickButton();
-            constraintSearch.setBackgroundColor(btn.getColor());
-            // 스케쥴 및 나머지 업데이트
-            startUpdate();
+            if(rowsService.size()>0) {
+                LineButton btn = (LineButton) v;
+                // FR_CODE 변경
+                station_FR_CODE = rowsService.get(btn.getPosition()).getFR_CODE();
+                // 이전 호선 이미지 원본으로
+                buttonCollection.get(lineNum).unClickButton();
+                // lineNum 변경
+                lineNum = rowsService.get(btn.getPosition()).getLINE_NUM();
+                // 호선 이미지 업데이트
+                buttonCollection.get(lineNum).clickButton();
+                constraintSearch.setBackgroundColor(btn.getColor());
+                // 스케쥴 및 나머지 업데이트
+                startUpdate();
+            }
         }
     };
 
@@ -216,13 +226,46 @@ public class ScheduleView extends FrameLayout {
         viewPagerSchedule.setAdapter(dayPagerAdapter);
     }
     private void setDayTabLayout(){
-        tabLayoutDay.addTab(tabLayoutDay.newTab().setText("평일"));
-        tabLayoutDay.addTab(tabLayoutDay.newTab().setText("토요일"));
-        tabLayoutDay.addTab(tabLayoutDay.newTab().setText("주말/일요일"));
+        tab1 = new CustomTab(getContext(),"평일");
+        tab2 = new CustomTab(getContext(),"토요일");
+        tab3 = new CustomTab(getContext(),"공휴일/일요일");
+        tab1.clickTab();
+        tabLayoutDay.addTab(tabLayoutDay.newTab().setCustomView(tab1));
+        tabLayoutDay.addTab(tabLayoutDay.newTab().setCustomView(tab2));
+        tabLayoutDay.addTab(tabLayoutDay.newTab().setCustomView(tab3));
+        tabLayoutDay.setBackgroundColor(Color.LTGRAY);
+        tabLayoutDay.setSelectedTabIndicatorColor(Color.LTGRAY);
+        tabPosition = tabLayoutDay.getSelectedTabPosition();
     }
+
     private void setDayTabWithView(){
-        tabLayoutDay.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPagerSchedule));
         viewPagerSchedule.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayoutDay));
+//        tabLayoutDay.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPagerSchedule));
+        tabLayoutDay.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPagerSchedule.setCurrentItem(tab.getPosition());
+                switch (tab.getPosition()){
+                    case 0: tab1.clickTab(); break;
+                    case 1: tab2.clickTab(); break;
+                    case 2: tab3.clickTab(); break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0: tab1.unClickTab(); break;
+                    case 1: tab2.unClickTab(); break;
+                    case 2: tab3.unClickTab(); break;
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     // 호선을 제외하고 모두 업데이트

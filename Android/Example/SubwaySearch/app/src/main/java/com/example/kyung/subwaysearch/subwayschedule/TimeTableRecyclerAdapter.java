@@ -52,7 +52,6 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
     @Override
     public void onBindViewHolder(Holder holder, int position) {
 
-        Log.e("체크Down","============="+rowDownList.get(position).getLEFTTIME());
         // 상행 체크
         if(rowUpList.size()>position){
             Row rowUp = rowUpList.get(position);
@@ -60,7 +59,6 @@ public class TimeTableRecyclerAdapter extends RecyclerView.Adapter<TimeTableRecy
                 holder.setTextUpTime("00:00:00");
                 holder.settextUpDes("종착역");
             } else {
-                Log.e("체크Up","============="+rowUpList.get(position).getLEFTTIME());
                 holder.setTextUpTime(rowUp.getLEFTTIME());
                 holder.settextUpDes(rowUp.getSUBWAYENAME() +" 행");
             }
