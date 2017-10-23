@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btnLine"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:background="@drawable/linebutton1"
+        android:text="0"
+        android:textColor="#FF0000"
+        app:srcCompat="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+        android:id="@+id/textStation"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_weight="5"
+        android:gravity="center_vertical"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:text="3호선"
+        android:textSize="14sp" />
+</LinearLayout>
