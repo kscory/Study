@@ -21,7 +21,7 @@
 >> Fiole IO 사용법 / try-with 사용법
 
 > ### 7. [database 연동](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Database%20Connection)
->> MySQL 데이터 베이스 연동
+>> 프로토콜 설명 / MySQL 데이터 베이스 연동
 
 > ### 8. [Abstract / Interface](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Abstract%2C%20Interface)
 >> Abstract 와 Interface 사용법
@@ -35,7 +35,10 @@
 > ### 11. [Annotation](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/Annotation)
 >> Annotation에 대해 / Annotation 사용 방법 / Annotation생성 방법
 
-> ### 12. [디자인패턴](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/DesignPattern)
+> ### 12. [BasicServer](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/BasicServer)
+>> 프로토콜 및 Socket / Server 만들기
+
+> ### 13. [디자인패턴](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/DesignPattern)
 >> Singleton / Observer
 
 ## 문제
