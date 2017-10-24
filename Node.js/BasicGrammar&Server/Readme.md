@@ -199,7 +199,7 @@
   - `response.writeHead(200, {'Content-Type':'타입명'});` : 읽을 타입을 정해준다.
   - 출력 예시
 
-  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Node.js/Contents/BasicGrammar%26Server/picture/ana.png)
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Node.js/BasicGrammar%26Server/picture/ana.png)
 
   ```javascript
   // 1. 서버 모듈(라이브러리)을 import
