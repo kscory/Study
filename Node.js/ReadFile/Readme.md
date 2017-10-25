@@ -123,6 +123,11 @@
     - `stream.on('end', function()` : 이벤트 완료
     - `stream.on('error', function()` : 이벤트 에러
   - html이 아닌 파일이 큰 경우(stream인 경우) 끊어서 가져오기 때문에 서버 호출이 더 많이 일어난다.
+  - 실행결과
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Node.js/ReadFile/picture/video.png)
+
+  > post.js
 
   ```javascript
   var http = require("http");
@@ -231,3 +236,8 @@
   - Get을 제외한 나머지 메소드는 body를 함께 보낸다.
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Node.js/ReadFile/picture/postget2.png)
+
+  ### 2. html은 src 경로가 있을경우 서버에 한번 더 호출한다.
+  - 위의 비디오 예시
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Node.js/ReadFile/picture/imagecall.png)
