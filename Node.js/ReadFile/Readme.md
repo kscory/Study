@@ -112,6 +112,7 @@
 
 ## 위를 활용하여 사진 및 동영상 읽기
   ### 1. post.js (사진 및 동영상 출력)
+  - 주소(Rest Api) 요청의 형태 : http://localhost:8090/post?filepath=/dir1/xxx.png
   - `npm insatall -g mime` 을 콘솔에 입력하여 mime을 다운받는다. (-g를 하면 모두 사용하겠다는 뜻, npm : node program manager)
   - `var mime = require("mime");` : mimetype을 알 수 있는 라이브러리 제공
   - html 파일은 모두 html 폴터에 따로 저장하여 javascript에서 태그로 찾도록 한다.
@@ -131,78 +132,81 @@
 
   ```javascript
   var http = require("http");
-  var u = require("url");
-  var fs = require("fs");
+  var tempUrl = require("url");
   var qs = require("querystring");
-  var mime = require("mime"); // mimetype을 알 수 있는 함수 제공
+  var fs = require("fs");
+  var mime = require("mime");
+  // mimetype을 알 수 있는 함수 제공
+  // npm install mime (-g를 하면 모두 사용하겠다고 한다.)(node program manager)
+  var server = http.createServer( function(request, response){
+  	var url = tempUrl.parse(request.url);
+  	// method를 꺼낸다
+  	// 주소에서 명령어 = 서버자원의id(url)을 먼저 꺼낸다.
+  	var path = url.pathname;
+  	var cmds = path.split("/");
 
-  var server = http.createServer(function(req, res) {
-    var url = u.parse(req.url);
-    // method 를 꺼낸다.
-    // 주소에서 명령어=서버자원의id(uri)를 먼저 꺼낸다.
-    var path = url.pathname;
-    var cmds = path.split("/");
-    if(cmds[1] == "getfile"){
-      if(req.method == "POST"){
-        // ..body에 넘어온 filepath를 꺼낸다.
-      } else if(req.method == "GET"){
-        // query에서 filepath를 꺼낸다.
-        var query = qs.parse(url.query);
-        if(query.filepath){
-          var filepath = query.filepath;
-          console.log("filepath="+filepath);
-          var mtype = mime.getType(filepath); // 파일의 mime type을 알려준다.
-          //mimetype을 체크해서 동영상이면 stream 처리
-          if(mtype == "video/mp4"){
-            // 1. stream 생성
-            var stream = fs.createReadStream(filepath);
-            // 2. stream 전송 이벤트 등록
-            var count=0;
-            stream.on('data', function(fragment){ .
-              console.log("count=" +count++);
-              res.write(fragment);
-            });
-            // 3. stream 완료 이벤트 등록
-            stream.on('end', function(){
-              console.log("complete!!");
-              res.end();
-            });
-            // 4. stream 에러 이벤트 등록
-            stream.on('error', function(){
-              res.end(error+"");
-            });
-          } else {
-            fs.readFile(filepath, function(error, data){
-              if(error){
-                res.writeHead(500,{'Content-type':mtype});
-                res.end(error+"");
-              } else {
-                res.writeHead(200,{'Content-type':mtype});
-                res.end(data);
-              }
-            });
-          }
-        }
-      }
-    } else if (cmds[1] == "html"){
-      filepath = path.substring(1);
-      fs.readFile(filepath, 'utf-8' ,function(error, data){
-        if(error){
-          res.writeHead(404,{'Content-type':'text/html'});
-          res.end("<h1>404 Page not Found</h1>")
-        } else {
-          res.writeHead(200,{'Content-type':'text/html'});
-          res.end(data);
-        }
-      });
-    } else {
-      res.writeHead(404,{'Content-type':'text/html'});
-      res.end("<h1>404 Page not Found</h1>")
-    }
+  	if(cmds[1] == "getfile"){
+  		if(request.method == "POST"){
+  			// body에서 넘어온 filepath를 꺼낸다.
+  		} else if(request.method == "GET"){
+  			//query에서 filepath를 꺼낸다.
+  			var query = qs.parse(url.query);
+
+  			if(query.filepath){
+  				var filepath = query.filepath;
+  				console.log("filepath : " + filepath);
+  				var mtype = mime.getType(filepath); // 파일의 mime type을 알려준다.
+
+  				//mimetype을 체크해서 동영상이면 stream 처리
+  				if(mtype == "video/mp4"){
+  					// 1. stream 생성
+  					var stream = fs.createReadStream(filepath);
+  					// 2. stream 전송 이벤트 등록
+  					var count = 0; // 스트림의 개수를 한번 파악하기 위해 사용
+  					stream.on('data', function(frag){
+  						console.log("count = " + count++);
+  						response.write(frag);
+  					});
+  					// 3. stream 완료 이벤트 등록
+  					stream.on('end', function(){
+  						response.end();
+  					});
+  					// 4. stream 에러 이벤트 등록
+  					stream.on('error', function(){
+  						response.end(error); // "" 안되도 되는지 체크!!;
+  					});
+  				} else {
+  					fs.readFile(filepath, function(error, data){
+  						if(error){
+  							response.writeHead(500,{'Content-type':mtype});
+  							response.end(error);
+  						} else{
+  							response.writeHead(200,{'Content-type':mtype});
+  							response.end(data);
+  						}
+  					});
+  				}
+  			}
+  		}
+  	}else if(cmds[1] == "html") {
+  		filepath = path.substring(1);
+  		fs.readFile(filepath, 'utf-8', function(error, data){
+  			if(error){
+  				response.writeHead(404,{'Content-type': 'text/html'});
+  				response.end("<h1>404 Page not Found</h1>");
+  			} else{
+  				response.writeHead(200,{'Content-type':'text/html'});
+  				response.end(data);
+  			}
+  		});
+  	} else {
+  		response.writeHead(404,{'Content-type': 'text/html'});
+  		response.end("<h1>404 Page not Found</h1>");
+  	}
   });
 
-  server.listen(8090, function(){
-    console.log("server is running.....");
+  server.listen(8099, function(){
+  	console.log("server is running...");
   });
   ```
 
@@ -222,7 +226,7 @@
   </head>
   <body>
   	<video width="640" height="480" controls>
-  		<src = /getfile?filepath=file/SampleVideo.mp4 type="video/mp4"/>
+  		<source src = "/getfile?filepath=file/samplevideo.mp4" type="video/mp4"/>
   		당신의 브라우저는 이 타입을 지원하지 않습니다.
   	</video>
   </body>
