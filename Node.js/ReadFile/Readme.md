@@ -235,6 +235,98 @@
 
 ---
 
+## Post를 호출하여 login(sign in) 기능 구현
+  ### 1. sign.js
+  - `request.on('data', function(data){});` : data 이벤트가 발생하며 이 데이터를 담아둔다,
+  - 쌓인 데이터는 `postData = "id=root&pw=qwer1234"` 와 같은 구성으로 되어 있다.
+  - `request.on('end', function(){});` : 이벤트 종료시 호출하며 여기서 쌓인 데이터를 parsing하여 객체(sign)에 담아둔다.
+  - id와 pw 값을 체크하여 결과를 넘겨준다.
+  - 결과 예시
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Node.js/ReadFile/picture/sign.png)
+
+  ```javascript
+  var http = require("http");
+  var u = require("url");
+  var qs = require("querystring");
+  var fs = require("fs");
+  var mime = require("mime");
+
+  var server = http.createServer(function(request, response){
+  	var url = u.parse(request.url);
+  	var path = url.pathname;
+  	var cmds = path.split("/");
+  	if(cmds[1] == "getfile") {
+          /* 코드 생략(위와 동일) */
+  	} else if(cmds[1] == "html") {
+  		filepath = path.substring(1);
+  		fs.readFile(filepath, 'utf-8', function(error, data){
+  			if(error){
+  				response.writeHead(500, {'Content-type':"text/html"});
+  				console.log("html > readfile error")
+  				response.end(error);
+  			} else{
+  				response.writeHead(200, {'Content-type':"text/html"});
+  				console.log("html > readfile complete")
+  				response.end(data);
+  			}
+  		});
+  	} else if(cmds[1] == "signin") {
+  		// request.url은 위에서 parsing해서 url 변수에 담아둔 상태
+  		var id = "root";
+  		var pw = "qwer1234";
+
+  		var sign;
+
+  		var postdata = "";
+  		request.on('data', function(data){ // data 이벤트가 발생하고 postData에 송신된 데이타를 쌓는다.
+  			postdata += data;
+  		});
+  		request.on('end', function(){ // 이벤트가 끝나면 실행된다.
+  			sign = qs.parse(postdata);
+  			if(sign.id == id && sign.pw == pw){
+  				response.writeHead(200,{'Content-type':'text/html'});
+  				console.log("ID or PW is ok...");
+  				response.end("OK");
+  			} else {
+  				response.writeHead(200,{'Content-type':'text/html'});
+  				console.log("ID or PW is wrong...");
+  				response.end("FAIL");
+  			}
+  		});
+
+  	} else{
+  		response.writeHead(404,{'Content-type':'text/html'});
+  		response.end("404 page is not found!!");
+  	}
+  });
+
+  server.listen(8090, function(){
+  	console.log("server is running...");
+  });
+  ```
+
+  ### 2. sign.html
+  - action을 signin으로 하여 method를 POST로 전송
+
+  ```html
+  <html>
+  <head>
+  	<meta charset="utf-8"/>
+  	<title>signin</title>
+  </head>
+  <body>
+  	<form action="/signin" method="POST">
+  		아이디 : <input type="text" id="id" name="id"></br>
+  		비밀번호 : <input type="text" pw="pw" name="pw"></br>
+  		<input type="submit" value="전송"/>
+  	</form>
+  </body>
+  </html>
+  ```
+
+---
+
 ## 참고 개념
   ### 1. POST와 GET의 동작 방식
   - Get을 제외한 나머지 메소드는 body를 함께 보낸다.
