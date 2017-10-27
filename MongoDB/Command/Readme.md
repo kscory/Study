@@ -12,6 +12,7 @@
   - 문서 지향 데이터베이스
   - 문서는 RDB의 행에 해당
   - CRUD의 작업 외 여러 쿼리를 제공
+  - insert 시 table이 없을경우 자동으로 생성시킨다.
 
   ### 2. 단점
   - ACID를 포기하여 consistency가 중요한 곳에 사용 어려움
@@ -68,8 +69,10 @@
   ```
   > db.테이블명.find()
   > db.테이블명.find({ id :"value1"}) // id가 value1인 것을 찾는다.
+  > db.테이블명.find({ id : /value1/}) // id에 value1이 들어간 모든 것을 찾는다.
 
   ex>  db.users.find({_id:"terry"})
+  ex>  db.users.find({_id:/terry/})
   ```
   - Update
   ```
