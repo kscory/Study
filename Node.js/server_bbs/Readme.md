@@ -5,6 +5,7 @@
     - route (형식을 파악해서 로직 요청)
     - controller (데이터를 컨트롤한 후 dao에 요청)
     - dao (CRUD 구현)
+  - [참고_RemoteBbs](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RemoteBbs)
 
 ---
 
@@ -71,7 +72,7 @@
       title : "제목",
       content : "내용",
       date : "2017/10/26 11:21:30"
-      user_id : "root"	
+      user_id : "root"
   }
   // 외부에서 이용시 exports를 사용 현재는 위와 같이 사용
   exports.bbs = function(){
@@ -83,7 +84,7 @@
   }
   search = {
       // all = 전체검색, no = 글 한개 검색, title = "제목검색"
-      type : "all", 
+      type : "all",
       no : 137;
       title : "제목검색"
       content : "내용검색",
@@ -165,7 +166,7 @@
     - object(_id)를 서치할때 이용하는 방법
       - a. ObjectID 변수 선언 `var ObjectID = require("mongodb").Object;`
       - b. `query = {_id : -1};` id 사용 정의
-      - c. `query._id = ObjectID(search._id);` object 값을 변경 
+      - c. `query._id = ObjectID(search._id);` object 값을 변경
 
   ```javascript
   var dao = require("../c_dao/bbs");
@@ -181,7 +182,7 @@
 
       // id를 가져올 경우 object이기 때문에 다음과 같이 한다.
       query = {_id : -1};
-      query._id = ObjectID(search._id); 
+      query._id = ObjectID(search._id);
     } else if(search.type="title"){
 
     } //..... 다른 서치 쿼리 가능
@@ -219,7 +220,7 @@
   };
   ```
 
-  
+
 
   ### 4. c_data/bbs.js
   - MongoDB에 대한 CRUD 함수 정의
@@ -256,7 +257,7 @@
       // 소팅 조건만 담아서 뒤에 sort만 붙이면 소팅이 된다.
       var sort = {
         _id : -1 // -1: 오름차순 , 1: 내림차순
-      }; // 소팅조건 
+      }; // 소팅조건
       // 집합
       // skip - 카운트를 시작할 index의 위치
       // limit - 가져올 개수
@@ -310,7 +311,7 @@
       var query = {_id: -1};
       query._id = bbs._id;
       // 2. 데이터 수정명령 var operator = {title:"수정된 타이틀",date:"2018-11-15 11:13:23"};
-      
+
       //딜리트 하는 일반적인 =====================
       // var operator = {
       // 	no : 1,
@@ -382,7 +383,7 @@
           content : "내용입니다",
           user_id : users[j%10],	// 10개를 미리 정해놓고 random 입력
           date : new Date()+""
-        } 
+        }
         array[j] = bbs;
       }
       // multitple insert
@@ -431,7 +432,7 @@
             var oldpath = files[i].path;
             // C:/Temp/upload/ 에 파일 저장
             var realpath = "C:/Temp/upload/"+files[i].name;
-            
+
             renameFile(oldpath,realpath,0);
           }
           response.end("upload completed!");
@@ -454,7 +455,7 @@
 
   // 파일 중복 재귀처리
   function renameFile(oldpath, realpath, index){
-    // fs.renameSync(oldpath, realpath); // suffix에 Sync 를 붙이면 동기가 된다. 
+    // fs.renameSync(oldpath, realpath); // suffix에 Sync 를 붙이면 동기가 된다.
     // fs.rename(oldpath,realpath,function(){}); // 비동기로 동작함
     if(newFile.exists)
       renameFile(oldpath, realpath+"_"+index, index++);
