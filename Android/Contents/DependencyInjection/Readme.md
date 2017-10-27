@@ -25,6 +25,7 @@
   - [참고_제어  반전](https://ko.wikipedia.org/wiki/%EC%A0%9C%EC%96%B4_%EB%B0%98%EC%A0%84)
 
   - DI, IOC 그림
+
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/DependencyInjection/picture/DI,IOP.png)
 
   ### 3. Aspect Oriented Programming(AOP)
@@ -47,7 +48,7 @@
 
   ### 2. ButterKnife 사용방법
   - 크게 4가지 기능
-    -` @BindView` annotation을 이용해서 `findViewById`를 제거
+    - ` @BindView` annotation을 이용해서 `findViewById`를 제거
     - resource annotation을 이용해서 resource 검색작업을 축소
     - 여러 개의 뷰와 배열을 그룹화
     - 리스너를 위한 익명의 내부 클래스들을 `@OnClick` annotation을 이용해서 제거
@@ -153,8 +154,17 @@
 ---
 
 ## AndroidAnnotation
-  ### 1. AndroidAnnotation 이란?
-  - 내용
+  ### 1. AndroidAnnotation 이란? & 라이브러리 추가 방법
+  - open source framework 으로 여러가지 idiomatic 표현들을 annotation 으로 지원해주는 라이브러리 (View, Extras, System Service, Resource, Thread 등을 지원)
+  - Gradle에 아래 코드 추가
+  ```
+  def AAVersion = "4.3.1"
+
+  dependencies {
+      annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
+      compile "org.androidannotations:androidannotations-api:$AAVersion"
+  }   
+  ```
 
   ### 2. AndroidAnnotation 사용방법
 
