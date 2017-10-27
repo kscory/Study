@@ -68,7 +68,10 @@
 >> googleMap(두가지 방법) / 외부Api 이용 / Json 포멧 이용
 
 > ### 23. [DependencyInjection](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/DependencyInjection)
->> ButterKnife / AndroidAnnotation
+>> ButterKnife / AndroidAnnotation 라이브러리 이용
+
+> ### 24. [LoginActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/LoginHttp)
+>> LoginActivity를 이용하여 서버와 통신
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
