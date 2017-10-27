@@ -52,7 +52,7 @@
     - resource annotation을 이용해서 resource 검색작업을 축소
     - 여러 개의 뷰와 배열을 그룹화
     - 리스너를 위한 익명의 내부 클래스들을 `@OnClick` annotation을 이용해서 제거
-  - 주의
+  - 주의사항
     - 버터나이프는 반드시 엑티비티에서 선언 (아닐경우 사용방법은 아래에.)
 
   >  @BindView 주석(annotation)을 이용해서 findViewById를 제거
@@ -167,7 +167,47 @@
   ```
 
   ### 2. AndroidAnnotation 사용방법
+  - onCreate를 대체 / window title 날릴 수 있음 등
+  - thread 사용 가능
+  - 주의사항
+    - AndroidAnnotation은 mainifest에서 "_"를 추가시켜 주여야 한다.
 
   ```java
+  @EActivity(R.layout.activity_main) // oncreate 생성
+  @WindowFeature(Window.FEATURE_NO_TITLE) // 타이틀을 날린다. =>그 외에도 스타일에서 했던 것을 정해줄 수 있다.
+  @Fullscreen
+  public class MainActivity extends AppCompatActivity {
 
+      @ViewById
+      TextView text;
+
+      // Resource
+      @AnimationRes
+      Animation fadeIn;
+
+      // Listener
+      @Click({R.id.updateBookmarksButton1, R.id.updateBookmarksButton2})
+      void updateBookmarksClicked() {
+          searchAsync(search.getText().toString(), application.getUserId());
+      }
+
+      @AfterViews
+      public void init(){
+          text.setText("Hello AA");
+      }
+
+      // 쓰레드 기능이 막강
+      @Background
+      public void run(){
+          // 여기는 sub thread에서 실행 (메소드가 run이 아니어도 됨)
+          for(int i=0 ; i<10 ; i++){
+              main(i);
+          }
+      }
+      @UiThread
+      public void main(int i){
+          // 여기 코드는 main thread에서 실행
+          text.setText(i+"");
+      }
+  }
   ```
