@@ -20,31 +20,38 @@ var dburl = "mongodb://localhost:27017/"+dbname;
 var table = "bbsex";
 var page_count = 10;
 
-exports.create = function(bbs){
+exports.create = function(bbs_insert,callbackResult){
     mongo.connect(dburl,function(error,db){
+        db.collection(table).insert(bbs_insert,function(error, inserted){
+            if(error){
+                callbackResult
+            } else{
 
+            }
+        });
+        db.close();
     });
 };
 
-exports.read = function(bbs, callbackData){
+exports.read = function(bbs_read, callbackData){
     mongo.connect(dburl,function(error,db){
         
     });
 };
 
-exports.search = function(search, callbackData){
+exports.search = function(bbs_search, callbackData){
     mongo.connect(dburl,function(error,db){
         
     });  
 };
 
-exports.update = function(bbs){
+exports.update = function(bbs_update, callbackResult){
     mongo.connect(dburl,function(error,db){
         
     });
 };
 
-exports.delete = function(bbs){
+exports.delete = function(bbs_delete, callbackResult){
     mongo.connect(dburl,function(error,db){
         
     });
