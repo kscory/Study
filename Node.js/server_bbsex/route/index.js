@@ -1,10 +1,10 @@
 /**
  * router
+ * 요청자 및 method를 파악해서 controller에 전달
  */
 var u = require("url");
 var qs = require("querystring");
 var controller = require("../controller");
-var singin = require("../signin");
 
 exports.process = function(request, response){
     var url = u.pasrse(request.url);
@@ -26,6 +26,7 @@ exports.process = function(request, response){
             });
             // body 데이터를 모두 가져온 후 요청 처리
             request.on('end',function(){
+                // json형식으로 변환
                 var body = JSON.parse(bodydata);
                 if(method = "post"){
                     controller.create(request,response,body);
@@ -34,7 +35,7 @@ exports.process = function(request, response){
                 } else if(method = "delete"){
                     controller.delete(request,response,body);
                 } else{
-                    controller.fail(request,response,"메소드오류");
+                    controller.fails(request,response,"메소드오류");
                 }
             });
         }
@@ -45,9 +46,10 @@ exports.process = function(request, response){
             bodydata += data;
         });
         request.on('end',function(){
+            var body = JSON.parse(bodydata);
             controller.signin(request,response,body);
         });
     } else {
-        controller.fail(request,response,"요청자 오류");
+        controller.fails(request,response,"요청자 오류");
     }
 };
