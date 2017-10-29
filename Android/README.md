@@ -71,7 +71,10 @@
 >> ButterKnife / AndroidAnnotation 라이브러리 이용
 
 > ### 24. [LoginActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/LoginHttp)
->> LoginActivity를 이용하여 서버와 통신
+>> LoginActivity를 이용하여 서버와 통신 / Json 데이터를 서버와 연결
+
+> ### 25. [RemoteBbs](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RemoteBbs)
+>> 간단한 게시판 구성(글작성, 글목록) / android ID 받기 / post시 header 작성(토큰,Content-type) / 리사이클러뷰 특정 개수만 로드하기
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
