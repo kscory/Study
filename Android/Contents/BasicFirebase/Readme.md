@@ -101,6 +101,7 @@
       }
 
       ValueEventListener valueEventListener = new ValueEventListener() {
+          // 순간의 데이터를 모아서 넘겨주는 것이 snapshot
           @Override
           public void onDataChange(DataSnapshot dataSnapshot) {
               textMsg.setText("");
@@ -133,6 +134,7 @@
       @OnClick(R.id.btnSend)
       public void send(View view){
           String msg = editText.getText().toString();
+          // key의 값에 아무것도 없으면 생성이 안되므로 임의값을 넣어준다.
           if(msg == null || "".equals(msg)){
               msg = "none";
           }
