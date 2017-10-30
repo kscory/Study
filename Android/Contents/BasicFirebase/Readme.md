@@ -5,21 +5,22 @@
 
 ---
 
-## FireBase의 형태 및 시작 / 구성
-  ### 1. FireBase의 형태
+## Firebase의 형태 및 시작 / 구성
+  ### 1. Firebase의 형태
+  - Firebase 는 NoSQL의 DB를 제공한다.
   - 백엔드는 BaaS의 형태(로그인과 테이블 기능 제공)에서 PaaS 의 형태로 진화
   - Firebase는 PaaS(Platform as a Service)의 형태로 BaaS 보다 많은 기능들을 제공한다.
   - Firebase는 manifest에 직접 권한 설정을 하지 않아도 자동으로 처리해준다.
 
  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFirebase/picture/baas%2Cpaas.png)
 
-  ### 2. FireBase 시작
+  ### 2. Firebase 시작
   - [firebase 홈페이지](https://firebase.google.com/) -> [gotoconsole](https://console.firebase.google.com/?hl=ko) -> 새 프로젝트 생성
   - 아래의 순서로 실행
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFirebase/picture/process.png)
 
-  ### 3. FireBase 구성
+  ### 3. Firebase 구성
   - 아래와 같이 구성
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFirebase/picture/menu.png)
@@ -38,6 +39,7 @@
 
   ```
   compile 'com.google.firebase:firebase-database:11.4.2'
+  (안드로이드 3.0은 compile이 아니라 implementation)
   ```
 
   > rule 예시 (공개의 경우)
@@ -66,19 +68,105 @@
 
 ---
 
-## firebase를 이용한 간단한 예제1 - 채팅
+## Firebase를 이용한 간단한 예제1 - 채팅기본
   ### 1. 채팅
-  - 내용
+  - ButterKnife 라이브러리 이용([참고_Dependency Injection](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/DependencyInjection))
+  - 데이터 베이스를 연결 -> 레퍼런스 참조 -> 값 세팅 순으로 진행
+  - firebase에 값이 바뀌면 리스너가 동작하게 된다.
+  - 항상 리스너는 시작과 중지를 해주어야 한다. (onResume과 onPause에서 결정)
+    - firebase랑 서버랑 계속 통신하게 되는 문제가 생기게 된다.
+  - 유일한 key는 push()로 생성할 수 있으며 getKey로 키를 가져올 수 있다.
+
+  > MainActivity.java
+
+  ```java
+  public class MainActivity extends AppCompatActivity {
+
+      @BindView(R.id.textMsg) TextView textMsg;
+      @BindView(R.id.editText) EditText editText;
+
+      FirebaseDatabase database;
+      DatabaseReference chatRef;
+
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.activity_main);
+          ButterKnife.bind(this);
+
+          // 데이터 베이스 connection
+          database = FirebaseDatabase.getInstance();
+          // key값의 위치, 없으면 그냥 생성
+          chatRef = database.getReference("chatMsg");
+      }
+
+      ValueEventListener valueEventListener = new ValueEventListener() {
+          @Override
+          public void onDataChange(DataSnapshot dataSnapshot) {
+              textMsg.setText("");
+              for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                  String msg = snapshot.getValue(String.class);
+                  // 혹은 String msg = (String) snapshot.getValue();
+
+                  textMsg.setText(textMsg.getText().toString()+"\n"+msg);
+              }
+          }
+          @Override
+          public void onCancelled(DatabaseError databaseError) {
+
+          }
+      };
+
+      // 항상 시작후 중지되었을 때 리스너를 중지시켜주어야 한다. (안하게 되면 서버랑 계속해서 통신하게 된다.)
+      @Override
+      protected void onResume() {
+          super.onResume();
+          chatRef.addValueEventListener(valueEventListener);
+      }
+
+      @Override
+      protected void onPause() {
+          super.onPause();
+          chatRef.removeEventListener(valueEventListener);
+      }
+
+      @OnClick(R.id.btnSend)
+      public void send(View view){
+          String msg = editText.getText().toString();
+          if(msg == null || "".equals(msg)){
+              msg = "none";
+          }
+          // 유일한 키를 생성하고(push) 그 키를 가져온다.(getkey) => 유일한 node를 하나 생성
+          String key = chatRef.push().getKey();
+          // 방금 생성한 키로 레퍼런스를 가져온 후(child) node에 값을 넣는다.(setValue)
+          chatRef.child(key).setValue(msg);
+      }
+  }
+
+  ```
+
+  ### 2. 결과
+  - 텍스트 입력후 send 시 메시지 전송
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFirebase/picture/chat.png)
 
 ---
 
-## firebase를 이용한 간단한 예제2 - 게시판
-  ### 1. 채팅
-  - 내용
+## 참고
+  ### 1. 키보드 팝업시 화면사이즈 재조정
+  - `android:windowSoftInputMode="adjustResize"`를 manifest의 Activity에 설정해준다.
 
+  ```xml
+  <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize"> <!-- 키보드 팝업시 화면사이즈 재조정 -->
+      <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+  </activity>
+  ```
 
----
+  ### 2. 웹호스팅 / 서버호스팅 / 클라우드
+  - 웹호스팅 -> 클라우드 -> 서버호스팅 보통 이 순서로 사용
 
-## 참고 개념
-  ### 1. 웹호스팅 / 서버호스팅 / 클라우드
-  - 내용
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFirebase/picture/webhosting.png)
