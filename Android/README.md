@@ -76,6 +76,12 @@
 > ### 25. [RemoteBbs](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RemoteBbs)
 >> 간단한 게시판 구성(글작성, 글목록) / android ID 받기 / post시 header 작성(토큰,Content-type) / 리사이클러뷰 특정 개수만 로드하기
 
+> ### 26. [BasicFirebase](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase)
+>> firebase 개념 및 사용법 / database 기초적인 사용법 / 간단한 채팅 예제 / 키보드 팝업시 화면사이즈 재조정하는 방법 / 웹호스팅이란
+
+> ### 27. [BasicFirebase2](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase2)
+>> RDB & NoSQL 구조 / firebase를 이용한 간단한 게시판 예제
+
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
 >> - Layout 적용 / 계산기 Logic / 정규식 / 버튼 디자인 / 애니메이션 / 버튼 클릭 효과 / 계산기 로직 예외처리

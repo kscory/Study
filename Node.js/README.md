@@ -11,4 +11,4 @@
 >> - MongoDB를 이용한 서버 구성 / 데이터를 Json 형태로 통신
 
 > ### 4. [MongoDB를 이용하여 간단한 게시판 구축](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/server_bbs)
->> - MongoDB를 이용한 서버 구성 / node.js module화 방법 / 게시판 CRUD 작성
+>> - MongoDB를 이용한 서버 구성 / node.js module화 방법 / 게시판 CRUD 작성 / 파일 업로드 방법
