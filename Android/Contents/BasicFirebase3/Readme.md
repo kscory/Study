@@ -230,6 +230,7 @@
   - 파일 탐색기를 호출하며 `startActivityForResult` 로 실행
   - 파일이 선택되면 `upload` 메소드를 호출
   - 성공시 파이어베이스에 업로드, 실패시 메세지를 날린다.
+  - 파일을 업로드 하기 위해서는 보안 규칙을 설정해주어야 한다.(ex> 공개 만약 위처럼 이메일 인증시는 그냥 두어도 됨)
 
   > Storage Activity
 
@@ -267,7 +268,7 @@
 
       public void upload(Uri file){
           // 파이어베이스의 스토리지 파일node
-          String temp[] = file.getPath().split("/"); // 파일 이름 꺼내는건 다시...
+          String temp[] = file.getPath().split("/"); // 파일 패스랑 이름이랑 다르므로,,, 패스는 다르게 해야함...
           String filename = temp[temp.length-1];
           StorageReference riversRef = storageRef.child("files/"+filename);
 
