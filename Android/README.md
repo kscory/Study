@@ -82,6 +82,12 @@
 > ### 27. [BasicFirebase2](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase2)
 >> RDB & NoSQL 구조 / firebase를 이용한 간단한 게시판 예제
 
+> ### 28. [BasicFirebase3](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase3)
+>> Firebase 프로젝트 스튜디오에서 생성방법 / Signup, Signin (Authentication) 기능 / Storage 기능 / RealPathUtil /
+
+> ### 29. [BasicFirebase4](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase4)
+>> noti 기능 / 
+
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
 >> - Layout 적용 / 계산기 Logic / 정규식 / 버튼 디자인 / 애니메이션 / 버튼 클릭 효과 / 계산기 로직 예외처리
