@@ -41,6 +41,9 @@
 > ### 13. [디자인패턴](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/DesignPattern)
 >> Singleton / Observer
 
+> ### 14. [정규식](https://github.com/Lee-KyungSeok/Study/tree/master/Java/Contents/RegularExpression)
+>> 정규식 사용법
+
 ## 문제
 > #### 1. [반복문을 활용한 거스름돈 문제](https://github.com/Lee-KyungSeok/ChangeMoney)
 >> - 간단한 for문 이용
