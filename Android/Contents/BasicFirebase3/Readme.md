@@ -162,6 +162,7 @@
                   @Override
                   public void onComplete(@NonNull Task<AuthResult> task) {
                       if (task.isSuccessful()) {
+                          // 입력한 email과 password가 동일한 FirebaseUser를 가지고 온다.
                           FirebaseUser user = mAuth.getCurrentUser();
 
                           // 이메일 검증 확인
