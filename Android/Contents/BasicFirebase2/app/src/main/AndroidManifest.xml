@@ -24,8 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".bbs.ListActivity" />
-        <activity android:name=".bbs.DetailActivity"></activity>
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".bbs.DetailActivity" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".bbs.PostActivity"></activity>
     </application>
 
 </manifest>

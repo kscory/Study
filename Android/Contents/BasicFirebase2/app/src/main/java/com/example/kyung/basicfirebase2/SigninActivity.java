@@ -197,7 +197,7 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
         } else {
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask.gosignin();
         }
     }
 
@@ -291,55 +291,48 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
         int IS_PRIMARY = 1;
     }
 
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    // 로그인 테스크를 처리
+    public class UserLoginTask {
 
         private final String mId;
+        private String name;
         private final String mPassword;
 
         UserLoginTask(String id, String password) {
             mId = id;
             mPassword = password;
         }
-        // id pw가 일치하는지 확인후 true, false 리턴
-        @Override
-        protected Boolean doInBackground(Void... params) {
+
+        public void gosignin(){
+            // id pw가 일치하는지 확인후 true, false 를 체크 한 후 true면 로그인 실행
             boolean check = false;
             // firebase에서 데이터를 불러옴
-            Log.e("size","============="+userData.size());
             for(User user : userData){
-                Log.e("ID/PW","======================"+user.user_id+" // "+user.user_password);
                 if(user.user_id.equals(mId) && user.user_password.equals(mPassword)){
+                    name = user.username;
                     check=true;
                     break;
                 }
             }
-            return check;
-        }
-        // 결과에 따라 요청 처리
-        @Override
-        protected void onPostExecute(final Boolean success) {
+
             mAuthTask = null;
             showProgress(false);
-
-            if (success) {
+            if (check) {
                 Intent intent = new Intent(SigninActivity.this, ListActivity.class);
                 intent.putExtra(Const.user_id,mId);
                 intent.putExtra(Const.user_password,mPassword);
+                intent.putExtra(Const.user_name, name);
                 startActivity(intent);
+                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
-        }
 
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
         }
     }
 
-    // 로그인을 위한 데이터(모든 id, pw)를 불러오는 리스너
+    // 로그인을 위한 데이터(모든 id, pw,name)를 불러오는 리스너
     List<User> userData = new ArrayList<>();
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
@@ -350,8 +343,13 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
                 Map map = (HashMap) snapshot.getValue();
                 String id = snapshot.getKey(); user.user_id = id;
                 String user_password = (String) map.get("user_password"); user.user_password = user_password;
-                Log.e("ID/PW불러오기","======================"+user.user_id+" // "+user.user_password);
+                String username = (String) map.get("username"); user.username = username;
                 userData.add(user);
+            }
+
+            if(!"".equals(signid) && !"".equals(signpw)){
+                mAuthTask = new UserLoginTask(signid,signpw);
+                mAuthTask.gosignin();
             }
         }
 
@@ -374,22 +372,22 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
     }
 
     // signup 한 이후에 id와 pw를 받아와 로그인 처리를 한다.
-    final static int signuupcode = 999;
     public void signup(View view){
         Intent intent = new Intent(this, SignupActivity.class);
-        startActivityForResult(intent,signuupcode);
+        startActivityForResult(intent,Const.signuupcode);
     }
+
+    String signid="";
+    String signpw="";
     // signup 한 이후 로그인 처리
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
-            case signuupcode:
-                if(requestCode==RESULT_OK){
-                    String id = data.getStringExtra(Const.user_id);
-                    String pw = data.getStringExtra(Const.user_password);
-                    mAuthTask = new UserLoginTask(id,pw);
-                    mAuthTask.execute((Void) null);
+            case Const.signuupcode:
+                if(resultCode==RESULT_OK){
+                    signid = data.getStringExtra(Const.user_id);
+                    signpw = data.getStringExtra(Const.user_password);
                 }
                 break;
         }
