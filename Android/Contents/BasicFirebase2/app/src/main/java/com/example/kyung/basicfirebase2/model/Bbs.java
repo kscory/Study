@@ -1,10 +1,12 @@
 package com.example.kyung.basicfirebase2.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Kyung on 2017-10-30.
  */
 
-public class Bbs {
+public class Bbs implements Serializable{
     public String bbs_id;
     public String content;
     public String date;

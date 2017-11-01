@@ -26,7 +26,6 @@ public class SignupActivity extends AppCompatActivity{
     DatabaseReference userRef;
 
     private EditText editId, editPassword, editName, editAge, editEmail;
-    private Button btnSign, btnReset, btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +43,6 @@ public class SignupActivity extends AppCompatActivity{
         editName = findViewById(R.id.editName);
         editAge = findViewById(R.id.editAge);
         editEmail = findViewById(R.id.editEmail);
-
-        btnSign = findViewById(R.id.btnSign);
-        btnReset = findViewById(R.id.btnReset);
-        btnCancel = findViewById(R.id.btnCancel);
-
     }
 
     // 리셋 버튼 클릭시 모든 데이터 리셋(리셋버튼과 연결)

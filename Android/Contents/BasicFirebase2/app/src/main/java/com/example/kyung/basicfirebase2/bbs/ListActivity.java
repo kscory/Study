@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.kyung.basicfirebase2.Const;
+import com.example.kyung.basicfirebase2.R;
 import com.example.kyung.basicfirebase2.bbs.bbsview.BbsAdapter;
 import com.example.kyung.basicfirebase2.bbs.bbsview.BbsAll;
 import com.example.kyung.basicfirebase2.bbs.bbsview.BbsMine;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,8 +70,6 @@ public class ListActivity extends AppCompatActivity implements BbsAdapter.IMoveD
         mId = intent.getStringExtra(Const.user_id);
         mPassword = intent.getStringExtra(Const.user_password);
         mName = intent.getStringExtra(Const.user_name);
-        Log.e("nameList==","======"+mName);
-        Log.e("init","===================="+mId);
 
         database = FirebaseDatabase.getInstance();
         bbsRef = database.getReference("bbs");
@@ -137,7 +137,6 @@ public class ListActivity extends AppCompatActivity implements BbsAdapter.IMoveD
                 Bbs bbs = snapshot.getValue(Bbs.class);
                 bbs.bbs_id = snapshot.getKey();
                 bbsAllList.add(bbs);
-                Log.e("listener","=======================");
                 if(bbs.user_id.equals(mId)){
                     bbsMineList.add(bbs);
                 }
@@ -145,11 +144,8 @@ public class ListActivity extends AppCompatActivity implements BbsAdapter.IMoveD
             bbsAll.setDataAll(bbsAllList);
             bbsMine.setDataMine(bbsMineList);
         }
-
         @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
+        public void onCancelled(DatabaseError databaseError) { }
     };
 
     @Override
@@ -166,23 +162,13 @@ public class ListActivity extends AppCompatActivity implements BbsAdapter.IMoveD
 
     @Override
     public void goDetail(final String bbs_id) {
-        final Intent intent = new Intent(this,DetailActivity.class);
-        bbsRef.child("bbs").child(bbs_id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Bbs bbs = dataSnapshot.getValue(Bbs.class);
-                intent.putExtra(Const.user_id,bbs.user_id);
-                intent.putExtra(Const.bbs_id,bbs.bbs_id);
-                intent.putExtra(Const.user_name, bbs.username);
-                intent.putExtra(Const.datetime,bbs.date);
-                intent.putExtra(Const.content,bbs.content);
+
+        for(Bbs bbs : bbsAllList){
+            if(bbs.bbs_id.equals(bbs_id)){
+                Intent intent = new Intent(ListActivity.this,DetailActivity.class);
+                intent.putExtra(Const.Bbs,bbs);
                 startActivity(intent);
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        }
     }
 }

@@ -291,7 +291,7 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
         int IS_PRIMARY = 1;
     }
 
-    // 로그인 테스크를 처리
+    // 로그인 테스크 처리
     public class UserLoginTask {
 
         private final String mId;

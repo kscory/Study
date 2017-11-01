@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.example.kyung.basicfirebase2.R;
 import com.example.kyung.basicfirebase2.model.Bbs;
 
 import java.util.List;

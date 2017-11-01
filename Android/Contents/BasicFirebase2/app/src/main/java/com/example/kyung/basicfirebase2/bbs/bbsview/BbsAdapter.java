@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kyung.basicfirebase2.Const;
+import com.example.kyung.basicfirebase2.R;
 import com.example.kyung.basicfirebase2.model.Bbs;
 
 import java.util.List;

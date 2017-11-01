@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.kyung.basicfirebase2.Const;
+import com.example.kyung.basicfirebase2.R;
 import com.example.kyung.basicfirebase2.model.Bbs;
 import com.example.kyung.basicfirebase2.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +31,7 @@ public class PostActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
     DatabaseReference bbsRef;
-    User user;
+
     String user_id;
     String user_password;
     String user_name;
@@ -49,7 +50,7 @@ public class PostActivity extends AppCompatActivity {
         user_id = intent.getStringExtra(Const.user_id);
         user_password = intent.getStringExtra(Const.user_password);
         user_name = intent.getStringExtra(Const.user_name);
-        Log.e("namePost==","======"+user_name);
+        Log.e("namePost==", "======" + user_name);
 
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("users");
@@ -59,18 +60,16 @@ public class PostActivity extends AppCompatActivity {
         initListener();
         setSupportActionBar(toolbarPost);
 
-
-
     }
 
-    private void initView(){
+    private void initView() {
         toolbarPost = findViewById(R.id.toolbarPost);
         textPost = toolbarPost.findViewById(R.id.textPost);
         btnfinish = toolbarPost.findViewById(R.id.btnfinish);
         editContent = findViewById(R.id.editContent);
     }
 
-    public void initListener(){
+    public void initListener() {
         textPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +77,7 @@ public class PostActivity extends AppCompatActivity {
                 String datetime = sdf.format(new Date(System.currentTimeMillis()));
                 String bbs_id = bbsRef.push().getKey();
                 String content = editContent.getText().toString();
-                Bbs bbs = new Bbs(content,datetime,user_id,user_name);
+                Bbs bbs = new Bbs(content, datetime, user_id, user_name);
 
                 bbsRef.child(bbs_id).setValue(bbs);
                 userRef.child(user_id).child("bbs").child(bbs_id).setValue(bbs);
@@ -96,6 +95,7 @@ public class PostActivity extends AppCompatActivity {
             }
         });
     }
+}
 
 
     // 홈버튼 자동 추가
@@ -109,4 +109,3 @@ public class PostActivity extends AppCompatActivity {
 //        }
 //        return super.onOptionsItemSelected(item);
 //    }
-}
