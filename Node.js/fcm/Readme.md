@@ -1,4 +1,5 @@
 # Firebase Cloud Messaging 서버 코드
+  - 안드로이드에서 앱을 끈 상태일 때 notification을 날린다.
   - Node.js 서버를 실행시켜 firebase에 연결
   - 코드를 firbase에 deploy시켜 연결
   - [참고(BasicFirebase4_firebase Clouding Messaging)_반드시 먼저 읽어야 할듯... ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase4)
@@ -19,6 +20,7 @@
   ### 1. 코드
   - request 모듈을 다운 (npm install request)
   - 형식이 정해져 있으며 msg의 body에 Obj의 msg를 담고 있다.
+  - msg 객체의 notification에 여러 행위들을 담을 수 있다. ([참고_Firebase 클라우드 메시징 HTTP 프로토콜](https://firebase.google.com/docs/cloud-messaging/http-server-ref))
 
   ```javascript
   var http = require("http");
@@ -35,7 +37,9 @@
     to : "",
     notification : {
       title : "테스트용",
-      body : ""
+      body : "" // 알림의 본문
+      click_action : "NOTI_LAUNCHER" // 안드로이드의 action_name으로 이동 // category를 반드시 주어야 실행된다.
+      sound : "doorbell.wav" // sound 파일을 넣어야 한다.
     }
   };
 
@@ -117,7 +121,7 @@
     // 파이어베이스 db의 message 레퍼런스에 그 값을 넣는다.
     admin.database().ref('/message') // message 디렉토리에 msg를 보낸다.
       .push({msg:text})  // // msg를 key로 하여 text를 넣는다. (msg는 고정된 값)
-      .then(snapshot=>{ // snapshot은 그냥 변수명 (aaa 라고 해도 됨) 
+      .then(snapshot=>{ // snapshot은 그냥 변수명 (aaa 라고 해도 됨)
         // res.redirect(303, snapshot.ref); // 이는 스냅샷의 링크(http url connection 이동하는 거)를 나에게 돌려주는 것
         res.end("sucess!!!");
       });
@@ -146,3 +150,25 @@
 
   ### 2. 결과
   - 결과는 동일하지만 보내는 링크를 firebase에서 지정한 url을 이용한다.
+
+---
+
+## 참고
+### 안드로이드 알림 메세지 키
+
+
+  표현식 | 사용량 | 설명
+  :----: | :----: | :----
+  title | 선택사항, 문자열 | 알림의 제목입니다.
+  body | 선택사항, 문자열 | 알림의 본문입니다.
+  android_channel_id | 선택사항, 문자열 |Android O에서 새로 추가된 알림의 채널 ID입니다. 이 키를 갖는 알림을 받으려면 앱에서 이 ID로 채널을 만들어야 합니다. 요청에서 이 키를 보내지 않거나 제공된 채널 ID가 아직 앱에서 만들어지지 않은 경우 FCM은 앱 매니페스트에 지정된 채널 ID를 사용합니다.
+  icon | 선택사항, 문자열 | 알림 아이콘입니다. 드로어블 리소스 myicon에 대한 알림 아이콘을 myicon으로 설정합니다. 요청에서 이 키를 전송하지 않으면 FCM은 앱 매니페스트에 지정된 런처 아이콘을 표시합니다.
+  sound | 선택사항, 문자열 | 	
+기기가 알림을 수신하면 재생할 알림음입니다. "default" 또는 앱에 번들로 포함된 사운드 리소스의 파일 이름을 지원합니다. 사운드 파일은 /res/raw/에 있어야 합니다.
+  tag | 선택사항, 문자열 | 알림 창에서 기존 알림을 대체하는 데 사용되는 식별자입니다. 지정하지 않으면 각 요청이 새 알림을 만듭니다. 지정하면 태그가 동일한 알림이 이미 표시되고 있는 경우 새 알림이 알림 창의 기존 알림을 대체합니다.
+  color | 선택사항, 문자열 | #rrggbb 형식으로 표현한 알림 아이콘 색상입니다.
+  click_action | 선택사항, 문자열 | 사용자의 알림 클릭과 관련된 작업입니다. 지정하면 사용자가 알림을 클릭할 때 일치하는 인텐트 필터가 있는 액티비티가 실행됩니다
+  body_loc_key | 선택사항, 문자열 | 앱의 문자열 리소스에서 본문을 사용자의 현재 지역으로 현지화하는 데 사용할 본문 문자열의 키입니다.
+  body_loc_args | 선택사항, 문자열인 JSON 배열 | 본문을 사용자의 현재 지역으로 현지화하는 데 사용할 body_loc_key의 형식 지정자 대신 사용될 변수 문자열 값입니다.
+  title_loc_key | 선택사항, 문자열 | 앱의 문자열 리소스에서 제목을 사용자의 현재 지역으로 현지화하는 데 사용할 제목 문자열의 키입니다.
+  title_loc_args | 선택사항, 문자열인 JSON 배열 | 제목을 사용자의 현재 지역으로 현지화하는 데 사용할 title_loc_key의 형식 지정자 대신 사용될 변수 문자열 값입니다.
