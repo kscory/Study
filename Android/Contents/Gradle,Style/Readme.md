@@ -147,7 +147,7 @@ View 또는 창의 모양과 형식을 지정하는 속성 모음
     ```
 
   - 상태표시줄
-  
+
     ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/Gradle%2CStyle/picture/style1.png)
 
 
@@ -171,6 +171,20 @@ View 또는 창의 모양과 형식을 지정하는 속성 모음
   <TextView
     style="@style/CodeFont" // 적용
     android:text="@string/hello" />
+  ```
+
+### EditText의 Style 설명
+
+  ```xml
+  <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+      <item name="colorControlNormal">@color/colorWhite</item> <!--포커스 되어있지 않은 경우의 밑줄 부분-->
+      <item name="colorControlActivated">@color/colorWhite</item> <!--손끝으로 터치되어 있는 부분. text selection handle라고 부른다고 한다-->
+      <item name="android:textCursorDrawable">@color/colorWhite</item> <!--커서 색. drawable 지정되지만, 색을 설정하는것도 된다-->
+      <item name="android:textColor">@color/colorWhite</item> <!--텍스트 색-->
+      <item name="android:textColorHint">@color/colorWhite</item> <!--입력전의 Hint (포커스 Holder)-->
+      <item name="android:textColorHighlight">@color/colorWhite</item> <!--텍스트 선택색-->
+      <item name="colorAccent">@color/colorMain</item> <!--포커스 된 밑줄 부분(핑크색 설정 변경) 바꿀 수 있다.-->
+  </style>
   ```
 ---
 
