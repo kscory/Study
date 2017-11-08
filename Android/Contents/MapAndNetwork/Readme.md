@@ -6,7 +6,7 @@
 ## GoogleMap 예제 결과
   - 서울 열린데이터에서 일반병원 위치 api를 이용
   - 결과 사진
-  
+
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/MapAndNetwork/picture/map.png)
 
 ---
@@ -248,6 +248,63 @@
 
 ---
 
-## 추가사항
-  ### 1. 대제목
-  - 내용
+## 참고
+  ### 1. LocationListener 오버라이드 메소드(google api 이용하지 않을 시)
+  - void onLocationChanged(Location location)
+    - 위치 정보를 가져올 수 있는 메소드
+    - 위치 이동이나 시간 경과 등으로 인해 호출
+    - 최신 위치는 location 파라미터가 가지고 있습니다.
+    - 최신 위치를 가져오려면, location 파라미터를 이용
+
+  - void onProviderDisabled(String provider)
+    - 위치 공급자가 사용 불가능해질(disabled) 때 호출
+    - 단순히 위치 정보를 구한다면, 코드를 작성할 필요 없음
+
+  - void onProviderEnabled(String provider)
+    - 위치 공급자가 사용 가능해질(enabled) 때 호출.
+    - 단순히 위치 정보를 구한다면, 코드를 작성할 필요 없음
+
+  - void onStatusChanged(String provider, int status, Bundle extras)
+    - 위치 공급자의 상태가 바뀔 때 호출
+    - 단순히 위치 정보를 구한다면, 코드를 작성할 필요 없음
+
+  > ex>
+
+  ```java
+  public class CustomLocationManager implements LocationListener {
+
+      private LocationManager locationManager;
+      private Location lastLocation;
+      private double lastLat;
+      private double lastLan;
+
+      public CustomLocationManager(Context context){
+          locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+      }
+
+      //내 위치를 자동으로 업데이트 해주는 메소드 (시작, 끝을 선언해준다,)
+      @SuppressLint("MissingPermission")
+      public void stratUpdateLocation(long intervalMiliTime, float intervalMeter){
+          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,intervalMiliTime, intervalMeter, this); locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,intervalMiliTime, intervalMeter, this);
+      }
+      public void stopUpdateLocation(){
+          locationManager.removeUpdates(this);
+      }
+
+      // locationManager에 달리는 리스너 정의
+      @Override
+      public void onLocationChanged(Location location) {
+          lastLat = location.getLatitude();
+          lastLan = location.getLongitude();
+          lastLocation = location;
+      }
+      @Override
+      public void onStatusChanged(String provider, int status, Bundle extras) { }
+
+      @Override
+      public void onProviderEnabled(String provider) {}
+
+      @Override
+      public void onProviderDisabled(String provider) {}
+  }
+  ```
