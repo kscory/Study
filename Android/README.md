@@ -65,28 +65,28 @@
 >> - Json에 대해 / Json 포멧 파싱 / Glide 라이브러리 / GSON 라이브러리 / 외부 Api 이용(githubusers, 서울 열린데이터)
 
 > ### 22. [GoogleMap](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/MapAndNetwork)
->> googleMap(두가지 방법) / 외부Api 이용 / Json 포멧 이용
+>> - googleMap(두가지 방법) / 외부Api 이용 / Json 포멧 이용 / LocationManager 사용
 
 > ### 23. [DependencyInjection](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/DependencyInjection)
->> ButterKnife / AndroidAnnotation 라이브러리 이용
+>> - ButterKnife / AndroidAnnotation 라이브러리 이용
 
 > ### 24. [LoginActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/LoginHttp)
->> LoginActivity를 이용하여 서버와 통신 / Json 데이터를 서버와 연결
+>> - LoginActivity를 이용하여 서버와 통신 / Json 데이터를 서버와 연결
 
 > ### 25. [RemoteBbs](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RemoteBbs)
->> 간단한 게시판 구성(글작성, 글목록) / android ID 받기 / post시 header 작성(토큰,Content-type) / 리사이클러뷰 특정 개수만 로드하기
+>> - 간단한 게시판 구성(글작성, 글목록) / android ID 받기 / post시 header 작성(토큰,Content-type) / 리사이클러뷰 특정 개수만 로드하기
 
 > ### 26. [BasicFirebase](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase)
->> firebase 개념 및 사용법 / database 기초적인 사용법 / 간단한 채팅 예제 / 키보드 팝업시 화면사이즈 재조정하는 방법 / 웹호스팅이란
+>> - firebase 개념 및 사용법 / database 기초적인 사용법 / 간단한 채팅 예제 / 키보드 팝업시 화면사이즈 재조정하는 방법 / 웹호스팅이란
 
 > ### 27. [BasicFirebase2](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase2)
->> RDB & NoSQL 구조 / firebase를 이용한 간단한 게시판 예제
+>> - RDB & NoSQL 구조 / firebase를 이용한 간단한 게시판 예제
 
 > ### 28. [BasicFirebase3](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase3)
->> Firebase 프로젝트 스튜디오에서 생성방법 / Signup, Signin (Authentication) 기능 / Storage 기능 / RealPathUtil /
+>> - Firebase 프로젝트 스튜디오에서 생성방법 / Signup, Signin (Authentication) 기능 / Storage 기능 / RealPathUtil /
 
 > ### 29. [BasicFirebase4](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase4)
->> noti 기능 / 
+>> - noti 기능 / Firebase Cloud Messaging 시작하기 / Retrofit 라이브러리 사용하여 통신
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
