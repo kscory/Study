@@ -266,7 +266,7 @@
               upload(uri);
           }
       }
-
+      // 파일을 업로드
       public void upload(Uri file){
           // 파이어베이스의 스토리지 파일node
           String temp[] = file.getPath().split("/"); // 파일 패스랑 이름이랑 다르므로,,, 패스는 다르게 해야함...
@@ -285,6 +285,23 @@
                       @Override
                       public void onFailure(@NonNull Exception exception) {
                           Toast.makeText(StorageActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+                      }
+                  });
+      }
+
+      // 파일 불러오기
+      private void fileLoad(String fileName){
+          FirebaseStorage.getInstance().getReference().child("files/"+fileName).getDownloadUrl()
+                  .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                      @Override
+                      public void onSuccess(Uri uri) {
+                          // "files/"+fileName" 에 대한 uri 를 가져온다.
+                      }
+                  })
+                  .addOnFailureListener(new OnFailureListener() {
+                      @Override
+                      public void onFailure(@NonNull Exception exception) {
+
                       }
                   });
       }

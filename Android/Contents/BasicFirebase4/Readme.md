@@ -44,36 +44,66 @@
   public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
       private static final String TAG = "MyFirebaseMsgService";
+
       // 내 앱이 화면에 현재 떠있으면 noti가 전송되었을 때 이 함수가 호출된다.
       @Override
       public void onMessageReceived(RemoteMessage remoteMessage) {
-
           Log.d(TAG, "From: " + remoteMessage.getFrom());
 
           if (remoteMessage.getData().size() > 0) {
               Log.d(TAG, "Message data payload: " + remoteMessage.getData());
               // 여기서 노티피케이션 메시지를 받아서 처리
+              sendNotification(remoteMessage.getData().get("type"));
           }
           if (remoteMessage.getNotification() != null) {
               Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
           }
+          String type = "";
+
+          Map map = remoteMessage.getData();
+          if(map !=null ){
+              type = map.get("type") != null ? (String)map.get("type") :"";
+          }
+
+          MediaPlayer player;
+          switch (type){
+              case "one":
+                  player = MediaPlayer.create(getBaseContext(),R.raw.doorbell);
+                  break;
+              default:
+                  player = MediaPlayer.create(getBaseContext(),R.raw.welcome);
+          }
+          player.setLooping(false);
+          player.start();
       }
 
       private void sendNotification(String messageBody) {
+
+          MediaPlayer player = MediaPlayer.create(getBaseContext(),R.raw.doorbell);
           Intent intent = new Intent(this, MainActivity.class);
           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
           PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                   PendingIntent.FLAG_ONE_SHOT);
 
+          Uri url;
+          switch (messageBody){
+              case "one":
+                  url = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.doorbell);
+                  break;
+              default:
+                  url = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.doorbell);
+                  break;
+          }
           String channelId = "DEFAULT ChANNEL";
           Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+          File file = new File(url.toString());
           NotificationCompat.Builder notificationBuilder =
                   new NotificationCompat.Builder(this, channelId)
                           .setSmallIcon(R.drawable.ic_launcher_background)
                           .setContentTitle("FCM Message")
                           .setContentText(messageBody)
                           .setAutoCancel(true)
-                          .setSound(defaultSoundUri)
+                          .setSound(url)
                           .setContentIntent(pendingIntent);
 
           NotificationManager notificationManager =
@@ -81,7 +111,6 @@
 
           notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
       }
-  }
   ```
 
   - `onTokenRefresh()` 메소드는 토큰을 생성하고 사용시키기 위해서 사용하라고 포멧을 준 것이다. (이를 sign-up 메소드에 넣어 핸드폰마다 토큰을 만들어 낼 수 있다.)
@@ -120,7 +149,10 @@
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/BasicFirebase4/picture/messaging.png)
 
-  ### 2. 시작하기_Firebase Function 이용
+  ### 2. 시작하기_Firebase Function 이용시
+  - Firebase Function을 이용하지 않는다면 Node.js의 서버를 실행시켜 연결
+  - 단 Firebase Function을 이용하게 되면 email이나 다른 값으로 Token을 검색할 수 있는 장점이 존재(아니면 Token으로만 검색 가능)
+
   - ① powershell(terminal) 에 (경로 지정 후) Firebase 명령줄 도구 설치 (이는 firebase “TOOL” 이기 때문에 다시 받을 필요는 없으며 -g 입력시 전체 적용)
   ```
   npm install -g firebase-tools
@@ -131,7 +163,7 @@
   firbase login
   ```
 
-  - ③ firebase init 명령어 입력 후 방햑키로 function 선택하여 파일 설치
+  - ③ firebase init 명령어 입력 후 방향키로 function 선택하여 파일 설치
   - 안되는 경우 아래와 같은 명령어 입력하여 파일을 설치한다.
   ```
   firebase init
@@ -139,7 +171,7 @@
   firbase init function
   ```
 
-  - ④ Functions에 있는 index에 (node.js로) 코드를 작성한다. ([코드작성예시]((https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/fcm))
+  - ④ Functions에 있는 index에 (node.js로) 코드를 작성한다. ([코드작성예시](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/fcm))
 
   - ⑤ Firebase에 코드를 deploy 한다.
   ```
@@ -159,18 +191,81 @@
 
 ---
 
-## Retrofit을 이용하여 통신
+## [Retrofit](http://square.github.io/retrofit/)을 이용하여 통신
   ### 1. 시작하기
-  - ㅇㅇ
+  - Retrofit은 `Thread + httpUrlConnection` 의 형태로 네트워킹을 위한 라이브러리다.
+  - Gradle에 아래와 같이 추가
+
+  ```java
+  implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+  ```
 
   ### 2. 코드 구성
-  - ㅇㅇ
+  - Retrofit을 사용하기 위해서는 인터페이스를 만들어 주어야 한다.
+  - 사용시에는 인터페이스와 결합하여 사용
 
-  ### 3. 결과
-  - ㅇㅇ
+  > IRetro.java
+
+  ```java
+  public interface IRetro {
+      // @GET("sendNotification?postData=")
+      // 리턴타입 함수명(인자)
+      @POST("sendNotification")
+      Call<ResponseBody> sendNotification(@Body RequestBody postdata);
+      // 따로 처리를 하지 않아도 http의 body가 담겨서 넘어간다.(@Body)
+  }
+  ```
+
+  > StorageActivity의 send 메소드
+
+  ```java
+  public void send(View view){
+      // 선택한 계정의 token과 작성한 메시지를 가져옴
+      String token = textToken.getText().toString();
+      String msg = editMsg.getText().toString();
+
+      // 각각이 null인 경우 실행하지 않음
+      if(token == null || "".equals(token)){
+          Toast.makeText(this,"받는사람을 선택하세요",Toast.LENGTH_SHORT).show();
+          return;
+      }
+      if(msg == null || "".equals(msg)){
+          Toast.makeText(this, "메시지를 입력하세요", Toast.LENGTH_SHORT).show();
+          return;
+      }
+
+      String json = "{\"to\":\""+token+"\", \"msg\":\""+msg+"\"}";
+      // Retrofit 선언
+      Retrofit retrofit = new Retrofit.Builder()
+              .baseUrl("http://192.168.0.63:9000/") // firebase deploy 이용시 url 변경 필요
+              .build();
+      // 인터페이스와 결합
+      IRetro service = retrofit.create(IRetro.class);
+      RequestBody body = RequestBody.create(MediaType.parse("plain/text"),json); // firebase deploy 이용시 타입 변경 필요
+      // 서비스로 서버 연결준비
+      Call<ResponseBody> remote = service.sendNotification(body);
+      // 실제 연결후 데이터처리
+      remote.enqueue(new Callback<ResponseBody>() {
+          @Override
+          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+              if(response.isSuccessful()){
+                  ResponseBody data = response.body();
+                  try {
+                      Toast.makeText(StorageActivity.this, data.string(), Toast.LENGTH_SHORT).show();
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+              } else {
+                  // 아닐경우 처리해도 됨
+              }
+          }
+
+          @Override
+          public void onFailure(Call<ResponseBody> call, Throwable t) {
+              Log.e("Retro",t.getMessage());
+          }
+      });
+  }
+  ```
 
 ---
-
-## 참고
-  ### 전체 코드 보기
-  - ㅇㅇ
