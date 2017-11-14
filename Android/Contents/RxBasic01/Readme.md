@@ -171,14 +171,99 @@
 ---
 ## 실제 사용 예시
   ### 1. 코드
+  - 1월부터 12월까지 가져오기 위해 `DateFormatSymbols` 사용
+  - observable의 create를 사용
+  - 반응형으로 onNext 호출시에 data를 업데이트
+  - Scheduler를 통해 사용할 thread를 지정
+
+  ```java
+  public class MainActivity extends AppCompatActivity {
+
+      RecyclerView recycler;
+      CustomAdapter adapter;
+      List<String> months = new ArrayList<>();
+
+      String monthString[];
+
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.activity_main);
+          recycler = findViewById(R.id.recycler);
+          adapter = new CustomAdapter();
+          recycler.setAdapter(adapter);
+          recycler.setLayoutManager(new LinearLayoutManager(this));
+
+          // 1월부터 12월 가져오기
+          DateFormatSymbols dfs = new DateFormatSymbols();
+          monthString = dfs.getMonths();
+
+          // 1. 발행자
+          Observable<String> observable = Observable.create( e -> {
+              try {
+                  for (String month : monthString) {
+                      e.onNext(month); // subscribe를 함과 동시에 onNext를 호출하면서 구독자의 onNext를 호출, 여기서는 12번 호출
+                      Thread.sleep(1000);
+                  }
+                  e.onComplete(); // 완료되었다고 호출
+              } catch (Exception ex){
+                  throw ex; // 에러가 날 경우가 있을 경우 trycatch문으로 감싸고 에러를 호출
+              }
+          });
+
+          // 2. 구독자
+          observable
+                  .subscribeOn(Schedulers.io()) // 옵저버블의 thread를 지정
+                  .observeOn(AndroidSchedulers.mainThread()) // 옵저버의 thread를 지정 (안드로이드에만 있음)
+                  .subscribe(
+                  str -> {
+                      months.add(str);
+                      adapter.setDataAndRefresh(months);
+                  } // 반응형으로 구현하려면 onNext에서 data를 refresh 시켜준다.
+          );
+      }
+  }
+  ```
 
   ### 2. 결과
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/RxBasic01/picture/rx.gif)
 
 ---
+## 참고 개념
+  ### 1. RxJava 에서 람다식 변형 예시
+  - 예시 2번 (Observable <-> Subscriber 예시) 에서 from의 subscribe 사용시 예시
 
-## 참고
+  ```java
+  // 기존 사용 방법 //
+  observableFrom.subscribe(new Consumer<String>() {   // onNext 데이터가 있으면 호출된다.
+      @Override
+      public void accept(String s) throws Exception {
+          months.add(s);
+      }
+  }, new Consumer<Throwable>() { // onError 가 호출된다
+      @Override
+      public void accept(Throwable throwable) throws Exception {
+
+      }
+  }, new Action() { // onComplete 이 호출된다.
+      @Override
+      public void run() throws Exception {
+          adapter.setDataAndRefresh(months);
+      }
+  });
+
+  // 람다식 이용 //
+  observableFrom.subscribe(
+          str -> months.add(str) , // onNext 데이터가 있으면 호출된다.
+          throwable -> {}, // onError 가 호출된다
+          () -> adapter.setDataAndRefresh(months) // onComplete 이 호출된다.
+  );
+  ```
+
+---
+
+## 참고 자료
 
   ### 1. [ReactiveX 홈페이지](http://reactivex.io/)
 
