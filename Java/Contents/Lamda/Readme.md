@@ -1,6 +1,6 @@
 # Lambda Expression (람다 표현식)
   - 람다식 사용법
-  - [참고_람다식pdf](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/LamdaExpression/pdf/Java8_Lambda.pdf)
+  - [참고_람다식pdf](https://github.com/Lee-KyungSeok/Study/blob/master/Java/Contents/Lamda/pdf/Java8_Lambda.pdf)
 
 ---
 
