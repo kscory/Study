@@ -109,7 +109,17 @@
   adapter.setData(data);
   ```
 
-  ### 4. 아답터와 RecyclerView 컨테이너를 연결
+  ### 4. Divider 설정 (부가사항)
+  - 아래의 코드를 추가시켜 단순한 divier를 구현할 수 있다.
+  - Divier의 경우 adapter를 세팅하기 전에 먼저 선언해주어야 한다.
+  - Divider는 설정하지 않아도 된다.
+
+  ```java
+  RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+  recyclerView.addItemDecoration(itemDecoration);
+  ```
+
+  ### 5. 아답터와 RecyclerView 컨테이너를 연결
   - adapter와 연결
 
   ```java
@@ -117,7 +127,7 @@
   recyclerView.setAdapter(adapter);
   ```
 
-  ### 5. RecyclerView에 레이아웃매니저를 설정
+  ### 6. RecyclerView에 레이아웃매니저를 설정
   - 레이아웃 매니저 종류는 3가지 존재
     - `LinearLayoutManager` : 리사이클러 뷰에서 가장 많이 쓰이는 레이아웃으로 수평, 수직 스크롤을 제공하는 리스트를 만들 수 있다.
     - `StaggeredGridLayoutManager` : 레이아웃을 통해 뷰마다 크기가 다른 레이아웃을 만들 수 있다. 마치 Pinterest 같은 레이아웃 구성가능.
@@ -162,6 +172,62 @@
               break;
       }
       return new Holder(view);
+  }
+  ```
+
+  ### 2. CustomDivider
+  - `getItemOffsets` : 아이템의 영역(공백을 추가 시킴)을 늘릴 수 있다.
+  - `onDraw` : 아이템이 그려지기 전에 먼저 그린다.
+  - `onDrawOver` : 아이템 위에 덮어서 그린다.
+
+  ```java
+  public class CustomDivider extends RecyclerView.ItemDecoration {
+      public Drawable mDivider;
+      private final int verticalSpaceHeight;
+
+      public CustomDivider(Context context, int verticalSpaceHeight){
+          mDivider = context.getResources().getDrawable(R.drawable.line_divider);
+          this.verticalSpaceHeight = verticalSpaceHeight;
+      }
+
+      @Override
+      public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+          // 마지막 아이템이 아닌 경우, 공백 추가
+          if(parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() -1 ){
+  //            outRect.set(left, top, right, bottom);
+              outRect.bottom = verticalSpaceHeight; // 아래쪽 공백 추가
+              outRect.top = 10; // 위쪽 공백 추가
+          }
+      }
+
+      @Override
+      public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+          super.onDraw(c, parent, state);
+      }
+
+      @Override
+      public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+          // parent.getPaddingLeft() : recyclerView의 padding값을 불러온다.
+          // parent.getWidth : recyclerView의 width값을 불러온다.
+          int left = parent.getPaddingLeft();
+          int right = parent.getWidth() - parent.getPaddingRight();
+
+          int childCount = parent.getChildCount();
+          for(int i=0 ; i<childCount ; i++){
+              View child = parent.getChildAt(i);
+
+              RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+              // child.getBottom : child까지의 높이, params.bootmMargin : RecyclerView의 item의 최상위 parent에서 결정한 margin값
+              int top = child.getBottom() + params.bottomMargin + verticalSpaceHeight;
+              // mDivider.getIntrinsicHeight : line.divider.xml에서 정의한 높이값
+              int bottom = top + mDivider.getIntrinsicHeight();
+
+              // 밑줄의 사각형 bound(굵기 및 길이)를 결정 (left~right : 길이, top~bottom : 높이)
+              mDivider.setBounds(left, top,right,bottom);
+              // 밑줄을 그린다.
+              mDivider.draw(c);
+          }
+      }
   }
   ```
 
