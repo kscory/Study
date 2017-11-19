@@ -137,6 +137,35 @@
   ```
 
 ---
+## 추가사항
+  ### 1. RecyclerView의 Viewtype 지정
+  - 아래와 같이 adapter에서 `viewtype` 을 지정하여 hodler의 layout을 다르게 지정할 수 있다.
+
+  ```java
+  @Override
+  public int getItemViewType(int position) {
+      if(data.get(position).equals("item : 0"))
+          return 0;
+      else
+          return 1;
+  }
+
+  @Override
+  public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+      View view;
+      switch (viewType){
+          case 1:
+              view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_msg_other, parent, false);
+              break;
+          default:
+              view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_msg_me, parent, false);
+              break;
+      }
+      return new Holder(view);
+  }
+  ```
+
+---
 
 ## 참고 자료
 #### 1. [목록 및 카드 생성](https://developer.android.com/training/material/lists-cards.html)

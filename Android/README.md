@@ -19,89 +19,95 @@
 > ### 6. [CustomView](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/CustomView)
 >> - CustomWidget / CustomView / 사용법 / onTouchListener / onDraw 사용
 
-> ### 7. [BasicList](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicList)
+> ### 7. [ListView](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicList)
 >> - ListView / Adapter / Holder / intent
 
-> ### 8. [File I/O](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/FileIO)
+> ### 8. [RecyclerView](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RecyclerViewExample)
+>> - RecyclerView / Adapter / LayoutManager
+
+> ### 9. [File I/O](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/FileIO)
 >> - File I/O
 
-> ### 9. [Activity ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Activity)
+> ### 10. [Activity ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Activity)
 >> - Activity 생명주기, startActivityForResult, (Intent 사용법)
 
-> ### 10. [Style /  Gradle](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Gradle,Style)
+> ### 11. [Style /  Gradle](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Gradle,Style)
 >> - Gradle 설명 / Style 변경방법
 
-> ### 11. [SQLite / ORM / Singleton ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/SQLite%2CORM%2CSingleton)
+> ### 12. [SQLite / ORM / Singleton ](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/SQLite%2CORM%2CSingleton)
 >> - SQLite / ORM / Singleton 설명
 
-> ### 12. [Permission /  BaseActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Permission)
+> ### 13. [Permission /  BaseActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Permission)
 >> - Permission 설명 / BaseActivity 사용법
 
-> ### 13. [Content Resolver / Intent(pdf)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ContactPractice)
+> ### 14. [Content Resolver / Intent(pdf)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ContactPractice)
 >> - Content를 활용한 주소록 / Permission Callback 이용 / Intent에 대해
 
-> ### 14. [Camera & Gallery](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Camera)
+> ### 15. [Camera & Gallery](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Camera)
 >> - Camera / Custom Gallery의 사용 / 외부파일 저장소 이용
 
-> ### 15. [Fragment](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFragment)
+> ### 16. [Fragment](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFragment)
 >> - Fragment 활용 / Content Resolver를 활용한 주소록 예시
 
-> ### 16. [TabLayout(Fragment)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/TapLayout)
+> ### 17. [TabLayout(Fragment)](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/TapLayout)
 >> - Fragment 어답터를 활용한 TabLayout / Preview에 한글 표시 방법
 
-> ### 17. [ViewPager](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/TabLayoutView)
+> ### 18. [ViewPager](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/TabLayoutView)
 >> - Pager 어답터를 활용한 TabLayout / View를 직접 상속(Customview)
 
-> ### 18. [BasicThread](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicThread)
+> ### 19. [BasicThread](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicThread)
 >> - Thread 사용법 / 사용예제
 
-> ### 19. [BasicService](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ServiceBasic)
+> ### 20. [BasicService](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/ServiceBasic)
 >> - Service 생명주기 / Service 개념
 
-> ### 20. [BasicNetwork & Thread, Asynctask](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicNetwork)
+> ### 21. [BasicNetwork & Thread, Asynctask](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicNetwork)
 >> - Network 사용방법 / Asynctask 사용방법 / Thread의 다양한 사용 방법
 
-> ### 21. [JsonData Basic](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/JsonDataPractice)
+> ### 22. [JsonData Basic](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/JsonDataPractice)
 >> - Json에 대해 / Json 포멧 파싱 / Glide 라이브러리 / GSON 라이브러리 / 외부 Api 이용(githubusers, 서울 열린데이터)
 
-> ### 22. [GoogleMap](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/MapAndNetwork)
+> ### 23. [GoogleMap](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/MapAndNetwork)
 >> - googleMap(두가지 방법) / 외부Api 이용 / Json 포멧 이용 / LocationManager 사용
 
-> ### 23. [DependencyInjection](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/DependencyInjection)
+> ### 24. [DependencyInjection](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/DependencyInjection)
 >> - ButterKnife / AndroidAnnotation 라이브러리 이용
 
-> ### 24. [LoginActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/LoginHttp)
+> ### 25. [LoginActivity](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/LoginHttp)
 >> - LoginActivity를 이용하여 서버와 통신 / Json 데이터를 서버와 연결
 
-> ### 25. [RemoteBbs](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RemoteBbs)
+> ### 26. [RemoteBbs](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RemoteBbs)
 >> - 간단한 게시판 구성(글작성, 글목록) / android ID 받기 / post시 header 작성(토큰,Content-type) / 리사이클러뷰 특정 개수만 로드하기
 
-> ### 26. [BasicFirebase](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase)
+> ### 27. [BasicFirebase](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase)
 >> - firebase 개념 및 사용법 / database 기초적인 사용법 / 간단한 채팅 예제 / 키보드 팝업시 화면사이즈 재조정하는 방법 / 웹호스팅이란
 
-> ### 27. [BasicFirebase2](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase2)
->> - RDB & NoSQL 구조 / firebase를 이용한 간단한 게시판 예제
+> ### 28. [BasicFirebase2](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase2)
+>> - RDB & NoSQL 구조 / firebase를 이용한 간단한 게시판 예제 / RecyclerView 의 LayoutManager 활용
 
-> ### 28. [BasicFirebase3](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase3)
+> ### 29. [BasicFirebase3](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase3)
 >> - Firebase 프로젝트 스튜디오에서 생성방법 / Signup, Signin (Authentication) 기능 / Storage 기능 / RealPathUtil /
 
-> ### 29. [BasicFirebase4](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase4)
+> ### 30. [BasicFirebase4](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/BasicFirebase4)
 >> - noti 기능 / Firebase Cloud Messaging 시작하기 / Retrofit 라이브러리 사용하여 통신
 
-> ### 30. [RxJava Basic1](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic01)
+> ### 31. [RxJava Basic1](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic01)
 >> - RxJava란 / RxJava 설명 pdf / RxJava 기초 사용법 / 람다식 사용 / DateFormatSymbols(월 가져오기) 사용
 
-> ### 31. [RxJava Basic2](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic02)
+> ### 32. [RxJava Basic2](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic02)
 >> - Filter / Map / FlatMap / Zip
 
-> ### 32. [RxJava Basic3](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic03)
+> ### 33. [RxJava Basic3](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic03)
 >> - PublishSubject / BehaviorSubject / ReplaySubject / AsyncSubject
 
-> ### 32. [RxJava Basic4](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic04)
+> ### 34. [RxJava Basic4](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic04)
 >> - RxBinding
 
-> ### 33. [RxJava Basic5](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic05)
+> ### 35. [RxJava Basic5](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/RxBasic05)
 >> - RxJava 와 Retrofit을 이용하여 외부 Api 불러오기
+
+> ### 36. [Realm Database](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/Realm)
+>> - Realm 데이터베이스 사용방법 / Application 상속하기
 
 ## 문제
 >#### 1. [계산기 실습](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Example/BasicCalculator)
