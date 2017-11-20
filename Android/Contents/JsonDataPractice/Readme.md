@@ -33,17 +33,28 @@
 ## Glide & Gson 라이브러리 & sodhanalibrary
   ### 1. Glide 사용법 ([글라이드 라이브러리](https://github.com/bumptech/glide))
   - Gradle 설정 (버전을 4.0 or 3.+로.. 업데이트 가능)
+  - [Glide transformation](https://github.com/wasabeef/glide-transformations)도 존재하며 다양한 형식으로 이미지를 로드 가능
 
-  ```
+  ```java
   compile 'com.github.bumptech.glide:glide:3.+'
+
+  // glide transformation
+  compile 'jp.wasabeef:glide-transformations:3.0.1'
   ```
 
   - 사용방법 (이미지를 imageView에 url을 가져와서 세팅)
 
   ```java
-  Glide.with(context)                                 // 글라이드 초기화
-          .load(url)   // 주소에서 이미지 가져오기
-          .into(imageView);                    // 실제 대상에 꽂는다.
+  Glide.with(context)         // 글라이드 초기화
+          .load(url)          // 주소에서 이미지 가져오기
+          .into(imageView);   // 실제 대상에 꽂는다.
+
+  // glide transformation 에서 원형의 이미지를 불러오는 경우
+  Glide.with(context)
+          .load(url)
+          .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+          .into(imageView);
+
   ```
 
   ### 2. Gson 사용법 ([Gson 라이브러리](https://github.com/google/gson))

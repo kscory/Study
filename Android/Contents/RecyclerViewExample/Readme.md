@@ -329,6 +329,56 @@
   }
   ```
 
+  ### 5. RecyclerView의 PreCache / Prefetch
+  - LayoutManager를 상속받아 `PreCache`를 만든다.
+  - `getExtraLayoutSpace` 메소드 에서 `extraLayoutSpace` 만큼 추가적으로 holder 를 생성하여 이미지와 같이 크기가 큰 파일을 빠르게 로드하는 것처럼 보이게 한다.
+  - RecyclerView에서 LayoutManager를 세팅할때 이를 세팅한다.
+  - `Prefetch`의 경우 LayoutManager를 세팅할 때 설정해준다.
+
+  > PreCachingLayoutManager.java
+
+  ```java
+  public class PreCachingLayoutManager extends LinearLayoutManager {
+      private static final int DEFAULT_EXTRA_LAYOUT_SPACE = 600;
+      private int extraLayoutSpace = -1;
+
+      public PreCachingLayoutManager(Context context) {
+          super(context);
+      }
+
+      public void setExtraLayoutSpace(int extraLayoutSpace) {
+          this.extraLayoutSpace = extraLayoutSpace;
+      }
+
+      @Override
+      protected int getExtraLayoutSpace(RecyclerView.State state) {
+          if(extraLayoutSpace >0) {
+              return extraLayoutSpace;
+          }
+          return DEFAULT_EXTRA_LAYOUT_SPACE;
+      }
+  }
+  ```
+
+  > 적용
+
+  ```java
+  PreCachingLayoutManager manager = new PreCachingLayoutManager(this);
+  manager.setOrientation(LinearLayoutManager.VERTICAL);
+  // 화면 사이즈만큼 가져오는 유틸을 통해 그만큼 holder를 더 생성
+  manager.setExtraLayoutSpace(DeviceUtil.getScreenHeight(this));
+  recyclerView.setLayoutManager(manager);
+  ```
+
+  > Prefetch 적용
+
+  ```java
+  LinearLayoutManager manager = new LinearLayoutManager(this);
+  manager.setItemPrefetchEnabled(true);
+  manager.setInitialPrefetchItemCount(10);
+  recyclerView.setLayoutManager(manager);
+  ```
+
 ---
 
 ## 참고 자료
