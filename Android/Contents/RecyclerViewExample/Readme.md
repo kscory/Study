@@ -148,7 +148,17 @@
 
 ---
 ## 추가사항
-  ### 1. RecyclerView의 Viewtype 지정
+  ### 1. 데이터의 변경을 알려주는 메소드
+  - `notifyDataSetChanged` : 데이터가 전체 바뀌었을 때 호출. 즉, 처음 부터 끝까지 전부 바뀌었을 경우
+  - `notifyItemChanged` : 특정 Position의 위치만 바뀌었을 경우. ex>position 4 번 위치만 데이터가 바뀌었을 경우 사용 하면 된다.
+  - `notifyItemRangeChanged` : 특정 영역을 데이터가 바뀌었을 경우. ex>position 3~10번까지의 데이터만 바뀌었을 경우 사용 하면 된다.
+  - `notifyItemInserted` : 특정 Position에 데이터 하나를 추가 하였을 경우. ex>position 3번과 4번 사이에 넣고자 할경우 4를 넣으면 된다.
+  - `notifyItemRangeInserted` : 특정 영역에 데이터를 추가할 경우. ex>position 3~10번 자리에 7개의 새로운 데이터를 넣을 경우
+  - `notifyItemRemoved` : 특정 Position에 데이터를 하나 제거할 경우.
+  - `notifyItemRangeRemoved` : 특정 영역의 데이터를 제거할 경우
+  - `notifyItemMoved` : 특정 위치를 교환할 경우
+
+  ### 2. RecyclerView의 Viewtype 지정
   - 아래와 같이 adapter에서 `viewtype` 을 지정하여 hodler의 layout을 다르게 지정할 수 있다.
 
   ```java
@@ -175,10 +185,12 @@
   }
   ```
 
-  ### 2. CustomDivider
+  ### 3. CustomDivider
   - `getItemOffsets` : 아이템의 영역(공백을 추가 시킴)을 늘릴 수 있다.
   - `onDraw` : 아이템이 그려지기 전에 먼저 그린다.
   - `onDrawOver` : 아이템 위에 덮어서 그린다.
+
+  > CustomDivider.java
 
   ```java
   public class CustomDivider extends RecyclerView.ItemDecoration {
@@ -228,6 +240,92 @@
               mDivider.draw(c);
           }
       }
+  }
+  ```
+
+  > item_divider.xml
+
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <shape xmlns:android="http://schemas.android.com/apk/res/android"
+      android:shape="rectangle">
+      <size
+          android:width="1dp"
+          android:height="1dp"/>
+      <solid
+          android:color="@color/colorPrimary"/>
+
+  </shape>
+  ```
+
+  ### 4. CustomItemAnimator
+  - recyclerView의 item이 추가되거나 사라졌을때 등 데이터의 변경이 있을때 애니메이션 효과를 준다.
+  - DefaultItemAnimator를 상속받으면 기본적인 애니메이션 효과를 줄 수 있다.
+  - `notifyItemInserted` 혹은 `notifyItemRemoved` 등이 호출될 때 애니메이션이 실행된다.
+
+  >CustomItemAnimator.java
+
+  ```java
+  public class CustomItemAnimator extends DefaultItemAnimator {
+
+      @Override
+      public boolean animateRemove(final RecyclerView.ViewHolder holder) {
+          View view = holder.itemView;
+          ObjectAnimator ani = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 300).setDuration(1000);
+          ani.setInterpolator(new DecelerateInterpolator());
+          // 리스너를 달아 끝나는 경우 holder를 삭제시킨다.
+          ani.addListener(new Animator.AnimatorListener() {
+              @Override
+              public void onAnimationStart(Animator animation) {}
+
+              @Override
+              public void onAnimationEnd(Animator animation) {
+                  dispatchRemoveFinished(holder);
+              }
+
+              @Override
+              public void onAnimationCancel(Animator animation) {}
+              @Override
+              public void onAnimationRepeat(Animator animation) {}
+          });
+          ani.start();
+          // returndl true일 경우 실행 완료 후 runPendingAnimations 메소드를 실행
+          return true;
+      }
+
+      @Override
+      public boolean animateAdd(RecyclerView.ViewHolder holder) {
+          return super.animateAdd(holder);
+      }
+
+      @Override
+      public boolean animateMove(RecyclerView.ViewHolder holder, int fromX, int fromY, int toX, int toY) {
+          return super.animateMove(holder, fromX, fromY, toX, toY);
+      }
+
+      @Override
+      public boolean animateChange(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder, int fromX, int fromY, int toX, int toY) {
+          return super.animateChange(oldHolder, newHolder, fromX, fromY, toX, toY);
+      }
+
+      @Override
+      public void runPendingAnimations() {
+          super.runPendingAnimations();
+          Log.e("실행","======================================================");
+      }
+  }
+  ```
+
+  > 적용방법
+
+  ```java
+  // Mainactivty 에서
+  recyclerView.setItemAnimator(new CustomItemAnimator());
+
+  // adapter에서
+  public void removeDate(List<String> data){
+      this.data = data;
+      notifyItemRemoved(data.size());
   }
   ```
 

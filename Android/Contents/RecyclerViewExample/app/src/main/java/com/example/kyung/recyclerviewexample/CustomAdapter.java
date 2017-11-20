@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.InflaterInputStream;
 
@@ -17,13 +18,27 @@ import java.util.zip.InflaterInputStream;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
     // 1. 데이터 저장소
-    List<String> data;
+    List<String> data = new ArrayList<>();
     Context context;
     // 생성자
-    public CustomAdapter(Context context, List<String> data){
-        this.data = data;
+    public CustomAdapter(Context context){
         this.context = context;
     }
+    public void setDataAndRefresh(List<String> data){
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
+    public void addDate(List<String> data){
+        this.data = data;
+        notifyItemInserted(data.size()-1);
+    }
+
+    public void removeDate(List<String> data){
+        this.data = data;
+        notifyItemRemoved(data.size());
+    }
+
     // 2. 목록의 전체 길이 설정
     @Override
     public int getItemCount() {
