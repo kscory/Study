@@ -248,27 +248,16 @@
 
 ---
 
-## 참고
-  ### 1. LocationListener 오버라이드 메소드(google api 이용하지 않을 시)
-  - void onLocationChanged(Location location)
-    - 위치 정보를 가져올 수 있는 메소드
-    - 위치 이동이나 시간 경과 등으로 인해 호출
-    - 최신 위치는 location 파라미터가 가지고 있습니다.
-    - 최신 위치를 가져오려면, location 파라미터를 이용
+## 그외 map과 관련된 기능
+  ### 1. LocationManager & LocationListener (google api 이용하지 않을 시)
+  - `LocationManager를` 활용하여 내 위치를 가져올 수 있다.
+  - `LocationListener`의 종류는 아래 네 가지가 존재
+    - `void onLocationChanged(Location location)` : 위치 정보가 location에 담겨 있어 현재 위치정보가 특정 조건에 의해 가져올 수 있는 메소드, 단순히 위치 정보를 구한다면, 이 부분에서만 처리해도 됨
+    - `void onProviderDisabled` : 위치 공급자가 사용 불가능해질(disabled) 때 호출
+    - `void onProviderEnabled` : 위치 공급자가 사용 가능해질(enabled) 때 호출.
+    - `void onStatusChanged` : 위치 공급자의 상태가 바뀔 때 호출
 
-  - void onProviderDisabled(String provider)
-    - 위치 공급자가 사용 불가능해질(disabled) 때 호출
-    - 단순히 위치 정보를 구한다면, 코드를 작성할 필요 없음
-
-  - void onProviderEnabled(String provider)
-    - 위치 공급자가 사용 가능해질(enabled) 때 호출.
-    - 단순히 위치 정보를 구한다면, 코드를 작성할 필요 없음
-
-  - void onStatusChanged(String provider, int status, Bundle extras)
-    - 위치 공급자의 상태가 바뀔 때 호출
-    - 단순히 위치 정보를 구한다면, 코드를 작성할 필요 없음
-
-  > ex>
+  > CustomLocationManager
 
   ```java
   public class CustomLocationManager implements LocationListener {
@@ -282,10 +271,19 @@
           locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
       }
 
+      // GPS 혹은 네트워크가 켜져있는지 체크해주는 메소드
+      public boolean checkGPSOrNetwork(){
+        boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        return (gpsEnabled || networkEnabled);
+      }
+
       //내 위치를 자동으로 업데이트 해주는 메소드 (시작, 끝을 선언해준다,)
       @SuppressLint("MissingPermission")
       public void stratUpdateLocation(long intervalMiliTime, float intervalMeter){
-          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,intervalMiliTime, intervalMeter, this); locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,intervalMiliTime, intervalMeter, this);
+          // 인자 : GPS 등 어느 것을 체크할지 , 몇초마다 갱신할지, 몇미터마다, 리스너
+          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,intervalMiliTime, intervalMeter, this);
+          locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,intervalMiliTime, intervalMeter, this);
       }
       public void stopUpdateLocation(){
           locationManager.removeUpdates(this);
@@ -308,3 +306,17 @@
       public void onProviderDisabled(String provider) {}
   }
   ```
+
+---
+
+## 참고
+  ### 1. GoogleMap API release 버전 (keystore)-[참고](https://developers.google.com/maps/documentation/android-api/signup)
+  - 먼저 AndroidStudio에서 keystore를 생성
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/MapAndNetwork/picture/releasemap1.png)
+
+  - 생성 후 위에서의 방법과 같이 구글 프로젝트에 등록
+    - 명령어는 .android 경로에 들어가서 `keytool -list -v -keystore "저장한 key파일경로"` 입력
+    - 키 정보는 반드시 `release 경로에 있는 xml에 입력할 것`
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/MapAndNetwork/picture/releasemap2.png)
