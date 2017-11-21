@@ -320,3 +320,46 @@
     - 키 정보는 반드시 `release 경로에 있는 xml에 입력할 것`
 
   ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/MapAndNetwork/picture/releasemap2.png)
+
+  - gradle에 명령어를 추가
+    - 사용하기 위해서는 gradle에서 `signingConfig`를 정의해주어야 한다.
+    - 이 key 정보를 git에 올리지 않기 위해 `gradle.properties` 파일에 정보를 입력해주면 바로 쓸 수 있으며 gitignore에서 `/gradle.properties` 를 추가해준다.
+    - 참고로 아래와 같이 서버 url을 정의하여 사용할 수 있으며 자바코드에서 `BuildConfig."이름"`을 호출하면 url 불러올 수 있다.
+
+  > app gradle
+
+  ```java
+  signingConfigs{
+      release{
+          storeFile file("C:\\workspaces\\studykey\\mapex.jks") // 파일경로 입력
+          storePassword storePw // 패스워드 입력
+          keyAlias aliasId // key의 id 입력
+          keyPassword aliasPw // key의 password 입력
+      }
+  }
+  buildTypes {
+      debug {
+          buildConfigField "String", "SERVER_URL", "\"http://192.168.1.184:8080/\"" // debug 를 뒤에 붙인다.
+      }
+      release {
+          buildConfigField "String", "SERVER_URL", "\"http://192.168.1.184:8080/\"" // release 를 뒤에 붙인다.
+
+          signingConfig signingConfigs.release // map을 실행
+          minifyEnabled false
+          proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      }
+  }
+  ```
+
+  > gradle.properties
+
+  ```java
+  storePw=PW
+  aliasId=별칭
+  aliasPw=KEYPW
+  ```
+
+  ### 2. buildType 바꾸기
+  - 아래 그림과 같이 AndroidStudio에서 왼쪽 아래의 `build variants` 를 클릭 후 debug / release 등의 모드를 바꿀 수 있다.
+
+  ![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/MapAndNetwork/picture/releasemap3.png)

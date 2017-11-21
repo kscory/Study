@@ -1,34 +1,46 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.kyung.mapandnetwork"
+        applicationId "com.example.kyung.recyclerviewexample"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs{
+        release{
+            storeFile file("C:\\workspaces\\studykey\\mapex.jks") // 파일경로 입력
+            storePassword storePw // 패스워드 입력
+            keyAlias aliasId // key의 id 입력
+            keyPassword aliasPw // key의 password 입력
+        }
+    }
     buildTypes {
+        debug {
+            buildConfigField "String", "SERVER_URL", "\"http://192.168.1.184:8080/\"" // debug 를 뒤에 붙인다.
+        }
         release {
+            buildConfigField "String", "SERVER_URL", "\"http://192.168.1.184:8080/\"" // release 를 뒤에 붙인다.
+
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.google.android.gms:play-services-maps:11.0.4'
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.android.support:design:26.1.0'
+
+    implementation 'com.google.android.gms:play-services-maps:11.6.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
 }
