@@ -12,12 +12,16 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "SERVER_URL", "\"http://openapi.seoul.go.kr:8088/key/json/GeoInfoBikeConvenientFacilitiesWGS/1/1000/\"" // debug 를 뒤에 붙인다.
+            buildConfigField "String", "SERVER_URL", "\"http://openapi.seoul.go.kr:8088/key/json/GeoInfoBikeConvenientFacilitiesWGS/\"" // debug 를 뒤에 붙인다.
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
