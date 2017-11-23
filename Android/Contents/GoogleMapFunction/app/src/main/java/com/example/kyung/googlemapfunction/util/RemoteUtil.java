@@ -40,13 +40,14 @@ public class RemoteUtil {
                     Log.e("Server Error", con.getResponseCode() + "");
                 }
                 con.disconnect();
+                runFlag = false;
             } catch (Exception e) {
                 runFlag = true;
                 count++;
                 Log.e("Error", e.getMessage());
-                if (count == 5) {
+                if (count == 11) {
                     runFlag = false;
-                    return "Const";
+                    return "com.example.kyung.googlemapfunction.Const";
                 }
             }
         }
