@@ -68,7 +68,7 @@
 >> - Json에 대해 / Json 포멧 파싱 / Glide 라이브러리 / GSON 라이브러리 / 외부 Api 이용(githubusers, 서울 열린데이터)
 
 > ### 23. [GoogleMap](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/MapAndNetwork)
->> - googleMap(두가지 방법) / 외부Api 이용 / Json 포멧 이용 / LocationManager 사용
+>> - googleMap(두가지 방법) / 외부Api 이용 / Json 포멧 이용 / LocationManager 사용 / release 버전 사용법
 
 > ### 24. [DependencyInjection](https://github.com/Lee-KyungSeok/Study/tree/master/Android/Contents/DependencyInjection)
 >> - ButterKnife / AndroidAnnotation 라이브러리 이용
