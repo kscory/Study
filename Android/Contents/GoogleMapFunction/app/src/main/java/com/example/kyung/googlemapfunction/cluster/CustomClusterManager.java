@@ -26,15 +26,17 @@ public class CustomClusterManager {
     GoogleMap googleMap;
     Contract.IClickAction clickAction;
 
+    /**
+     * 1. 클러스터 매니저 초기화
+     * @param context
+     * @param googleMap
+     */
     public CustomClusterManager(Context context, GoogleMap googleMap){
         // 1. 클러스터 매니저 초기화
         clusterManager = new ClusterManager<MarkerItem>(context, googleMap);
-
         if(context instanceof Contract.IClickAction)
             clickAction = (Contract.IClickAction)context;
-        else
-            throw new RuntimeException(context.toString()  + " must implement IClickAction");
-
+        else throw new RuntimeException(context.toString()  + " must implement IClickAction");
         this.googleMap = googleMap;
         init();
     }
@@ -49,12 +51,15 @@ public class CustomClusterManager {
         googleMap.setOnMarkerClickListener(clusterManager);
     }
 
+    /**
+     * 2. 클러스터에 대한 특정 효과 추가
+     *    - 마커에 대한 크릭효과 추가
+     */
     private void setClickListener(){
         // 클러스터 그룹 클릭시 효과
         clusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<MarkerItem>() {
             @Override
             public boolean onClusterClick(Cluster<MarkerItem> cluster) {
-                // 클릭하면 obj 리스트를 넘겨서 보관대 그룹의 정보를 recyclerView로 보여주도록 설계할 것
                 List<String> objs = new ArrayList<>();
                 for(MarkerItem markerItem : cluster.getItems()){
                     objs.add(markerItem.getObjId());
@@ -68,16 +73,19 @@ public class CustomClusterManager {
         clusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<MarkerItem>() {
             @Override
             public boolean onClusterItemClick(MarkerItem markerItem) {
-                // 특정 보관대의 정보를 보여주도록 설계할 것
                 clickAction.showDetail(markerItem.getObjId());
                 return false;
             }
         });
     }
 
+    /**
+     * 3. 클러스터 매니저에 마커를 등록
+     *    - 이를 호출하면 맵에 있는 클러스터를 수정하게 된다.
+     * @param bikeConventions
+     */
     public void setCluster(List<Row> bikeConventions){
         clusterManager.clearItems();
-        Log.e("123456","===================="+clusterManager.getClusterMarkerCollection().getMarkers().size());
         for(Row conInfo : bikeConventions){
             // 2. 클러스터 매니저에 마커를 등록
             MarkerItem markerItem = new MarkerItem(conInfo.getLAT(), conInfo.getLNG(), conInfo.getOBJECTID());
@@ -87,7 +95,7 @@ public class CustomClusterManager {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Const.DEFAULT_LAT, Const.DEFAULT_LNG), 10));
         } else {
             LatLng latLng = new LatLng(bikeConventions.get(bikeConventions.size()-1).getLAT(), bikeConventions.get(bikeConventions.size()-1).getLNG());
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
         }
     }
 }

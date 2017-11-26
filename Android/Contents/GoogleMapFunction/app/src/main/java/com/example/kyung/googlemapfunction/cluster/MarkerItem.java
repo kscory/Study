@@ -20,7 +20,6 @@ public class MarkerItem implements ClusterItem {
     public LatLng getPosition() {
         return position;
     }
-
     public String getObjId() {
         return objId;
     }
