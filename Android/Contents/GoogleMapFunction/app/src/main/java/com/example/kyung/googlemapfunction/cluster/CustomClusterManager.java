@@ -3,6 +3,7 @@ package com.example.kyung.googlemapfunction.cluster;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.kyung.googlemapfunction.Const;
 import com.example.kyung.googlemapfunction.contract.Contract;
 import com.example.kyung.googlemapfunction.domain.bikeconvention.Row;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -83,7 +84,7 @@ public class CustomClusterManager {
             clusterManager.addItem(markerItem);
         }
         if(bikeConventions.size() > 1000 || bikeConventions.size()<=0) {
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.516038, 127.019783), 10));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Const.DEFAULT_LAT, Const.DEFAULT_LNG), 10));
         } else {
             LatLng latLng = new LatLng(bikeConventions.get(bikeConventions.size()-1).getLAT(), bikeConventions.get(bikeConventions.size()-1).getLNG());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
