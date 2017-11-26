@@ -1,10 +1,13 @@
 package com.example.kyung.googlemapfunction.cluster;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.kyung.googlemapfunction.contract.Contract;
 import com.example.kyung.googlemapfunction.domain.bikeconvention.Row;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 
@@ -37,6 +40,12 @@ public class CustomClusterManager {
 
     private void init(){
         setClickListener();
+        setMapListener();
+    }
+
+    private void setMapListener(){
+        googleMap.setOnCameraIdleListener(clusterManager);
+        googleMap.setOnMarkerClickListener(clusterManager);
     }
 
     private void setClickListener(){
@@ -67,10 +76,17 @@ public class CustomClusterManager {
 
     public void setCluster(List<Row> bikeConventions){
         clusterManager.clearItems();
+        Log.e("123456","===================="+clusterManager.getClusterMarkerCollection().getMarkers().size());
         for(Row conInfo : bikeConventions){
             // 2. 클러스터 매니저에 마커를 등록
             MarkerItem markerItem = new MarkerItem(conInfo.getLAT(), conInfo.getLNG(), conInfo.getOBJECTID());
             clusterManager.addItem(markerItem);
+        }
+        if(bikeConventions.size() > 1000 || bikeConventions.size()<=0) {
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.516038, 127.019783), 10));
+        } else {
+            LatLng latLng = new LatLng(bikeConventions.get(bikeConventions.size()-1).getLAT(), bikeConventions.get(bikeConventions.size()-1).getLNG());
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         }
     }
 }

@@ -1,10 +1,12 @@
 package com.example.kyung.googlemapfunction.domain.bikeconvention;
 
+import java.io.Serializable;
+
 /**
  * Created by Kyung on 2017-10-17.
  */
 
-public class Row
+public class Row implements Serializable
 {
     private String LAT;
     private String CLASS;

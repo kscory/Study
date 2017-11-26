@@ -49,7 +49,7 @@ public class BikeConventionDao {
     }
 
     // objList 혹은 obj를 받아 저장된 데이터베이스 읽기
-    public List<Row> readByObjId(List<String> objIdList){
+    public List<Row> readByObjList(List<String> objIdList){
         List<Row> data = new ArrayList<>();
         if(objIdList.size()>0) {
             String query = "SELECT * FROM bike_convention WHERE object_id IN (";
@@ -110,10 +110,10 @@ public class BikeConventionDao {
         List<Row> data = new ArrayList<>();
         String query = "select * from bike_convention";
 
-        Row row = new Row();
         con = helper.getReadableDatabase();
         Cursor cursor = con.rawQuery(query,null);
         while (cursor.moveToNext()) {
+            Row row = new Row();
             int cursorIndex = cursor.getColumnIndex("object_id");
             row.setOBJECTID(cursor.getString(cursorIndex));
             cursorIndex = cursor.getColumnIndex("file_path");
@@ -126,11 +126,35 @@ public class BikeConventionDao {
             row.setLAT(cursor.getString(cursorIndex));
             cursorIndex = cursor.getColumnIndex("lng");
             row.setLNG(cursor.getString(cursorIndex));
-
             data.add(row);
         }
         con.close();
 
+        return data;
+    }
+
+    public List<Row> searchInAddress(String text){
+        if("".equals(text)) return readAll();
+        List<Row> data = new ArrayList<>();
+        String query = String.format("SELECT * FROM bike_convention WHERE address LIKE '%%%s%%'", text);
+        con = helper.getReadableDatabase();
+        Cursor cursor = con.rawQuery(query,null);
+        while (cursor.moveToNext()) {
+            Row row = new Row();
+            int cursorIndex = cursor.getColumnIndex("object_id");
+            row.setOBJECTID(cursor.getString(cursorIndex));
+            cursorIndex = cursor.getColumnIndex("file_path");
+            row.setFILENAME(cursor.getString(cursorIndex));
+            cursorIndex = cursor.getColumnIndex("type");
+            row.setCLASS(cursor.getString(cursorIndex));
+            cursorIndex = cursor.getColumnIndex("address");
+            row.setADDRESS(cursor.getString(cursorIndex));
+            cursorIndex = cursor.getColumnIndex("lat");
+            row.setLAT(cursor.getString(cursorIndex));
+            cursorIndex = cursor.getColumnIndex("lng");
+            row.setLNG(cursor.getString(cursorIndex));
+            data.add(row);
+        }
         return data;
     }
 
@@ -139,5 +163,15 @@ public class BikeConventionDao {
         String query = "DELETE FROM bike_convention";
         con.execSQL(query);
         con.close();
+    }
+
+    public int getTotalCount(){
+        int result = 0;
+        con = helper.getReadableDatabase();
+        String query = "select * from bike_convention";
+        Cursor cursor = con.rawQuery(query,null);
+        result += cursor.getCount();
+        con.close();
+        return result;
     }
 }

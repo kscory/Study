@@ -39,7 +39,7 @@
         android:id="@+id/mspFrame"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        map:layout_constraintBottom_toTopOf="@+id/listFrame"
+        map:layout_constraintBottom_toTopOf="@+id/swipeRefresh"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toBottomOf="@+id/relativeLayout">
@@ -62,8 +62,8 @@
 
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/listFrame"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="0dp"
         android:layout_height="200dp"
         map:layout_constraintBottom_toBottomOf="parent"
@@ -78,14 +78,7 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <ProgressBar
-            android:id="@+id/listProgress"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            tools:visibility="gone" />
-    </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>
 

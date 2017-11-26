@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.kyung.googlemapfunction.contract.Contract;
 import com.example.kyung.googlemapfunction.domain.bikeconvention.Row;
-import com.example.kyung.googlemapfunction.util.PicassoUtil;
+import com.example.kyung.googlemapfunction.util.ImageLoadUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class BikeListAdapter extends RecyclerView.Adapter<BikeListAdapter.Holder
             this.objId = objId;
         }
         public void setImageView(String imageUrl){
-            PicassoUtil.loadImage(context,imageUrl, imageView);
+            ImageLoadUtil.loadImageByAQuery(context,imageUrl, imageView);
         }
         public void setTypeName(String type){
             typeName.setText(type);
