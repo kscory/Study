@@ -1,12 +1,11 @@
 package com.example.kyung.broadcastreceiver;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.kyung.broadcastreceiver.util.PermissionUtil;
 
 /**
  * Created by Kyung on 2017-11-23.

@@ -1,20 +1,24 @@
 package com.example.kyung.broadcastreceiver;
 
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.TextView;
+
+import com.example.kyung.broadcastreceiver.broadcast.SMSReceiver;
 
 /*
     1. 리시버를 동적으로 사용할 때는 start와 stop에서 각각 regist 처리
     2. 항상 사용할 때는 manifest에 등록하여 사용
  */
 public class MainActivity extends BaseActivity {
-    BroadcastReceiver receiver;
-    IntentFilter intentFilter;
+    private TextView textSMS;
+    private TextView textGPS;
+    private TextView textNetwork;
+
+    SMSReceiver sMSReceiver;
+    IntentFilter sMSIntentFilter;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -25,23 +29,33 @@ public class MainActivity extends BaseActivity {
     @Override
     public void init() {
         setContentView(R.layout.activity_main);
-        receiver = new MyReceiver();
-        intentFilter = new IntentFilter();
-        intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
-
-        // 현재 화면에 보이고 있는 엑티비티 가져오기
-        ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        initView();
+        setSMSReceiver();
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        registerReceiver(receiver, intentFilter);
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        unregisterReceiver(receiver);
-//    }
+    private void setSMSReceiver(){
+        sMSReceiver = new SMSReceiver(textSMS);
+        sMSIntentFilter = new IntentFilter();
+        sMSIntentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 리시버를 등록
+        registerReceiver(sMSReceiver, sMSIntentFilter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 리시버를 해제
+        unregisterReceiver(sMSReceiver);
+    }
+
+    private void initView() {
+        textSMS = findViewById(R.id.textSMS);
+        textGPS = findViewById(R.id.textGPS);
+        textNetwork = findViewById(R.id.textNetwork);
+    }
 }
