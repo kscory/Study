@@ -4,15 +4,15 @@
   - [SwipeRefreshLayout](https://developer.android.com/reference/android/support/v4/widget/SwipeRefreshLayout.html) 사용법
   - [AQuery](https://code.google.com/archive/p/android-query/) 라이브러리 사용
   - [Picasso](https://github.com/square/picasso) 라이브러리 사용
-  - 서울 열린 데이터 광장 Api 및 데이터베이스 활용
+  - 기타 : 서울 열린 데이터 광장 Api / SQLite 데이터베이스 / RecyclerView Precache / Network 연결 등 이용
 
 ---
 
 ## 개요 및 결과
 
-![](![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/GoogleMapFunction/picture/result1.png))
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/GoogleMapFunction/picture/result1.png)
 
-![](![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/GoogleMapFunction/picture/result2.png))
+![](https://github.com/Lee-KyungSeok/Study/blob/master/Android/Contents/GoogleMapFunction/picture/result2.png)
 
 ---
 
@@ -60,4 +60,7 @@
   - 내용
 
   ### 3. Picasso
+  - 내용
+
+  ### 4. 패키지의 해시값 가져오기(keytool X)
   - 내용
