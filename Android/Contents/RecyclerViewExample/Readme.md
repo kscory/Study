@@ -132,6 +132,7 @@
     - `LinearLayoutManager` : 리사이클러 뷰에서 가장 많이 쓰이는 레이아웃으로 수평, 수직 스크롤을 제공하는 리스트를 만들 수 있다.
     - `StaggeredGridLayoutManager` : 레이아웃을 통해 뷰마다 크기가 다른 레이아웃을 만들 수 있다. 마치 Pinterest 같은 레이아웃 구성가능.
     - `GridLayoutManager` : 갤러리(GridView) 같은 격자형 리스트를 만들 수 있다.
+  - LayoutManager 에는 기본적으로 자동으로 넓이를 지정하기도 한다. 따라서 이를 제거하기 위해서는 `setAutoMeasureEnabled(false)` 를 선언하여 자동 조정을 해제해야 한다.
 
   ```java
   // # 1. LinearLayoutManager
@@ -144,6 +145,8 @@
   // # 3. GridLayoutManager
   RecyclerView.LayoutManager gm= new GridLayoutManager(this, 3);
   recyclerView.setLayoutManager(gm);
+  // 자동 넓이조절 제거
+  gm.setAutoMeasureEnabled(false);
   ```
 
 ---
