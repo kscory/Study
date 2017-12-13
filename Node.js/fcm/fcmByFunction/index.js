@@ -28,7 +28,8 @@ exports.sendNotification = fun.https.onRequest((req, res)=>{
 	};
 	var tokens = [];
 	tokens.push(dataObj.to);
-	admin.messaging().sendToDevice(tokens, msg)
+	admin.messaging()
+	.sendToDevice(tokens, msg)
 		.then(function(response){
 			res.status(200).send(response);
 		})
