@@ -17,7 +17,7 @@
   MONEY = 1000 # int형
   RATE = 0.07 # float 형
   NAME = "Kyung" # string 형
-  Fake = True # boolean 형
+  FAKE = True # boolean 형
 
   # 긴 string 형
   LONG_STRING = """
@@ -153,6 +153,10 @@
   final = "니다."
   print("내 이름은 " + name + " 입", final, sep = "" end="!!")
   # 결과 : 내 이름은 홍길동 입니다.!!
+
+  # string format을 출력하는 두가지 방법
+  print("안녕하세요 %s씨, %d년 새해 복 많이 받으세요" %("홍길동", 2018)) # %를 사용
+  print("안녕하세요 {name}씨, {day}년 새해 복 많이 받으세요".format(name="아무개", day="2017")) # {} 를 사용
   ```
 
   ### 2. input("보여줄 값")
