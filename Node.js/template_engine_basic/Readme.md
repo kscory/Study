@@ -1,4 +1,4 @@
-# Template Engine
+# Template Engine Basic
   - Template Engine 이란
   - Pug(Jade) 기본
 
@@ -77,8 +77,3 @@
      res.render('temp', {time:Date(), _title:'Pug'}); // pug 파일에 있는 변수에 값을 넘길 수 있다
   });
   ```
-
----
-
-## Pug 문법 정리
-  ### 1.
