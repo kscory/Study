@@ -194,17 +194,7 @@
   // 로그인이 성공하면 cookie에 auth를 추가시켜 준다
   ```
 
-  ### 7. connect-multiparty
-  - multiparty/form-data 인코딩 방식을 사용(file 추가할 때 보통 사용)
-  - 설치 : `npm install connect-multiparty`
-  - 모듈 추출 : `require('connect-multiparty')`
-  - 사용 : `app.use(multiparty({ uploadDir: _dirname + '/multipart' }))`
-    - uploadDir 속성을 지정하면 파일 업로드 시 지정된 경로로 파일이 업로드 된다.
-  - 주의 : 파일 관련정보는 `body` 속성이 아니라 모두 `files` 속성에 존재한다.
-  - 참고1> multiple 속성이면 파일이 여러개로 넘어오는데 이 때는 배열 형태로 파일이 전달된다.
-  - 참고2> multipart/form-data 처리 모듈은 `busboy`, `formidable` 등 많은 미들웨어가 존재
-
-  ### 8. express-session
+  ### 7. express-session
   - `session` : 서버에 정보를 저장하는 기술 _ request 객체에 session 속성을 부여 (cf. `cookie` : 웹 브라우저에 정보를 저장하는 기능)
   - 클라이언트에 세션 식별자 쿠키를 부여하고, 이와 대응되는 서버 별도 저장소에 데이터를 저장
   - 설치 : `npm install express-session`
@@ -251,39 +241,3 @@
   ### 1. form 형태를 입력받는 방법
   - \` 를 사용하면 form 형태를 넣을 수 있다.
   - \` 사이에 `&{변수}` 를 사용하면 자바스크립트의 변수를 넣을 수 있다.
-
-  ### 2. 파일을 업로드 할 때 이름중복 시 새로 지정해 주는 경우
-  - rename() 메서드를 사용하여 처리
-  - 원하는 파일이 아니라면 삭제
-  - 하지만 UUID(아이디 중복 방지) 모듈을 이용하여 파일 중복을 방지할 수도 있다.
-
-  ```javascript
-  app.post('/', function(req, res){
-      var comment = req.body.comment;
-      var imageFile = req.files.image;
-
-      // 특정 파일이 넘어왔다면 실행
-      if(imageFile){
-          var name = imageFile.name;
-          var path = imageFile.path;
-          var type = imageFile.type;
-
-          // 이미지 파일 확인
-          if (type.indexOf('image') != -1) {
-              // 이미지 파일의 경우 파일 이름을 변경
-              var outputPath = _dirname + "/multipart/" + Date.now() + '_' + name;
-              fs.rename(path, outputPath, function(error){
-                  res.redirct('/');
-              })
-          }
-      } else {
-          // 이미지 파일이 아닌 경우 파일을 제거
-          fs.unlink(path, function(error){
-              res.sendStatus(400);
-          })
-      } else {
-          // 파일이 없는 경우
-          res.sendStatus(404);
-      }
-  })
-  ```
