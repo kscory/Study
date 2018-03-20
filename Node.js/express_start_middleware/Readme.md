@@ -178,10 +178,12 @@
 
 
   ### 6. body parser
-  - POST 요청 데이터를 추출하는 미들웨어 (but> application 인코딩 방식만 지원하고, multiparty 인코딩 지원하지 않음)
+  - POST/PUT/DELETE 요청 데이터를 추출하는 미들웨어 (but> application 인코딩 방식만 지원하고, multiparty 인코딩 지원하지 않음)
   - 설치 : `npm install body-parser`
   - 모듈 추출 : `require('body-parser')`
-  - 사용 : `app.use(bodyParser.urlencoded({ extended: false }))`
+  - 사용 : `app.use(bodyParser.xxxx)` (xxx 는 아래와 같이 넣는다.)
+    - `urlencoded({ extended: false })` : application/x-www-form-unlecoded 방식으로 파싱
+    - `json()` : aplication/json 형식으로 파싱
 
   > html 에 input 에서 name이 login, password 로 지정되어 있음
 
