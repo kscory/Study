@@ -1,6 +1,6 @@
 # Node.js
 
-## 개념설명
+## 기초 설명
 
 ### 1. [Basic Grammar](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/BasicGrammar)
 > - 변수&출력 / 반복문 / 조건문 / 기본연산 / 함수 사용 / 클래스 사용 / object의 사용 / NPM 관련
@@ -22,7 +22,7 @@
 
 ---
 
-## Express 모듈
+## Express
 
 ### 1. [Express Basic](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express1)
 > - 설치 및 실행 / 기본 서버 작성 / get 예시
@@ -35,5 +35,17 @@
 ### 3. [Template Engine Basic (Pug) ](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/template_engine)
 > - Template Engine / Pug(Jade) 기본
 
-### 4.[URL 활용](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_url)
+### 4. [URL 활용](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_url)
 > Querystring / Semantic Url / Restful 웹 서비스
+
+### 4. [File Upload](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_file_uploaded)
+> Connect-multiparty 를 이용하여 파일 업로드 (rename 방법 추가) / Multer 를 이용하여 파일 업로드
+
+### 5. [MySQL 기본](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_mysql)
+> mysql 모듈 설치 / 커넥션 / CRUD 사용법 / 웹 서비스에 적용
+
+### 6. [Cookie](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_cookie)
+> Cookie란 / 일반적인 Cookie 사용 방법 / 암호화된 Cookie 사용 방법
+
+### 7. [Session](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_session)
+> Session 이란 / Session 기본 사용 방법 / File에 Session 저장 / MySQL에 Session 저장
