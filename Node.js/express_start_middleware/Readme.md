@@ -142,13 +142,7 @@
   - 설치 : `npm install cookie-parser`
   - 모듈 추출 : `require('cookie-parser')`
   - 사용 : `app.use(cookieParser)`
-  - 쿠키 생성 및 매개변수 : response.cookie(key, value, option)
-    - httpOnly : 클라이언트의 쿠키 접근 권한을 지정
-    - secure : secure 속성을 지정
-    - expires : expires 속성을 지정
-    - maxAge : 상대적인 expires 속성을 지정
-    - path : path 속성을 지정
-  - 로그인 시 res.cookie('auth',true) 를 추가시켜 로그인을 구성할 수 있다.
+  - 나중에 다시 설명...
 
   ```javascript
   var cookieParser = require('cookie-parser');
@@ -200,18 +194,6 @@
   - 설치 : `npm install express-session`
   - 모듈 추출 : `require('express-session')`
   - 사용 : `app.use(session( 속성 ))`
-  - `connect.sid` 쿠키를 생성시키며, 세션의 유지 시간을 변경시키고 싶다면 sesion 옵션에서 cookie 값을 변경할 수 있다.
-  - session() 메서드 옵션
-    - `name` : 쿠키의 name 속성 지정
-    - `store` : 세션 저장소 지정
-    - `cookie` : 생성할 쿠키와 관련된 정보 지정(originalMaxAge, expires, httpOnly, path)
-    - `resave` : 세션이 변경되지 않아도 세션 저장소에 반영(resave)할지 설정(bool 값)
-    - `saveUninitialized` : 초기화되지 않은 세션을 세션 저장소에 저장할지 설정(bool 값)
-  - session 객체의 메서드
-    - `regenerate()` : 세션을 다시 생성
-    - `destroy()` : 세션을 제거
-    - `reload()` : 세션을 다시 불러옴
-    - `save()` : 세션을 저장
 
   > 현재 시간을 now 세션에 저장하기
 
