@@ -35,13 +35,14 @@
   ```
 
   ### 2. form 및 데이터 예시
-  - passportjs 를 사용하기 위해서는 반드시 username, password 로 지정 해주어야 함에 주의 (안하면 에러 발생)
+  - passportjs 에서 passportjs 에 사용할 식별자와 패스워드를 설정한다.
+    - ex> email, password
 
   ```html
   <form action="/login" method="post">
       <div>
           <label>Username:</label>
-          <input type="text" name="username"/>
+          <input type="text" name="email"/>
       </div>
       <div>
           <label>Password:</label>
@@ -68,6 +69,10 @@
 
   ### 3. Passport use 사용
   - LocalStrategy 을 새로 만들어 사용
+  - LocalStrategy에서 username 과 password 로 사용할 값을 정해준다.
+    - `usernameField` : 다음 콜백 인자에 username 을 던져줄 값을 정함
+    - `passwordField` : 다음 콜백 인자에 passowrd 를 던져줄 값을 정함
+    - `passReqToCallback` : 증을 수행하는 인증 함수로 HTTP request를 그대로  전달할지 여부를 결정 (true 면 functon에 request 값을 전달, 아니면 빈칸으로 둔다.)
   - done 이라는 인자를 콜백으로 넘겨주며 여기에는 넘길 값, 메세지를 넣을 수 있다.
     - 유저 인증이 되면 `user` 를  아니면 `false` 를 대입
     - 만약 뒤의 라우터에서 `failureFlash` 를 true로 했을 경우 전달할 메세지를 작성한다.
@@ -76,21 +81,26 @@
 
   ```javascript
   // LocalStrategy use
-  passport.use(new LocalStrategy(
-      function(username, password, done){
+  passport.use(new LocalStrategy({
+          usernameField: 'email',
+          passwordField: 'password',
+          passReqToCallback: true
+      },
+      function(req, username, password, done){
           var uname = username;
           var pwd = password;
           for(var i=0 ; i<users.length; i++){
               var user = users[i];
               if(uname === user.username){
                   return hasher({password:pwd, salt:user.salt}, function(err, pass, salt, hash){
-                      // 인증 후 done 함수 이용
+                      // done 함수를 이용해서 맞으면 user 를 아니면 false 를 반환시킨다.
                       if(hash === user.password){
                           console.log(user.password);
                           done(null, user);
                       } else {
                           done(null, false);
-                          // cf> 아래와 fauilureFlash true 인 경우 메시지 작성 필요
+                          // cf>
+                          // 아래와 fauilureFlash 가 true 이면 아래와 같이 메세지를 전달해서 보여줄 수 있다.
                           // done(null, false, {message: 'Incorrect username or password'});
                       }
                   });
@@ -99,34 +109,15 @@
           done(null, false);
       }
   ));
-
-  // ex> welcome 의 리다이렉트
-  app.get('/welcome', function(req, res){
-      if(req.user && req.user.displayName) {
-          res.send(`
-              <h1>Hello, ${req.user.displayName}</h1>
-              <a href="/auth/logout">logout</a>
-      `);
-      } else {
-          res.send(`
-        <h1>Welcome</h1>
-        <ul>
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/register">Register</a></li>
-        </ul>
-      `);
-      }
-  });
   ```
 
   ### 4. Route
-  - pasasport 에서 `authenticate` 란 미들웨어를 통해 콜백함수를 쓸 수 있다.
-  - 안의 요소는 아래와 같이 들어갈 수 있다.
-    - `local` : 로컬 전략을 사용하겠다.
+    - pasasport 에서 `authenticate` 란 미들웨어를 통해 콜백함수를 쓸 수 있다.
+    - `local` : 로컬 전략을 사용하겠다. ( 따로 지정.. )
     - `successRedirect` : 성공 시 리다이렉트 시킴
     - `failureRedirect` : 실패 시 리다이렉트 시킴
     - `failureFlash` : 사용자에게 한번만 "인증에 실패했습니다" 와 같은 메세지를 보낼 수 있다.
-    - 뒤에 req.session.save(function(){ }) 과 같이 콜백 사용 가능
+  - 그 뒤에 function(req, res){ req.session.save(function(){ }) } 과 같이 콜백 사용 가능
 
 
   ```javascript
@@ -137,11 +128,9 @@
           successRedirect: '/welcome',
           failureRedirect: '/auth/login',
           failureFlash: false,
-      }),
-          req.session.save(function(){
-              res.redirect('/welcome');
       })
   );
+
   /* 아래와 같이 콜백함수를 인자로 추가하여 로그인의 경우에도 세션이 저장된 뒤 리다이렉트 할 수 있다.
   app.post('/auth/login', passport.authenticate(
       'local',
@@ -150,9 +139,11 @@
           failureRedirect: '/auth/login',
           failureFlash: false,
       }),
-          req.session.save(function(){
+      function(req,res){
+          req.session.save(function() {
               res.redirect('/welcome');
-      })
+          })
+      }
   );
   */
   ```
@@ -210,5 +201,29 @@
               })
           });
       });
+  });
+  ```
+
+  ### 7. isAuthenticated()
+  - 현재 사용자가 인증되었는지 확인할 수 있다.
+  - 이를 통해 인증이 안되었다면 login 으로 보내고 인증이 되어 있다면 원래 메소드로 실행시킬 수 있다.
+
+  ```javascript
+  var checkAuth = function(req, res, next){
+      if (req.isAuthenticated())
+          return next();
+      res.redirect('/auth/login');
+  };
+
+  // welcome 리다이렉트
+  app.get('/welcome', checkAuth , function(req, res){
+      if(req.user && req.user.displayName) {
+          res.send(`
+              <h1>Hello, ${req.user.displayName}</h1>
+              <a href="/auth/logout">logout</a>
+      `);
+      } else {
+          res.send('Error');
+      }
   });
   ```
