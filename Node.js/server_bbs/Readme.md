@@ -14,7 +14,7 @@
   - 보통 디렉토리를 따로 만들어 작성한다.
   - 만약 이름이 index 라면 디렉토리만 호출하면 파일을 호출한다. ( gateway를 index로 준다.)
   - 외부에서 이용할 변수 및 함수는 `exports`를 붙여준다. (대부분 동일하지만 코틀린은 반대.. 참고)
-  - module 화 할 때는 `module.exports(값)` 혹은 `module.exports = 값` 으로 보통 표시한다.
+  - module 화 할 때는 보통 `module.exports = 값` 으로 표시한다.
 
   ```javascript
   // public
@@ -27,8 +27,12 @@
   function sum(a, b){
   	return a+b;
   }
+
   // 보통 모듈화를 시키면 아래와 같이 모듈이라고 표시함
-  module.exports(b);
+  function sub(a, b){
+  	return a-b;
+  }
+  module.exports = sub;
   ```
 
   ### 2. module 사용방법
