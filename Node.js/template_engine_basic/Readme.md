@@ -54,6 +54,7 @@
   ```
   html(lang='en')
       head
+          meta(charset='urf-8')
           title= _title
       body
           h1 Hello Jade

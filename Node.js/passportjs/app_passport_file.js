@@ -29,7 +29,6 @@ passport.serializeUser(function(user, done) {
 });
 
 // 세션에 저장되어 있는 유저가 접근하면 이를 실행시키게 되어 있다.
-// 저장된 사용자의 식별자가 id 로 넘어온다
 passport.deserializeUser(function(id, done) {
     for(var i=0 ; i<users.length; i++){
         var user = users[i];
@@ -41,8 +40,6 @@ passport.deserializeUser(function(id, done) {
 });
 
 // LocalStrategy 전략을 새로 만들어 사용한다.
-// 공식문서 안에는 MongoDB API 를 사용하고 있으니 참고
-// done 이라는 인자는 함수를 담고 있다.
 passport.use(new LocalStrategy(
     function(username, password, done){
         var uname = username;
@@ -69,10 +66,6 @@ passport.use(new LocalStrategy(
 ));
 
 // pasasport 에서 미들웨어를 통해 콜백함수를 쓸 수 있다.
-// local : 로컬 전략을 사용하겠다.
-// successRedirect : 성공 시 리다이렉트 시킴
-// failureRedirect : 실패 시 리다이렉트 시킴
-// failureFlash : 사용자에게 한번만 인증에 실패했습니다 라는 메세지를 보낼 수 있다.
 app.post('/auth/login', passport.authenticate(
     'local',
     {
@@ -92,9 +85,11 @@ app.post('/auth/login', passport.authenticate(
         failureRedirect: '/auth/login',
         failureFlash: false,
     }),
-        req.session.save(function(){
+    function(req,res){
+        req.session.save(function() {
             res.redirect('/welcome');
-    })
+        })
+    }
 );
 */
 
