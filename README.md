@@ -16,7 +16,11 @@
 
 ## OS
 
-### 1. [Linux](https://github.com/Lee-KyungSeok/Linux-Study)
+### 1. [Linux & Infra](https://github.com/Lee-KyungSeok/Linux-Study)
+
+---
+
+### 1. [OPenCV with ComputerVision](https://github.com/Lee-KyungSeok/ComputerVision-Study)
 
 ---
 
