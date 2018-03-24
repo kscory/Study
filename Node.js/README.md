@@ -8,25 +8,28 @@
 ### 2. [Basic Server](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/BasicServer)
 > - 서버 사용 위한 기본 세팅 / 피보나치 및 annagram 출력 예제
 
-### 3. [Http 통신(Basic Post & Get )](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/ReadFile)
+### 3. [Basic Module](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/BasicModule)
+> 모듈화 방법 / 외부 모듈 사용(forever, supervisor) / 참고 - Exoress 사용 정보 숨기기, 오래된 패키지 확인
+
+### 4. [Http 통신(Basic Post & Get )](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/ReadFile)
 > - Post와 Get의 이해 및 파일 읽기(html, image, video 등) / 대용량 파일 stream 읽기 / URL, querystring, fs, mimetype 함수 사용
 
-### 4. [MongoDB를 이용하여 간단한 login server 구축](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/server_db_basic)
+### 5. [MongoDB를 이용하여 간단한 login server 구축](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/server_db_basic)
 > - MongoDB를 이용한 서버 구성 / 데이터를 Json 형태로 통신
 
-### 5. [MongoDB를 이용하여 간단한 게시판 구축](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/server_bbs)
+### 6. [MongoDB를 이용하여 간단한 게시판 구축](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/server_bbs)
 > - MongoDB를 이용한 서버 구성 / node.js module화 방법 / 게시판 CRUD 작성 / 파일 업로드 방법
 
-### 6. [Firebase Cloud Messaging 서버 코드](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/fcm)
+### 7. [Firebase Cloud Messaging 서버 코드](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/fcm)
 > - Node.js 서버를 통해 이용 / Firebase에 코드를 deploy하여 이용
 
-### 7. [Security](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/security)
+### 8. [Security](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/security)
 > 암호화 / md5를 이용한 암호화 / sha256을 이용한 암호화 / salt 주기 / PBKDF2 이용하여 암호화
 
-### 8. [Socket](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/socket)
+### 9. [Socket](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/socket)
 > Socket.io 기본적인 사용방법 / 소켓 통신 종류별 사용방법 / 방 생성 방법 / Express에 적용 방법
 
-### 9. [Basic API](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/BasicApi)
+### 10. [Basic API](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/BasicApi)
 > 외부 API 연동하기 / 참고(package.json 을 이용한 버전 관리)
 
 ## Express
