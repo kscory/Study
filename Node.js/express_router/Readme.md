@@ -1,5 +1,5 @@
 # Express 에서 라우터 분리하기
-  - [모듈화 방법](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/server_bbs) 참고 (모듈화 부분 먼저 볼 것!)
+  - [모듈화 방법](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/BasicModule) 참고 (모듈화 부분 먼저 볼 것!)
   - 좀 더 쉽게 구조를 파악하기 위해 라우터를 사용해보자 !!
   - 종류는 많지만 express 에서 사용하는 라우터 레벨의 미들웨어를 사용해보자. (공식문서 참고)
 

@@ -1,5 +1,4 @@
-# MongoDB를 이용하여 간단한 게시판 구축
-  - module화 방법 및 사용법
+# MongoDB를 이용하여 간단한 게시판 구축W
   - 간단한 게시판 서버 구성
     - server.js (서버 연결)
     - route (형식을 파악해서 로직 요청)
@@ -9,44 +8,8 @@
 
 ---
 
-## module화 방법 및 사용법 & MongoDB 테이블 사용 방법
-  ### 1. module화 방법
-  - 보통 디렉토리를 따로 만들어 작성한다.
-  - 만약 이름이 index 라면 디렉토리만 호출하면 파일을 호출한다. ( gateway를 index로 준다.)
-  - 외부에서 이용할 변수 및 함수는 `exports`를 붙여준다. (대부분 동일하지만 코틀린은 반대.. 참고)
-  - module 화 할 때는 보통 `module.exports = 값` 으로 표시한다.
-
-  ```javascript
-  // public
-  exports.a=157;
-  exports.sum = function(a,b){
-  	return a+b;
-  }
-  // private
-  var b = 137;
-  function sum(a, b){
-  	return a+b;
-  }
-
-  // 보통 모듈화를 시키면 아래와 같이 모듈이라고 표시함
-  function sub(a, b){
-  	return a-b;
-  }
-  module.exports = sub;
-  ```
-
-  ### 2. module 사용방법
-  - `require` 을 통해 module을 선언해준다. (module로 따로 작성하면 `./`와 같이 경로를 지정해주어야 한다. - 참고로 "."의 개수는 상위디렉토리로 이동)
-
-  ```javascript
-  var module = require("./module"); // 경로 조심할 것
-
-  var x = 300;
-  var y = 750;
-  console.log(module.sum(x,y));
-  ```
-
-  ### 3. MongoDB의 table 사용 방법
+## MongoDB 테이블 사용 방법
+  ### 1. MongoDB의 table 사용 방법
   - 사용방법1 : new로 선언해서 사용(형식을 index에 만든다.)
   - 사용방법2 : 테이블을 직접 넘긴다.
 
