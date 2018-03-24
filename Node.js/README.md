@@ -20,7 +20,14 @@
 ### 6. [Firebase Cloud Messaging 서버 코드](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/fcm)
 > - Node.js 서버를 통해 이용 / Firebase에 코드를 deploy하여 이용
 
----
+### 7. [Security](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/security)
+> 암호화 / md5를 이용한 암호화 / sha256을 이용한 암호화 / salt 주기 / PBKDF2 이용하여 암호화
+
+### 8. [Socket](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/socket)
+> Socket.io 기본적인 사용방법 / 소켓 통신 종류별 사용방법 / 방 생성 방법 / Express에 적용 방법
+
+### 9. [Basic API](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/BasicApi)
+> 외부 API 연동하기 / 참고(package.json 을 이용한 버전 관리)
 
 ## Express
 
@@ -32,20 +39,32 @@
 > - 정적 / 동적으로 실행하는 것에 관해..
 > - 미들웨어 _ next / router / static / morgan / cookie parser / body parser / connect-multiparty / express-session
 
-### 3. [Template Engine Basic (Pug) ](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/template_engine)
+### 3. [Template Engine Basic (Pug) ](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/template_engine_basic)
 > - Template Engine / Pug(Jade) 기본
 
 ### 4. [URL 활용](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_url)
 > Querystring / Semantic Url / Restful 웹 서비스
 
-### 4. [File Upload](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_file_uploaded)
+### 5. [File Upload](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_file_uploaded)
 > Connect-multiparty 를 이용하여 파일 업로드 (rename 방법 추가) / Multer 를 이용하여 파일 업로드
 
-### 5. [MySQL 기본](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_mysql)
+### 6. [MySQL 기본](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_mysql)
 > mysql 모듈 설치 / 커넥션 / CRUD 사용법 / 웹 서비스에 적용
 
-### 6. [Cookie](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_cookie)
+### 7. [Cookie](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_cookie)
 > Cookie란 / 일반적인 Cookie 사용 방법 / 암호화된 Cookie 사용 방법
 
-### 7. [Session](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_session)
+### 8. [Session](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_session)
 > Session 이란 / Session 기본 사용 방법 / File에 Session 저장 / MySQL에 Session 저장
+
+### 9. [Passprotjs 1](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/passprotjs)
+> Passprotjs 기본 사용법 / passportjs local(자체 인증체제) 사용방법
+
+### 10. [Passprotjs 2](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/passprotjs_oauth)
+> Passprotjs 를 이용한 타사 인증(OAuth - KaKao, Naver, Facebook)
+
+### 11. [Express Router Seperate](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_router)
+> 라우터 분리하기 / 불러오기
+
+### 12. [Express-generator](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_generator)
+> 설치 및 실행 방법 /  프로젝트 구성 요소 / 실행 환경 설정
