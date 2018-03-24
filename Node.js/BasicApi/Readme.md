@@ -1,11 +1,11 @@
 # Basic API
   - [참고_yun의 기술 블로그](https://cheese10yun.github.io/API-CALL/)
-  - 다른 서버의 Api 호출 방법 [전체코드]()
-  -
+  - 다른 서버의 Api 호출 방법( [전체코드](https://github.com/Lee-KyungSeok/Study/blob/master/Node.js/BasicApi/ex/api.js) )
+  - 참고 - package.json 을 이용한 버전관리
 
 ---
 
-## 다른 서버의 Api 호출
+## 외부 Api 호출
   ### 1. Api 호출 이유 및 사용 방법
   - 프런트에서 Ajax 를 통해 다른 서버의 API 호출할 수 있지만 서버에 해당 기록을 남겨야 하는 경우 백엔드에서 처리해야 한다.
   - request 모듈 사용(웹 요청) : `npm install request`
@@ -118,4 +118,24 @@
           }
       });
   });
+  ```
+
+---
+## 참고
+  ### 1. package.json 파일을 이용하여 버전관리
+  - package.json 파일을 불러오고 그 안에서 버전을 가져온다.
+    - split 와 shift 를 통해 가장 앞자리를 가져옴
+  - 아래처럼 `${}` 를 통해 기본 url 에 버전을 추가한 api url 을 만들 수 있게 된다.
+  - 이제 package.json 파일에 있는 버전을 변경하면 url이 변경 된다.
+    - 아래는 `http://localhost:3000/api/v0` 와 같은 url로 호출 가능
+
+  ```javascript
+  // package/json 파일에서 버전 추출 및 url 설정
+  var packageFile = require('./package');
+  const API_VERSION = packageFile.version.split('.').shift();
+  const BASE_URL = `/api/v${API_VERSION}`;
+
+  // 라우팅 주소를 버전을 써서 설정
+  app.use(`${BASE_URL}/`, indexRouter);
+  app.use(`${BASE_URL}/users`, usersRouter);
   ```
