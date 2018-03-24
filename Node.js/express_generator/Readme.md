@@ -1,6 +1,9 @@
 # Express-generator
-  - Express-generator 기본 (설치, 실행, Package 파일)
-  - Express-generator 기본 모듈
+  - Express-generator 기본 (설치, 실행, 프로젝트 구성 설명)
+  - package.json
+  - ./bin/www 파일
+  - app.js 파일의 구성
+  - 실행 환경 설정
 
 ---
 
