@@ -1,28 +1,45 @@
-# 프로그래밍 공부
+# My Study
 
-## Programming 설명
+## Programming Language
 
 ### 1. [JAVA](https://github.com/Lee-KyungSeok/Study/tree/master/Java)
 
-### 2. [Android](https://github.com/Lee-KyungSeok/Study/tree/master/Android)
+### 2. [MongoDB](https://github.com/Lee-KyungSeok/Study/tree/master/MongoDB)
 
-### 3. [Node.js](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js)
+### 3. [Python](https://github.com/Lee-KyungSeok/Python-Study)
 
-### 4. [MongoDB](https://github.com/Lee-KyungSeok/Study/tree/master/MongoDB)
+---
 
-### 5. [Python](https://github.com/Lee-KyungSeok/Python-Study)
+## Web & App & Server
+
+### 1. [Android](https://github.com/Lee-KyungSeok/Study/tree/master/Android)
+
+### 2. [Node.js](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js)
+
+### 3. [React.js](https://github.com/Lee-KyungSeok/ReactJS-Study)
+
+---
+## BlockChain
+
+### 1. [Ethereum](https://github.com/Lee-KyungSeok/Ethereum-Study)
+
+---
+
+## Macine Learning
+
+### 1. [Multivariate-data-analysis](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study)
+
+---
+
+## ComputerVision
+
+### 1. [OPenCV with ComputerVision](https://github.com/Lee-KyungSeok/ComputerVision-Study)
 
 ---
 
 ## OS
 
 ### 1. [Linux & Infra](https://github.com/Lee-KyungSeok/Linux-Study)
-
----
-
-## 영상처리
-
-### 1. [OPenCV with ComputerVision](https://github.com/Lee-KyungSeok/ComputerVision-Study)
 
 ---
 
