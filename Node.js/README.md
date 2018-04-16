@@ -34,7 +34,7 @@
 
 ## Express
 
-### 1. [Express Basic](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express1)
+### 1. [Express Basic](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_basic)
 > - 설치 및 실행 / 기본 서버 작성 / get 예시
 > - response 객체 메소드 / request 객체 메소드
 
@@ -48,7 +48,7 @@
 ### 4. [URL 활용](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_url)
 > Querystring / Semantic Url / Restful 웹 서비스
 
-### 5. [File Upload](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_file_uploaded)
+### 5. [File Upload](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_file_upload)
 > Connect-multiparty 를 이용하여 파일 업로드 (rename 방법 추가) / Multer 를 이용하여 파일 업로드
 
 ### 6. [MySQL 기본](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_mysql)
@@ -60,10 +60,10 @@
 ### 8. [Session](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_session)
 > Session 이란 / Session 기본 사용 방법 / File에 Session 저장 / MySQL에 Session 저장
 
-### 9. [Passprotjs 1](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/passprotjs)
+### 9. [Passprotjs 1](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/passportjs)
 > Passprotjs 기본 사용법 / passportjs local(자체 인증체제) 사용방법
 
-### 10. [Passprotjs 2](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/passprotjs_oauth)
+### 10. [Passprotjs 2](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/passportjs_oauth)
 > Passprotjs 를 이용한 타사 인증(OAuth - KaKao, Naver, Facebook)
 
 ### 11. [Express Router Seperate](https://github.com/Lee-KyungSeok/Study/tree/master/Node.js/express_router)
