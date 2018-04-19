@@ -25,15 +25,11 @@
 
 ---
 
-## Macine Learning
+## Machine Learning
 
-### 1. [Multivariate-data-analysis](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study)
+### 1. [Computer Vision with OpenCV ](https://github.com/Lee-KyungSeok/ComputerVision-Study)
 
----
-
-## ComputerVision
-
-### 1. [OPenCV with ComputerVision](https://github.com/Lee-KyungSeok/ComputerVision-Study)
+### 2. [Multivariate Data Analysis](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study)
 
 ---
 
